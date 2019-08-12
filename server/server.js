@@ -14,8 +14,10 @@ app.use(bodyParser.urlencoded({
 }))
 
 const dataRoutes = require('./routes/generate-data');
+const studentRoutes = require('./routes/students');
 
-app.use('/data', dataRoutes)
+app.use('/data', dataRoutes);
+app.use('/students', studentRoutes);
 
 // Server Setup
 const port = process.env.PORT || 8000;
