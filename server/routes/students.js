@@ -15,11 +15,12 @@ router.param('id', function (req, res, next) {
   // }
 
   else {
-    Student.findById({ _id: id }).exec((err, result) => {
+    Student.findById(id).exec((err, result) => {
+      if (err) throw err;
       if (result === undefined) {
         res.status(404).send('Student not found, please check Student ID.');
       } else {
-        req.student = result[0];
+        req.student = result;
         next();
       }
     })
@@ -38,7 +39,7 @@ router.post('/:id', (req, res, next) => {
   //checks below here for request body data validation
   let { studentUpdates } = req.body;
   //Mongoose function to find and updated specific document
-  Student.findByIdAndUpdate({ _id: req.student._id }, 
+  Student.findByIdAndUpdate( req.student._id, 
     //we'll pass in our updates, Mongo is smart enough to overwrite what is present and leave the rest
     studentUpdates,
     //this parameter tells Mongo to return the updated object to us
