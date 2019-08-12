@@ -19,6 +19,7 @@ router.get('/students', (req, res, next) => {
       first: faker.name.firstName(),
       last: faker.name.lastName()
     }
+    student.packages = []
     student.jobSeekingStatus = jobSeekingStatus[Math.floor(Math.random() * jobSeekingStatus.length)]
     student.employmentLocationPreference = employmentLocPref[Math.floor(Math.random() * employmentLocPref.length)]
     student.typeOfWorkDesired = typeOfWork[Math.floor(Math.random() * typeOfWork.length)]
@@ -31,8 +32,9 @@ router.get('/students', (req, res, next) => {
     student.bio = faker.lorem.paragraph()
     student.address = faker.address.city() + ', ' + faker.address.state() + ', ' + faker.address.country()
     student.email = `${student.name.first}@projectshift.io`
+    student.linkedIn = ''
     student.phone = faker.phone.phoneNumberFormat()
-    student.resume = ""
+    student.resume = ''
     student.cohort = faker.random.number({ min: 0, max: 7 });
     student.graduationDate = faker.date.future(2)
 

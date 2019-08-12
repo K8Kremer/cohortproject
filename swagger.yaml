@@ -1,0 +1,328 @@
+swagger: '2.0'
+info:
+  description: Project Shift Group API
+  version: 1.0.0
+  title: Working Title API
+  # put the contact info for your development or API team
+  contact:
+    email: aaron@projectshift.io
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: PS Staff Admin-only calls
+- name: employers
+  description: Operations available to employers
+
+paths:
+  /students:
+    get:
+      tags:
+      - admins
+      summary: searches students
+      operationId: searchStudents
+      description: |
+        By passing in the appropriate options, you can search for students in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: location
+        description: pass an optional search string for location
+        required: false
+        type: array
+        items:
+          type: string
+      - in: query
+        name: jobStatus
+        description: if Student is available
+        required: false
+        type: array
+        items:
+          type: string
+      - in: query
+        name: desiredWork
+        description: type of role student is looking for
+        required: false
+        type: array
+        items:
+          type: string
+      - in: query
+        name: id
+        description: student ID to find individual student
+        required: false
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Student'
+        400:
+          description: bad input parameter
+        404:
+          description: student with that ID not found
+    post:
+      tags:
+      - admins
+      summary: adds a Student
+      operationId: addStudent
+      description: Adds a Student to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: student
+        description: Student to add
+        schema:
+          $ref: '#/definitions/Student'
+      responses:
+        201:
+          description: Student created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /students/{id}:
+    get:
+      tags:
+      - admins
+      - employers
+      summary: return student by ID
+      operationId: getStudent
+      description: |
+        By passing in the appropriate options, you can search for
+        students in the system
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: the searched for Student's ID
+        required: true
+        type: string
+      responses:
+        200:
+          description: Student with matching ID
+          schema:
+            $ref: '#/definitions/Student'
+        404:
+          description: student with that ID not found
+    post:
+      tags:
+      - admins
+      summary: update student by ID
+      operationId: updateStudent
+      description: |
+        By passing in the appropriate options, you  will update a Student by ID within the system
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: the Student to update's ID 
+        required: true
+        type: string
+      - in: body
+        name: student
+        description: Student info to update
+        schema:
+          $ref: '#/definitions/Student'
+      responses:
+        200:
+          description: updated Student
+          schema:
+            $ref: '#/definitions/Student'
+        404:
+          description: student with that ID not found
+definitions:
+  Student:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: object
+        properties:
+          title:
+            type: string
+            description: Student's preferred honorific.
+          first:
+            type: string
+            description: Student's preferred given name.
+          last:
+            type: string
+            description: Student's preferred surname.
+      packages:
+        type: array
+        items:
+          $ref: '#/definitions/Package/properties/id'
+      jobSeekingStatus:
+        type: string
+        example: Open to Opportunities/Searching/Employed
+      employmentLocationPreference:
+        type: string
+        example: Local to Triangle/Open to Relocation/Both
+      typeOfWorkDesired:
+        type: string
+        example: Full Stack/Front End/Back End
+      industriesPreferred:
+        type: array
+        items:
+          type: string
+        description: Initially empty array that holds a Student's industries of interest.
+      picture:
+        type: object
+        properties:
+          large:
+            type: string
+            description: URL for User's picture, large-sized.
+          medium:
+            type: string
+            description: URL for User's picture, medium-sized.
+          thumbnail:
+            type: string
+            description: URL for User's picture, thumbnail-sized.
+      bio:
+        type: string
+        example: "Jim is a straight-up boss, does all the things."
+      address:
+        type: string
+        example: "Durham, NC, USA"
+      email:
+        type: string
+        format: email
+        example: "sean@example.com"
+      linkedIn:
+        type: string
+        format: url
+        example: "linkedin.com/sean"
+      phone:
+        type: string
+        format: phone_number
+        description: User's phone number, in string format.
+        example: "(000)-000-0000"
+      resume:
+        type: object
+        properties:
+          pdf:
+            type: string
+            description: URL for Student's resume, PDF format.
+      cohort:
+        type: integer
+        format: int32
+        example: 6
+      graduationDate:
+        type: string
+        format: date
+        description: Student's Project Shift graduation date, string-formatted with exact time of day.
+        example: "2019-08-30 12:00:00"
+      updated_at:
+        type: string
+        format: date
+        description: Student's last updated at date
+        example: "2019-08-30 12:00:00"
+      created_at:
+        type: string
+        format: date
+        description: Student's creation date
+        example: "2019-01-30 12:00:00"
+  Package:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      packageName:
+        type: string
+        example: Grove Collaborative Future Employees
+      packageLink:
+        type: string
+        format: url
+        example:  https://www.theTotalPackage.com/$id
+      companyName:
+        type: string
+        format: email
+        example: "Project Shift"
+      employerName:
+        type: string
+        format: email
+        example: "Seanathan Doherty"
+      employerEmail:
+        type: string
+        format: email
+        example: "JimBob@ibm.biz"
+      students:
+        type: array
+        items:
+          type: object
+          properties:
+            student:
+              $ref: '#/definitions/Student'
+            studentNotes:
+              type: string
+              example: Dan is the Man.
+      packageNotes:
+        type: string
+        example: Attached are the latest and greatest that Project Shift has ever known.
+      replyEmail:
+        type: string
+        format: email
+        example: "morgan@projectshift.io"
+      replyName:
+        type: object
+        properties:
+          title:
+            type: string
+            description: Project Employee's preferred honorific.
+          first:
+            type: string
+            description: Project Employee's preferred given name.
+          last:
+            type: string
+            description: Project Employee's preferred surname.\
+      seenByEmployer:
+        type: boolean
+      isHidden:
+        type: boolean
+      updated_at:
+        type: string
+        format: date
+        description: Package's last updated at date
+        example: "2019-08-30 12:00:00"
+      created_at:
+        type: string
+        format: date
+        description: Package's creation date
+        example: "2019-01-30 12:00:00"
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /seandolan/GroupProject/1.0.0
+schemes:
+ - https
