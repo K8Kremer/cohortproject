@@ -72,3 +72,5 @@ router.get('/packages', (req, res, next) => {
   }
   res.status(200).end()
 });
+
+module.exports = router;
