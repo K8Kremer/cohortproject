@@ -19,8 +19,8 @@ ReactDOM.render(
         <Switch>
           <Route path='/admin' component={AdminView} />
 
-          <Route exact path='/:packageId' component={EmployerView} />
-          <Route exact path='/:packageId/:studentId' component={StudentDetail} />
+          <Route exact path='/employer/:packageId' component={EmployerView} />
+          <Route exact path='/employer/:packageId/student/:studentId' component={StudentDetail} />
         </Switch>
       </App>
     </BrowserRouter>,
