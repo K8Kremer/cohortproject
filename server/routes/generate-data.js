@@ -1,0 +1,70 @@
+const router = require('express').Router();
+const faker = require('faker');
+const Student = require('../models/student');
+const Package = require('../models/package');
+
+//list of parameters for fake data
+//for real data, we may prefer a dropdown on the Front End
+const jobSeekingStatus = ['Employed', 'Searching', 'Open']
+const employmentLocPref = ['Local to Triangle', 'Open to Relocation', 'Both']
+const typeOfWork = ['Full-stack', 'Front End', 'Back End']
+const industries = ['Artificial Intelligence', 'Machine Learning', 'Internet of Things', 'Finance', 'Insurance', 'Health Care', 'Robotics']
+
+//new student data, fo free
+router.get('/students', (req, res, next) => {
+  for (let i = 0; i < 90; i++) {
+    let student = new Student();
+    student.name = {
+      title: faker.name.title(),
+      first: faker.name.firstName(),
+      last: faker.name.lastName()
+    }
+    student.jobSeekingStatus = jobSeekingStatus[Math.floor(Math.random() * jobSeekingStatus.length)]
+    student.employmentLocationPreference = employmentLocPref[Math.floor(Math.random() * employmentLocPref.length)]
+    student.typeOfWorkDesired = typeOfWork[Math.floor(Math.random() * typeOfWork.length)]
+    student.industriesPreferred = [industries[Math.floor(Math.random() * industries.length)]]
+    student.picture = {
+      large: faker.image.imageUrl(800, 800, "people"),
+      medium: faker.image.imageUrl(500, 500, "people"),
+      thumbnail: faker.image.imageUrl(250, 250, "people")
+    }
+    student.bio = faker.lorem.paragraph()
+    student.address = faker.address.city() + ', ' + faker.address.state() + ', ' + faker.address.country()
+    student.email = `${student.name.first}@projectshift.io`
+    student.phone = faker.phone.phoneNumberFormat()
+    student.resume = ""
+    student.cohort = faker.random.number({ min: 0, max: 7 });
+    student.graduationDate = faker.date.future(2)
+
+    student.save((err) => {
+      if (err) throw err
+    })
+  }
+  res.status(200).end()
+});
+
+//new package data, fo free
+router.get('/packages', (req, res, next) => {
+  for (let i = 0; i < 3; i++) {
+    let package = new Package();
+
+    package.category = faker.commerce.department();
+    package.name = faker.commerce.productName();
+    package.price = faker.commerce.price();
+    package.image = 'http://www.salonidangarwala.com/images/about-black-1240x600.jpg';
+    package.reviews = [];
+    for (let i = 0; i < 3; i++) {
+      const review = new Review();
+      review.author = faker.name.firstName() + ' ' + faker.name.lastName();
+      review.reviewText = faker.lorem.sentences();
+      review.package = package;
+      review.save()
+      package.reviews.push(review);
+    }
+
+    package.save((err) => {
+      if (err) throw err
+    })
+  }
+  res.status(200).end()
+});
