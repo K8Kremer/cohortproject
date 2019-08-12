@@ -47,23 +47,25 @@ router.get('/students', (req, res, next) => {
 
 //new package data, fo free
 router.get('/packages', (req, res, next) => {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 10; i++) {
     let package = new Package();
 
-    package.category = faker.commerce.department();
-    package.name = faker.commerce.productName();
-    package.price = faker.commerce.price();
-    package.image = 'http://www.salonidangarwala.com/images/about-black-1240x600.jpg';
-    package.reviews = [];
-    for (let i = 0; i < 3; i++) {
-      const review = new Review();
-      review.author = faker.name.firstName() + ' ' + faker.name.lastName();
-      review.reviewText = faker.lorem.sentences();
-      review.package = package;
-      review.save()
-      package.reviews.push(review);
-    }
-
+    package.packageName = faker.lorem.word();
+    package.packageLink = faker.commerce.productName();
+    package.companyName = faker.company.companyName();
+    package.employerName = faker.name.firstName() + ' ' + faker.name.lastName();
+    package.employerEmail = faker.commerce.email();
+    package.students = [];
+    package.packageNotes = faker.lorem.paragraph();
+    package.replyEmail = faker.company.email();
+    package.replyName = {
+      title: faker.name.title(),
+      first: faker.name.firstName(),
+      last: faker.name.lastName()
+    };
+    package.seenByEmployer = false;
+    package.isHidden = false;
+    
     package.save((err) => {
       if (err) throw err
     })
