@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PageHeader from '../nav/navpane';
+import SideBar from '../nav/sidebar';
 import LoginPage from './LoginPage';
 import StudentList from './StudentList';
 import CreateStudent from './CreateStudent';
@@ -9,10 +10,12 @@ import PackageList from './PackageList';
 import CreatePackage from './CreatePackage';
 import EditPackage from './EditPackage';
 
+
 const AdminView = () => {
   return (
     <Fragment>
       <PageHeader />
+      <SideBar />
       <Switch>
         <Route exact path='/admin/login'         component={LoginPage} />
         <Route exact path='/admin/studentlist'   component={StudentList} />
