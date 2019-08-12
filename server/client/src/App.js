@@ -20,5 +20,5 @@ export default App;
 // )(App));
 
 const AppContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 0px;
 `;
