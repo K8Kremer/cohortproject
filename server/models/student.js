@@ -7,6 +7,7 @@ const StudentSchema = new Schema({
     first: String,
     last: String
   },
+  packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
   jobSeekingStatus: String,
   employmentLocationPreference: String,
   typeOfWorkDesired: String,
@@ -19,6 +20,7 @@ const StudentSchema = new Schema({
   bio: String,
   address: String,
   email: String,
+  linkedIn: String, 
   phone: String,
   resume: String,
   cohort: Number,
