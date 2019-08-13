@@ -4,7 +4,7 @@ import axios from "axios";
 import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT } from './types';
 
 export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(``)
+	axios.get(`/students`)
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -14,7 +14,7 @@ export const fetchStudents = (page = 1) => dispatch => {
 };
 
 export const fetchPackages = () => dispatch => {
-	axios.get(``)
+	axios.get(`/packages`)
 	.then( response => {
 		dispatch({ type: FETCH_PACKAGES, payload: response.data});
 	})
@@ -24,7 +24,7 @@ export const fetchPackages = () => dispatch => {
 };
 
 export const addStudentToPackage = (student) => dispatch => {
-	axios.post(``, { student })
+	axios.post(`/students`, { student })
 	.then( resonse => {
 		dispatch({ type: ADD_STUDENT, payload: response.data});
 	})
