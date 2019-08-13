@@ -1,6 +1,6 @@
 import { FETCH_PACKAGES } from '../actions/types';
 
-export default function (state = {}, action) {
+export default function (state = [], action) {
   if (action.error) {
     return (action.error);
   }

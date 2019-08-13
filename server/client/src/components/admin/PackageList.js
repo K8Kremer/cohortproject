@@ -4,26 +4,33 @@ import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom';
 
-class PackageList extends Component {
+class PackageList extends React.Component {
 
-  componentDidMount = () => {
-    super();
-    this.props.fetchPackages();
+  constructor(props){
+    super(props);
     this.wrapPackages = this.wrapPackages.bind(this);
   }
+  componentDidMount() {
+    
+    this.props.fetchPackages();
+    
+  }
 
-  wrapPackages = (packagesObject) => {
-    return packagesObject.map(package => {
-      return (
-        <li>
-          <Link to='/packages/{package._id}'> {package.packageName}</Link> 
-        </li>
-      )
-    })
+  wrapPackages(packagesArray){
+    // console.log(packagesArray);
+    return (
+      packagesArray.map(currentPackage => {
+        return (
+          <li>
+            <Link to='/packages/{currentPackage._id}'> {currentPackage.packageName}</Link> 
+          </li>
+        )
+      })
+    );
   }
 
   render(){
-    if(packages == {}){
+    if(this.props.packages.length === 0){
       return(
         <div>
           No Packages here just yet! Please make one from our friendly action bar above.
@@ -34,7 +41,7 @@ class PackageList extends Component {
     return (
       <div>
         <ul>
-          {this.wrapPackages(packages)}
+          {this.wrapPackages(this.props.packages)}
         </ul>
       </div>
     )
