@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
-import styled from 'styled-components';
+
 
 class AddStudent extends Component {
 	onSubmit = formProps => {
