@@ -89,75 +89,16 @@ router.post('/:id', (req, res, next) => {
 //POST route for /packages (adds packages to DB)
 router.post('/', (req, res, next) => {
   //checks below here for request body data validation
-  let { category, name, price, image } = req.body;
-  
-  Package.create(req.body, function (err, result) {
+ 
+  //we creating newPackage by referencing Package Schema
+  //which is passing in the request body.
+  //We are assuming that the front end will handle data validation. 
+  const newPackage = new Package(req.body)
+  newPackage.save((err, result) => {
     if (err) return handleError(err);
     // saved!
     res.send(result);
   });
-});
-
-router.post("/", (req, res) => {
-  
-  //const name = req.body.name
-  const { name, packages, jobSeekingStatus, employmentLocationPreference, typeOfWorkDesired, industriesPreferred, picture, bio, address, email, linkedIn, phone, resume, cohort, graduationDate, updated_at, created_at  } = req.body
-  //using Product schema to create a new document in MONGODB
-  let package = new Package()
-  package.name = {
-    title: name.title || '',
-    first: name.first || '',
-    last: name.last || ''
-  };
-  package.packages = [];
-  package.jobSeekingStatus = jobSeekingStatus;
-  package.employmentLocationPreference = employmentLocationPreference;
-  package.typeOfWorkDesired = typeOfWorkDesired;
-  package.industriesPreferred = industriesPreferred;
-  package.picture = {
-    large: large,
-    medium: medium,
-    thumbnail: thumbnail
-  };
-  package.bio = bio;
-  package.address = address;
-  package.email = email;
-  package.linkedIn = linkedIn;
-  package.phone = phone;
-  package.resume = resume; //this is going to change with fs 
-  package.cohort = cohort;
-  package.graduationDate = graduationDate;
-  package.updated_at = updated_at;
-  package.created_at = created_at
-
-  const PackageSchema = new Schema({
-    packageName: String,
-    packageLink: String,
-    companyName: String,
-    employerName: String,// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
-    employerEmail: String,
-    students: [{
-      student: {type: Schema.Types.ObjectId, ref: 'Student'},
-      studentNotes: String
-    }],
-    packageNotes: String,
-    replyEmail: String,
-    replyName: {
-      title: String,
-      first: String,
-      last: String
-    },
-    seenByEmployer: false,
-    isHidden: false,
-    updated_at: Date,
-    created_at: Date
-  });
-
-  package.save((err) => {
-    if (err) throw err
-    return res.send(package);
-  });
-
 });
 
 module.exports = router;
