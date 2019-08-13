@@ -72,11 +72,11 @@ router.get('/:id', (req, res, next) => {
 //POST route here for Student by ID - to update individual info
 router.post('/:id', (req, res, next) => {
   //checks below here for request body data validation
-  let { studentUpdates } = req.body;
+  
   //Mongoose function to find and updated specific document
   Student.findByIdAndUpdate( req.student._id, 
     //we'll pass in our updates, Mongo is smart enough to overwrite what is present and leave the rest
-    studentUpdates,
+    req.body,
     //this parameter tells Mongo to return the updated object to us
     { new: true }, 
     //throw an error or return our shiny updated Student
@@ -86,11 +86,11 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
-//POST route for /packages (adds packages to DB)
+//POST route for /students (adds students to DB)
 router.post('/', (req, res, next) => {
   //checks below here for request body data validation
  
-  //we creating newPackage by referencing Package Schema
+  //we creating newStudent by referencing Student Schema
   //which is passing in the request body.
   //We are assuming that the front end will handle data validation. 
   const newStudent = new Student(req.body)

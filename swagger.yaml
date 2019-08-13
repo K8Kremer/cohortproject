@@ -11,18 +11,17 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-# tags are used for organizing operations
-tags:
-- name: admins
-  description: PS Staff Admin-only calls
-- name: employers
-  description: Operations available to employers
+# # tags are used for organizing operations
+# - name: admins
+#   description: PS Staff Admin-only calls
+# - name: employers
+#   description: Operations available to employers
 
 paths:
   /students:
     get:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: searches students
       operationId: searchStudents
       description: |
@@ -31,32 +30,15 @@ paths:
       - application/json
       parameters:
       - in: query
-        name: location
+        name: cohort
         description: pass an optional search string for location
         required: false
-        type: array
-        items:
-          type: string
+        type: string
       - in: query
-        name: jobStatus
-        description: if Student is available
-        required: false
-        type: array
-        items:
-          type: string
-      - in: query
-        name: desiredWork
-        description: type of role student is looking for
-        required: false
-        type: array
-        items:
-          type: string
-      - in: query
-        name: id
-        description: student ID to find individual student
+        name: studentName
+        description: pass an optional search string for name of specific student
         required: false
         type: string
-        format: uuid
       responses:
         200:
           description: search results matching criteria
@@ -69,8 +51,8 @@ paths:
         404:
           description: student with that ID not found
     post:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: adds a Student
       operationId: addStudent
       description: Adds a Student to the system
@@ -93,9 +75,9 @@ paths:
           description: an existing item already exists
   /students/{id}:
     get:
-      tags:
-      - admins
-      - employers
+      # tags:
+      # - admins
+      # - employers
       summary: return student by ID
       operationId: getStudent
       description: |
@@ -117,8 +99,8 @@ paths:
         404:
           description: student with that ID not found
     post:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: update student by ID
       operationId: updateStudent
       description: |
@@ -145,8 +127,8 @@ paths:
           description: student with that ID not found
   /packages:
     get:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: searches packages
       operationId: searchPackages
       description: |
@@ -155,30 +137,12 @@ paths:
       - application/json
       parameters:
       - in: query
-        name: companyName
-        description: pass an optional search string for companyName
-        required: false
-        type: array
-        items:
-          type: string
-      - in: query
         name: employerName
         description: if Package was sent to a particular Employer
         required: false
         type: array
         items:
           type: string
-      - in: query
-        name: seenByEmployer
-        description: if Package has been seen by an Employer
-        required: false
-        type: boolean
-      - in: query
-        name: id
-        description: Package ID to find individual Package
-        required: false
-        type: string
-        format: uuid
       responses:
         200:
           description: search results matching criteria
@@ -191,8 +155,8 @@ paths:
         404:
           description: Package with that ID not found
     post:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: adds a Package
       operationId: addPackage
       description: Adds a Package to the system
@@ -215,9 +179,9 @@ paths:
           description: an existing item already exists
   /packages/{id}:
     get:
-      tags:
-      - admins
-      - employers
+      # tags:
+      # - admins
+      # - employers
       summary: return Package by ID
       operationId: getPackage
       description: |
@@ -239,8 +203,8 @@ paths:
         404:
           description: Package with that ID not found
     post:
-      tags:
-      - admins
+      # tags:
+      # - admins
       summary: update Package by ID
       operationId: updatePackage
       description: |
