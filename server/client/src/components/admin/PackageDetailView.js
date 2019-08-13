@@ -34,7 +34,7 @@ class PackageDetailView extends Component {
             <ul>
               {this.props.package.students.length === 0 ? 
                 <h5>No Students Yet!</h5> : 
-                this.props.package.students.map(student => <li>{student.name.first}</li>)
+                this.props.package.students.map(student => <li>{student.firstName}</li>)
               }
             </ul>
           </div>
