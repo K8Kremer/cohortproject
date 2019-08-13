@@ -11,6 +11,7 @@ const StudentSchema = new Schema({
   picture: String,
   bio: String,
   address: String,
+  projectRepo: String,
   email: String,
   linkedIn: String, 
   phone: String,
