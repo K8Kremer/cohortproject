@@ -19,7 +19,7 @@ const packageRoutes = require('./routes/packages');
 
 app.use('/data', dataRoutes);
 app.use('/students', studentRoutes);
-app.use('/packages', packageRoutes); 
+app.use('/packages', packageRoutes);
 
 // Server Setup
 const port = process.env.PORT || 8000;
