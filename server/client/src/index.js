@@ -30,9 +30,5 @@ ReactDOM.render(
         </Switch>
       </App>
     </BrowserRouter>,
-<<<<<<< HEAD
-   </Provider>, 
-=======
   </Provider>, 
->>>>>>> dev
 document.getElementById('root'));
