@@ -7,36 +7,10 @@ import Modal from 'react-modal';
 
 
 class CreateStudent extends Component {
-
-	// constructor() {
-  //   super();
-
-  //   this.state = {
-  //     modalIsOpen: false
-  //   }
-
-  //   this.openModal = this.openModal.bind(this);
-  //   this.afterOpenModal = this.afterOpenModal.bind(this);
-  //   this.closeModal = this.closeModal.bind(this);
-  // }
-
-  // openModal() {
-  //   this.setState({modalIsOpen: true});
-  // }
-
-  // afterOpenModal() {
-  //   // references are now sync'd and can be accessed.
-  //   this.subtitle.style.color = '#f00';
-  // }
-
-  // closeModal() {
-  //   this.setState({modalIsOpen: false});
-  // }
-
 	onSubmit = formProps => {
 		this.props.createStudent(formProps, () => {
 			this.props.history.push('/');
-			console.log(formProps);
+			console.log("submit button clicked")
 		});
 	};
 
@@ -46,9 +20,26 @@ class CreateStudent extends Component {
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
-						<label>Name: </label>
+						<label>Title: </label>
+						<Field name="title" component="select">
+							<option value></option>
+							<option value = "Mr.">Mr.</option>
+							<option value = "Mrs.">Mrs.</option>
+						</Field>
+					</fieldset>
+					<fieldset>
+						<label>First Name: </label>
 						<Field 
-							name="name"
+							name="first"
+							type="text"
+							component="input"
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
+						<label>Last Name: </label>
+						<Field 
+							name="last"
 							type="text"
 							component="input"
 							autoComplete="none"
@@ -59,6 +50,15 @@ class CreateStudent extends Component {
 						<Field 
 							name="address"
 							type="text"
+							component="input"
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
+						<label>Cohort Number: </label>
+						<Field 
+							name="cohort"
+							type="number"
 							component="input"
 							autoComplete="none"
 						/>
@@ -82,9 +82,9 @@ class CreateStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Link To Project Repos: </label>
+						<label>LinkedIn Profile: </label>
 						<Field 
-							name="link to project repos"
+							name="linkedIn"
 							type="url"
 							component="input"
 							autoComplete="none"
@@ -92,16 +92,16 @@ class CreateStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Job Seeking Status: </label>
-						<select>
+						<Field name="jobSeekingStatus" component="select">
 							<option value = "employed">Employed</option>
 							<option value = "actively-seeking-employment">Seeking Employment</option>
 							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Graduation Date: </label>
 						<Field 
-							name="graduation date"
+							name="graduationDate"
 							type="date"
 							component="input"
 							autoComplete="none"
@@ -109,19 +109,19 @@ class CreateStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Work Desired: </label>
-						<select>
+						<Field name="typeOfWorkDesired" component="select">
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
 							<option value = "full-stack">Full Stack</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Employment Location Preference: </label>
-						<select>
+						<Field name="employmentLocationPreference" component="select">
 							<option value = "local">Local Work Only</option>
 							<option value = "remote">Remote Work Only</option>
 							<option value = "relocation">Willing to Relocate</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Upload Photo: </label>
@@ -146,20 +146,20 @@ class CreateStudent extends Component {
 					<fieldset>
 						<legend>Industries Preferred</legend>
 						<div>
-							<input type="checkbox" id="finance" name="interest" value="finance"/>
-							<label for="finance">Finance</label>
+							<Field type="checkbox" component="input" id="finance" name="finance" />
+							<label htmlFor="finance">Finance</label>
 						</div>
 						<div>
-							<input type="checkbox" id="healthcare" name="interest" value="healthcare"/>
-							<label for="healthcare">Healthcare</label>
+							<Field type="checkbox" component="input" id="healthcare" name="interest"/>
+							<label htmlFor="healthcare">Healthcare</label>
 						</div>
 						<div>
-							<input type="checkbox" id="gaming" name="interest" value="gaming"/>
-							<label for="gaming">Gaming</label>
+							<Field type="checkbox" component="input" id="gaming" name="gaming"/>
+							<label htmlFor="gaming">Gaming</label>
 						</div>
 						<div>
-							<input type="checkbox" id="ecommerce" name="interest" value="ecommerce"/>
-							<label for="ecommerce">E-commerce</label>
+							<Field type="checkbox" component="input" id="ecommerce" name="ecommerce"/>
+							<label htmlFor="ecommerce">E-commerce</label>
 						</div>
 					</fieldset>
 					<fieldset>
