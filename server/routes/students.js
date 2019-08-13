@@ -23,10 +23,15 @@ router.get('/', (req,res,next) => {
             .find({cohort: cohortQuery})
             .sort({'name.last': 1})
             .exec((err, students) => {
-                if (err) {
-                    res.status(400).send('Make sure cohort query represents a valid cohort');                    
-                }
-                res.send(students);
+              if (err) {
+                  res.status(400).send('Make sure cohort query represents a valid cohort');                    
+              }
+              //checking for cohorts without students
+              if(students.length === 0){
+                return res.send('There are no students within that cohort');
+              }
+              
+              res.send(students);
             })
     }
 })
