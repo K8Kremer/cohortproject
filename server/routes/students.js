@@ -86,44 +86,20 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
-//POST route here to add new student to database
-router.post("/", (req, res) => {
-  
-  //const name = req.body.name
-  const { name, packages, jobSeekingStatus, employmentLocationPreference, typeOfWorkDesired, industriesPreferred, picture, bio, address, email, linkedIn, phone, resume, cohort, graduationDate, updated_at, created_at  } = req.body
-  //using Product schema to create a new document in MONGODB
-  let student = new Student()
-  student.name = {
-    title: name.title || '',
-    first: name.first || '',
-    last: name.last || ''
-  };
-  student.packages = [];
-  student.jobSeekingStatus = jobSeekingStatus;
-  student.employmentLocationPreference = employmentLocationPreference;
-  student.typeOfWorkDesired = typeOfWorkDesired;
-  student.industriesPreferred = industriesPreferred;
-  student.picture = {
-    large: large,
-    medium: medium,
-    thumbnail: thumbnail
-  };
-  student.bio = bio;
-  student.address = address;
-  student.email = email;
-  student.linkedIn = linkedIn;
-  student.phone = phone;
-  student.resume = resume; //this is going to change with fs 
-  student.cohort = cohort;
-  student.graduationDate = graduationDate;
-  student.updated_at = updated_at;
-  student.created_at = created_at
+//POST route for /packages (adds packages to DB)
+router.post('/', (req, res, next) => {
+  //checks below here for request body data validation
+ 
+  //we creating newPackage by referencing Package Schema
+  //which is passing in the request body.
+  //We are assuming that the front end will handle data validation. 
+  const newStudent = new Student(req.body)
+  newStudent.save((err, result) => {
+    if (err) return handleError(err);
+    // saved!
+    res.send(result);
 
-  student.save((err) => {
-    if (err) throw err
-    return res.send(student);
   });
-
 });
 
 module.exports = router;
