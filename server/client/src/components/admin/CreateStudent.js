@@ -118,7 +118,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Upload Photo: </label>
 						<Field 
-							name="upload photo"
+							name="picture"
 							type="file"
 							accept="image/png, image/jpeg"
 							component="input"
@@ -128,7 +128,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Upload Resume: </label>
 						<Field 
-							name="upload resume"
+							name="resume"
 							type="file"
 							accept=".doc, .pdf"
 							component="input"
