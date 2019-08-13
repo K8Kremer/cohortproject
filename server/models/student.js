@@ -2,23 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-  name: {
-    title: String,
-    first: String,
-    last: String
-  },
+  
+  firstName: String,
+  lastName: String,
   packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
   jobSeekingStatus: String,
   employmentLocationPreference: String,
   typeOfWorkDesired: String,
   industriesPreferred: [],
-  picture: {
-    large: String,
-    medium: String,
-    thumbnail: String
-  },
+  picture: String,
   bio: String,
   address: String,
+  projectRepo: String,
   email: String,
   linkedIn: String, 
   phone: String,
