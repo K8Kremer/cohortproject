@@ -6,18 +6,18 @@ import { connect } from 'react-redux';
 
 
 class CreateStudent extends Component {
-	onSubmit = formProps => {
-		this.props.createStudent(formProps, () => {
-			this.props.history.push('/');
-			console.log("submit button clicked")
-		});
-	};
+	// onSubmit = formProps => {
+	// 	this.props.createStudent(formProps, () => {
+	// 		this.props.history.push('/');
+	// 		console.log("submit button clicked")
+	// 	});
+	// };
 
 	render() {
-		const { handleSubmit } = this.props;
+		// const { handleSubmit } = this.props;
 		
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+				<form /*onSubmit={handleSubmit(this.onSubmit.bind(this))}*/>
 					<fieldset>
 						<label>Name: </label>
 						<Field 
