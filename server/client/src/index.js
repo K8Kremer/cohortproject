@@ -10,6 +10,8 @@ import EmployerView from './components/employer/EmployerView';
 import { BrowserRouter, Switch, Route, Redirect  } from 'react-router-dom';
 import EmployerStudentView from './components/shared/EmployerStudentView';
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
 ReactDOM.render(
