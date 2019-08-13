@@ -5,7 +5,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
+
+
 class CreateStudent extends Component {
+	
 	// onSubmit = formProps => {
 	// 	this.props.createStudent(formProps, () => {
 	// 		this.props.history.push('/');
@@ -17,7 +20,7 @@ class CreateStudent extends Component {
 		// const { handleSubmit } = this.props;
 		
 		return (
-				<form /** onSubmit={handleSubmit(this.onSubmit.bind(this))}*/>
+				<form>
 					<fieldset>
 						<label>Name: </label>
 						<Field 
@@ -144,10 +147,18 @@ class CreateStudent extends Component {
 						autoComplete="none"
 						/>
 					</fieldset>
-					<button>Save</button>
+					<button onClick >Save</button>
 				</form>
 		)
 	}
+}
+
+function validate (values) {
+	const errors = {};
+	if ( !values.name ) {
+		errors.name = 'Required'
+	} 
+	console.log(errors)
 }
 
 function mapDispatchToProps(dispatch) {
@@ -155,6 +166,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const createStudentForm = reduxForm({
+	validate,
 	form: 'createStudent'
 })(CreateStudent);
 
