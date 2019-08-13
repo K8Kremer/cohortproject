@@ -10,13 +10,10 @@ const StudentSchema = new Schema({
   employmentLocationPreference: String,
   typeOfWorkDesired: String,
   industriesPreferred: [],
-  picture: {
-    large: String,
-    medium: String,
-    thumbnail: String
-  },
+  picture: String,
   bio: String,
   address: String,
+  projectRepo: String,
   email: String,
   linkedIn: String, 
   phone: String,
