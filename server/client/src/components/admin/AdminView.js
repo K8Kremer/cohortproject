@@ -4,6 +4,7 @@ import PageHeader from '../nav/navpane';
 import SideBar from '../nav/sidebar';
 import LoginPage from './LoginPage';
 import StudentList from './StudentList';
+import AdminStudentView from './AdminStudentView'
 import CreateStudent from './CreateStudent';
 import EditStudent from './EditStudent';
 import PackageList from './PackageList';
@@ -17,13 +18,14 @@ const AdminView = () => {
       <PageHeader />
       <SideBar />
       <Switch>
-        <Route exact path='/admin/login'         component={LoginPage} />
-        <Route exact path='/admin/studentlist'   component={StudentList} />
-        <Route exact path='/admin/createstudent' component={CreateStudent} />
-        <Route exact path='/admin/editstudent'   component={EditStudent} />
-        <Route exact path='/admin/packagelist'   component={PackageList} />
-        <Route exact path='/admin/createpackage' component={CreatePackage} />
-        <Route exact path='/admin/editpackage'   component={EditPackage} />
+        <Route exact path='/admin/login'               component={LoginPage} />
+        <Route exact path='/admin/studentlist'         component={StudentList} />
+        <Route exact path='/admin/student/:studentId'  component={AdminStudentView} />
+        <Route exact path='/admin/createstudent'       component={CreateStudent} />
+        <Route exact path='/admin/editstudent'         component={EditStudent} />
+        <Route exact path='/admin/packagelist'         component={PackageList} />
+        <Route exact path='/admin/createpackage'       component={CreatePackage} />
+        <Route exact path='/admin/editpackage'         component={EditPackage} />
       </Switch>
     </Fragment>
   )
