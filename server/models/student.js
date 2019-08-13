@@ -3,28 +3,31 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
   name: {
-    title: String,
-    first: String,
-    last: String
+    title: { type: String, required: True},
+    first: { type: String, required: True},
+    last: { type: String, required: True},  },
+  projectRepo = {
+    link: String,
+    description:  String 
   },
   packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
-  jobSeekingStatus: String,
-  employmentLocationPreference: String,
-  typeOfWorkDesired: String,
+  jobSeekingStatus: { type: String, required: True},
+  employmentLocationPreference: { type: String, required: True},
+  typeOfWorkDesired: { type: String, required: True},
   industriesPreferred: [],
   picture: {
-    large: String,
-    medium: String,
-    thumbnail: String
+    large: { type: String, required: True},
+    medium: { type: String, required: True},
+    thumbnail: { type: String, required: True}, 
   },
-  bio: String,
-  address: String,
-  email: String,
-  linkedIn: String, 
-  phone: String,
-  resume: String,
-  cohort: Number,
-  graduationDate: Date,
+  bio: { type: String, required: True},
+  address: { type: String, required: True},
+  email: { type: String, required: True},
+  linkedIn: { type: String, required: True},
+  phone: { type: String, required: True},
+  resume: { type: String, required: True},
+  cohort: { type: Number, required: True},
+  graduationDate: { type: Date, required: True},
   updated_at: Date,
   created_at: Date
 });
