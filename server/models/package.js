@@ -13,11 +13,9 @@ const PackageSchema = new Schema({
   }],
   packageNotes: String,
   replyEmail: String,
-  replyName: {
-    title: String,
-    first: String,
-    last: String
-  },
+  replyTitle: String,
+  replyFirst: String,
+  replyLast: String,
   seenByEmployer: false,
   isHidden: false,
   updated_at: Date,
