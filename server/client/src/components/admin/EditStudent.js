@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 
 class EditStudent extends Component {
   componentDidMount() {
-    this.props.fetchStudent("5d52d7ca9c840b774c6b7e5f");  
+    this.props.fetchStudent("5d531bd05477829122cd40ec");  
+    // this.props.initialize({address: "{address}"});
   }
 	onSubmit = formProps => {
 		this.props.editStudent(formProps, () => {
@@ -144,13 +145,35 @@ class EditStudent extends Component {
 						name="bio"
 						type="text"
 						component="input"
-						autoComplete="none"
+            autoComplete="none"
 						/>
 					</fieldset>
 					<button>Save</button>
 				</form>
 		)
 	}
+}
+
+function mapStateToProps(state) {
+//   return {
+//           name: state.name, 
+//           jobSeekingStatus: state.jobSeekingStatus,
+//           employmentLocationPreference: state.employmentLocationPreference,
+//           typeOfWorkDesired: state.typeOfWorkDesired,
+//           industriesPreferred: state.industriesPreferred,
+//           picture: state.picture,
+//           bio: state.bio,
+//           address: state.address,
+//           projectRepo: state.projectRepo,
+//           email: state.email,
+//           linkedIn: state.linkedIn,
+//           phone: state.phone,
+//           resume: state.resume,
+//           cohort: state.cohort,
+//           graduationDate: state.graduationDate,
+//           }
+// }
+return {...state}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -161,4 +184,4 @@ const editStudentForm = reduxForm({
 	form: 'editStudent'
 })(EditStudent);
 
-export default connect(null, mapDispatchToProps)(editStudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(editStudentForm);
