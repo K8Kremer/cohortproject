@@ -3,21 +3,48 @@ import { reduxForm, Field } from 'redux-form';
 import { createStudent} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
 
 
 class CreateStudent extends Component {
-	// onSubmit = formProps => {
-	// 	this.props.createStudent(formProps, () => {
-	// 		this.props.history.push('/');
-	// 		console.log("submit button clicked")
-	// 	});
-	// };
+
+	// constructor() {
+  //   super();
+
+  //   this.state = {
+  //     modalIsOpen: false
+  //   }
+
+  //   this.openModal = this.openModal.bind(this);
+  //   this.afterOpenModal = this.afterOpenModal.bind(this);
+  //   this.closeModal = this.closeModal.bind(this);
+  // }
+
+  // openModal() {
+  //   this.setState({modalIsOpen: true});
+  // }
+
+  // afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   this.subtitle.style.color = '#f00';
+  // }
+
+  // closeModal() {
+  //   this.setState({modalIsOpen: false});
+  // }
+
+	onSubmit = formProps => {
+		this.props.createStudent(formProps, () => {
+			this.props.history.push('/');
+			console.log(formProps);
+		});
+	};
 
 	render() {
-		// const { handleSubmit } = this.props;
+		const { handleSubmit } = this.props;
 		
 		return (
-				<form /*onSubmit={handleSubmit(this.onSubmit.bind(this))}*/>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
 						<label>Name: </label>
 						<Field 
