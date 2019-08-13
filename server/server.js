@@ -18,7 +18,7 @@ const studentRoutes = require('./routes/students');
 
 app.use('/data', dataRoutes);
 app.use('/students', studentRoutes);
-
+app.use('/packages', packageRoutes);
 // Server Setup
 const port = process.env.PORT || 8000;
 const server = http.createServer(app);
