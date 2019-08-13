@@ -25,7 +25,7 @@ export const createStudent = (student) => dispatch => {
 }
 
 export const fetchPackages = () => dispatch => {
-	axios.get(`/packages`)
+	axios.get(`${ROOT_URL}/packages`)
 	.then( response => {
 		dispatch({ type: FETCH_PACKAGES, payload: response.data});
 	})
