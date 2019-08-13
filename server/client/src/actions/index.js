@@ -1,8 +1,6 @@
 import axios from "axios";
 /** using redux thunk method of requesting data instead of a promise */
-
-
-import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT, FETCH_STUDENT, CREATE_STUDENT } from './types';
+import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE, FETCH_STUDENT, CREATE_STUDENT } from './types';
 
 const ROOT_URL = 'http://localhost:8000';
 
@@ -39,7 +37,7 @@ export const fetchPackages = () => dispatch => {
 export const addStudentToPackage = (student) => dispatch => {
 	axios.post(`/students`, { student })
 	.then( response => {
-		dispatch({ type: ADD_STUDENT, payload: response.data});
+		dispatch({ type: ADD_STUDENT_TO_PACKAGE, payload: response.data});
 	})
 	.catch( error => {
 		console.log(error);
