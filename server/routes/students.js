@@ -81,6 +81,7 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
+//POST route here to add new student to database
 router.post("/", (req, res) => {
   
   //const name = req.body.name
