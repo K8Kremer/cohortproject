@@ -15,10 +15,12 @@ app.use(bodyParser.urlencoded({
 
 const dataRoutes = require('./routes/generate-data');
 const studentRoutes = require('./routes/students');
+const packageRoutes = require('./routes/packages'); 
 
 app.use('/data', dataRoutes);
 app.use('/students', studentRoutes);
 app.use('/packages', packageRoutes);
+
 // Server Setup
 const port = process.env.PORT || 8000;
 const server = http.createServer(app);
