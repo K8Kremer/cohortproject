@@ -58,7 +58,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="Phone Number"
+							name="phone"
 							type="tel"
 							component="input"
 							autoComplete="none"
