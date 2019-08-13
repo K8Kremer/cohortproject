@@ -86,11 +86,11 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
-//POST route for /packages (adds packages to DB)
+//POST route for /students (adds students to DB)
 router.post('/', (req, res, next) => {
   //checks below here for request body data validation
  
-  //we creating newPackage by referencing Package Schema
+  //we creating newStudent by referencing Student Schema
   //which is passing in the request body.
   //We are assuming that the front end will handle data validation. 
   const newStudent = new Student(req.body)
