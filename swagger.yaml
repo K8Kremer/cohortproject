@@ -143,6 +143,128 @@ paths:
             $ref: '#/definitions/Student'
         404:
           description: student with that ID not found
+  /packages:
+    get:
+      tags:
+      - admins
+      summary: searches packages
+      operationId: searchPackages
+      description: |
+        By passing in the appropriate options, you can search for Packages in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: companyName
+        description: pass an optional search string for companyName
+        required: false
+        type: array
+        items:
+          type: string
+      - in: query
+        name: employerName
+        description: if Package was sent to a particular Employer
+        required: false
+        type: array
+        items:
+          type: string
+      - in: query
+        name: seenByEmployer
+        description: if Package has been seen by an Employer
+        required: false
+        type: boolean
+      - in: query
+        name: id
+        description: Package ID to find individual Package
+        required: false
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Package'
+        400:
+          description: bad input parameter
+        404:
+          description: Package with that ID not found
+    post:
+      tags:
+      - admins
+      summary: adds a Package
+      operationId: addPackage
+      description: Adds a Package to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: Package
+        description: Package to add
+        schema:
+          $ref: '#/definitions/Package'
+      responses:
+        201:
+          description: Package created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /packages/{id}:
+    get:
+      tags:
+      - admins
+      - employers
+      summary: return Package by ID
+      operationId: getPackage
+      description: |
+        By passing in the appropriate options, you can search for
+        Packages in the system
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: the searched for Package's ID
+        required: true
+        type: string
+      responses:
+        200:
+          description: Package with matching ID
+          schema:
+            $ref: '#/definitions/Package'
+        404:
+          description: Package with that ID not found
+    post:
+      tags:
+      - admins
+      summary: update Package by ID
+      operationId: updatePackage
+      description: |
+        By passing in the appropriate options, you  will update a Package by ID within the system
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: the Package to update's ID 
+        required: true
+        type: string
+      - in: body
+        name: Package
+        description: Package info to update
+        schema:
+          $ref: '#/definitions/Package'
+      responses:
+        200:
+          description: updated Package
+          schema:
+            $ref: '#/definitions/Package'
+        404:
+          description: Package with that ID not found
 definitions:
   Student:
     type: object
@@ -296,7 +418,7 @@ definitions:
             description: Project Employee's preferred given name.
           last:
             type: string
-            description: Project Employee's preferred surname.\
+            description: Project Employee's preferred surname.
       seenByEmployer:
         type: boolean
       isHidden:
