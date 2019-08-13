@@ -10,7 +10,7 @@ import EditStudent from './EditStudent';
 import PackageList from './PackageList';
 import CreatePackage from './CreatePackage';
 import EditPackage from './EditPackage';
-import ModalNotification from './ModalNotification';
+import PackageDetailView from './PackageDetailView';
 
 
 
@@ -26,9 +26,9 @@ const AdminView = () => {
         <Route exact path='/admin/createstudent'       component={CreateStudent} />
         <Route exact path='/admin/editstudent'         component={EditStudent} />
         <Route exact path='/admin/packagelist'         component={PackageList} />
+        <Route exact path='/admin/package/:packageId'  component={PackageDetailView} />
         <Route exact path='/admin/createpackage'       component={CreatePackage} />
         <Route exact path='/admin/editpackage'         component={EditPackage} />
-        <Route exact path='/admin/modalnotification'   component={ModalNotification} />
       </Switch>
     </Fragment>
   )

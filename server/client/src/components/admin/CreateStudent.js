@@ -20,17 +20,9 @@ class CreateStudent extends Component {
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
-						<label>Title: </label>
-						<Field name="title" component="select">
-							<option value></option>
-							<option value = "Mr.">Mr.</option>
-							<option value = "Mrs.">Mrs.</option>
-						</Field>
-					</fieldset>
-					<fieldset>
 						<label>First Name: </label>
 						<Field 
-							name="first"
+							name="firstName"
 							type="text"
 							component="input"
 							autoComplete="none"
@@ -39,7 +31,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Last Name: </label>
 						<Field 
-							name="last"
+							name="lastName"
 							type="text"
 							component="input"
 							autoComplete="none"
@@ -144,23 +136,13 @@ class CreateStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<legend>Industries Preferred</legend>
-						<div>
-							<Field type="checkbox" component="input" id="finance" name="finance" />
-							<label htmlFor="finance">Finance</label>
-						</div>
-						<div>
-							<Field type="checkbox" component="input" id="healthcare" name="interest"/>
-							<label htmlFor="healthcare">Healthcare</label>
-						</div>
-						<div>
-							<Field type="checkbox" component="input" id="gaming" name="gaming"/>
-							<label htmlFor="gaming">Gaming</label>
-						</div>
-						<div>
-							<Field type="checkbox" component="input" id="ecommerce" name="ecommerce"/>
-							<label htmlFor="ecommerce">E-commerce</label>
-						</div>
+						<label>Industry Preferred: </label>
+						<Field name="industriesPreferred" component="select">
+							<option value = "finance">Finance</option>
+							<option value = "healthcare">Healthcare</option>
+							<option value = "gaming">Gaming</option>
+							<option value = "ecommerce">E-commerce</option>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Bio: </label>
