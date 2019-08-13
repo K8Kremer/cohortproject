@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { createStudent} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
 
 
 
@@ -50,9 +51,18 @@ class CreateStudent extends Component {
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
-						<label>Name: </label>
+						<label>First Name: </label>
 						<Field 
-							name="name"
+							name="firstName"
+							type="text"
+							component="input"
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
+						<label>Last Name: </label>
+						<Field 
+							name="lastName"
 							type="text"
 							component= {this.renderField}
 							autoComplete="none"
@@ -68,9 +78,18 @@ class CreateStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
+						<label>Cohort Number: </label>
+						<Field 
+							name="cohort"
+							type="number"
+							component="input"
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="phoneNumber"
+							name="phone"
 							type="tel"
 							component={this.renderField}
 							autoComplete="none"
@@ -86,9 +105,9 @@ class CreateStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Link To Project Repos: </label>
+						<label>LinkedIn Profile: </label>
 						<Field 
-							name="link to project repos"
+							name="linkedIn"
 							type="url"
 							component={this.renderField}
 							autoComplete="none"
@@ -133,7 +152,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Upload Photo: </label>
 						<Field 
-							name="uploadPhoto"
+							name="picture"
 							type="file"
 							accept="image/png, image/jpeg"
 							component={this.renderField}
@@ -143,7 +162,7 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Upload Resume: </label>
 						<Field 
-							name="uploadResume"
+							name="resume"
 							type="file"
 							accept=".doc, .pdf"
 							component={this.renderField}
@@ -151,23 +170,13 @@ class CreateStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<legend>Industries Preferred</legend>
-						<div>
-							<input type="checkbox" id="finance" name="interest" value="finance"/>
-							<label htmlFor="finance">Finance</label>
-						</div>
-						<div>
-							<input type="checkbox" id="healthcare" name="interest" value="healthcare"/>
-							<label htmlFor="healthcare">Healthcare</label>
-						</div>
-						<div>
-							<input type="checkbox" id="gaming" name="interest" value="gaming"/>
-							<label htmlFor="gaming">Gaming</label>
-						</div>
-						<div>
-							<input type="checkbox" id="ecommerce" name="interest" value="ecommerce"/>
-							<label htmlFor="ecommerce">E-commerce</label>
-						</div>
+						<label>Industry Preferred: </label>
+						<Field name="industriesPreferred" component="select">
+							<option value = "finance">Finance</option>
+							<option value = "healthcare">Healthcare</option>
+							<option value = "gaming">Gaming</option>
+							<option value = "ecommerce">E-commerce</option>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Bio: </label>
