@@ -13,8 +13,11 @@
     "react-sidebar": "^3.0.2",
     "redux": "^4.0.4",
     "redux-devtools": "^3.5.0",
+    "redux-form": "^8.2.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.1.2"
+    "styled-components": "^4.1.2",
+    "chai": "latest",
+    "chai-http": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
