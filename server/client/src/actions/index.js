@@ -5,7 +5,7 @@ import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE, FETCH_STUDENT, 
 const ROOT_URL = 'http://localhost:8000';
 
 export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(`/students`)
+	axios.get(`${ROOT_URL}/students/`)
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -33,6 +33,8 @@ export const fetchPackages = () => dispatch => {
 		console.log(error);
 	});
 };
+
+//fetch individual package
 
 export const addStudentToPackage = (student) => dispatch => {
 	axios.post(`/students`, { student })
