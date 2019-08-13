@@ -7,9 +7,8 @@ import './navstyles.css';
 function SideBar () {
   return(
     <Menu noOverlay>
-      <Link to = '/admin/studentlist' className="menu-item" > Students</Link>
-      
-      <Link to = '/admin/packagelist' className="menu-item" > Packages</Link>
+      <Link to='/admin/studentlist' className="menu-item" > Students</Link>
+      <Link to='/admin/packagelist' className="menu-item" > Packages</Link>
     </Menu>
   )
   }
