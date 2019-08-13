@@ -6,9 +6,9 @@ import './navstyles.css';
 function SideBar () {
   return(
     <Menu noOverlay>
-      <a className="menu-item" href="#"> Students</a>
+      <a className="menu-item" href="admin/studentlist"> Students</a>
       
-      <a className="menu-item" href="#">Packages</a>
+      <a className="menu-item" href="admin/packagelist">Packages</a>
     </Menu>
   )
   }
