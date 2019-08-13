@@ -6,18 +6,18 @@ import { connect } from 'react-redux';
 
 
 class CreateStudent extends Component {
-	// onSubmit = formProps => {
-	// 	this.props.createStudent(formProps, () => {
-	// 		this.props.history.push('/');
-	// 		console.log("submit button clicked")
-	// 	});
-	// };
+	onSubmit = formProps => {
+		this.props.createStudent(formProps, () => {
+			this.props.history.push('/');
+			console.log("submit button clicked")
+		});
+	};
 
 	render() {
-		// const { handleSubmit } = this.props;
+		const { handleSubmit } = this.props;
 		
 		return (
-				<form /** onSubmit={handleSubmit(this.onSubmit.bind(this))}*/>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
 						<label>Name: </label>
 						<Field 
@@ -120,19 +120,19 @@ class CreateStudent extends Component {
 						<legend>Industries Preferred</legend>
 						<div>
 							<input type="checkbox" id="finance" name="interest" value="finance"/>
-							<label for="finance">Finance</label>
+							<label htmlFor="finance">Finance</label>
 						</div>
 						<div>
 							<input type="checkbox" id="healthcare" name="interest" value="healthcare"/>
-							<label for="healthcare">Healthcare</label>
+							<label htmlFor="healthcare">Healthcare</label>
 						</div>
 						<div>
 							<input type="checkbox" id="gaming" name="interest" value="gaming"/>
-							<label for="gaming">Gaming</label>
+							<label htmlFor="gaming">Gaming</label>
 						</div>
 						<div>
 							<input type="checkbox" id="ecommerce" name="interest" value="ecommerce"/>
-							<label for="ecommerce">E-commerce</label>
+							<label htmlFor="ecommerce">E-commerce</label>
 						</div>
 					</fieldset>
 					<fieldset>

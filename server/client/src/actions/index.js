@@ -15,7 +15,7 @@ export const fetchStudents = (page = 1) => dispatch => {
 };
 
 export const createStudent = (student) => dispatch => {
-	axios.post(`/students/`, { student })
+	axios.post(`${ROOT_URL}/students/`, { student })
 	.then( response => {
 		dispatch({ type: CREATE_STUDENT, payload: response.data});
 	})
