@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { slide as Menu } from "react-burger-menu";
 import './navstyles.css';
 
@@ -6,9 +7,9 @@ import './navstyles.css';
 function SideBar () {
   return(
     <Menu noOverlay>
-      <a className="menu-item" href="#"> Students</a>
+      <Link to = '/admin/studentlist' className="menu-item" > Students</Link>
       
-      <a className="menu-item" href="#">Packages</a>
+      <Link to = '/admin/packagelist' className="menu-item" > Packages</Link>
     </Menu>
   )
   }
