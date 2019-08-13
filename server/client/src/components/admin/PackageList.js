@@ -4,7 +4,7 @@ import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom';
 
-class PackageList extends React.Component {
+class PackageList extends Component {
 
   constructor(props){
     super(props);
@@ -13,7 +13,6 @@ class PackageList extends React.Component {
   componentDidMount() {
     
     this.props.fetchPackages();
-    
   }
 
   wrapPackages(packagesArray){
@@ -22,7 +21,7 @@ class PackageList extends React.Component {
       packagesArray.map(currentPackage => {
         return (
           <li>
-            <Link to='/packages/{currentPackage._id}'> {currentPackage.packageName}</Link> 
+            <Link to={`/admin/package/${currentPackage._id}`}> {currentPackage.packageName}</Link> 
           </li>
         )
       })
