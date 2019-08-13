@@ -54,10 +54,10 @@ router.get('/packages', (req, res, next) => {
     package.packageLink = faker.commerce.productName();
     package.companyName = faker.company.companyName();
     package.employerName = faker.name.firstName() + ' ' + faker.name.lastName();
-    package.employerEmail = faker.commerce.email();
+    package.employerEmail = faker.internet.email();
     package.students = [];
     package.packageNotes = faker.lorem.paragraph();
-    package.replyEmail = faker.company.email();
+    package.replyEmail = faker.internet.email();
     package.replyName = {
       title: faker.name.title(),
       first: faker.name.firstName(),
