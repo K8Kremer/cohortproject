@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { compose } from 'redux';
+import { createStudent} from '../../actions'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 
-class AddStudent extends Component {
-	onSubmit = formProps => {
-		this.props.addStudent(formProps, () => {
-			this.props.history.push('/');
-		});
-	};
+class CreateStudent extends Component {
+	// onSubmit = formProps => {
+	// 	this.props.createStudent(formProps, () => {
+	// 		this.props.history.push('/');
+	// 		console.log("submit button clicked")
+	// 	});
+	// };
 
 	render() {
-		const { handleSubmit } = this.props;
+		// const { handleSubmit } = this.props;
 		
 		return (
-			<FormContainer>
-				<form onSubmit={handleSubmit(this.onSubmit)}>
+				<form /** onSubmit={handleSubmit(this.onSubmit.bind(this))}*/>
 					<fieldset>
-						<label>Name</label>
+						<label>Name: </label>
 						<Field 
 							name="name"
 							type="text"
@@ -26,7 +28,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Address</label>
+						<label>Address: </label>
 						<Field 
 							name="address"
 							type="text"
@@ -35,7 +37,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Phone Number</label>
+						<label>Phone Number: </label>
 						<Field 
 							name="Phone Number"
 							type="tel"
@@ -44,7 +46,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Email</label>
+						<label>Email: </label>
 						<Field
 						name="email"
 						type="email"
@@ -53,7 +55,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Link To Project Repos</label>
+						<label>Link To Project Repos: </label>
 						<Field 
 							name="link to project repos"
 							type="url"
@@ -62,7 +64,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Job Seeking Status</label>
+						<label>Job Seeking Status: </label>
 						<select>
 							<option value = "employed">Employed</option>
 							<option value = "actively-seeking-employment">Seeking Employment</option>
@@ -70,7 +72,7 @@ class AddStudent extends Component {
 						</select>
 					</fieldset>
 					<fieldset>
-						<label>Graduation Date</label>
+						<label>Graduation Date: </label>
 						<Field 
 							name="graduation date"
 							type="date"
@@ -79,7 +81,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Work Desired</label>
+						<label>Work Desired: </label>
 						<select>
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
@@ -87,7 +89,7 @@ class AddStudent extends Component {
 						</select>
 					</fieldset>
 					<fieldset>
-						<label>Employment Location Preference</label>
+						<label>Employment Location Preference: </label>
 						<select>
 							<option value = "local">Local Work Only</option>
 							<option value = "remote">Remote Work Only</option>
@@ -95,7 +97,7 @@ class AddStudent extends Component {
 						</select>
 					</fieldset>
 					<fieldset>
-						<label>Upload Photo</label>
+						<label>Upload Photo: </label>
 						<Field 
 							name="upload photo"
 							type="file"
@@ -105,7 +107,7 @@ class AddStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Upload Resume</label>
+						<label>Upload Resume: </label>
 						<Field 
 							name="upload resume"
 							type="file"
@@ -134,7 +136,7 @@ class AddStudent extends Component {
 						</div>
 					</fieldset>
 					<fieldset>
-						<label>Bio</label>
+						<label>Bio: </label>
 						<Field
 						name="bio"
 						type="text"
@@ -142,14 +144,20 @@ class AddStudent extends Component {
 						autoComplete="none"
 						/>
 					</fieldset>
-					<button>Submit</button>
+					<button>Save</button>
 				</form>
-			</FormContainer>
 		)
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ createStudent }, dispatch);
+}
 
-export default compose(
-	reduxForm({ form: 'addStudent' })
-)(AddStudent)
+const createStudentForm = reduxForm({
+	form: 'createStudent'
+})(CreateStudent);
+
+export default connect(null, mapDispatchToProps)(createStudentForm);
+
+
