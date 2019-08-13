@@ -31,7 +31,7 @@ router.get('/students', (req, res, next) => {
     }
     student.bio = faker.lorem.paragraph()
     student.address = faker.address.city() + ', ' + faker.address.state() + ', ' + faker.address.country()
-    student.email = `${student.name.first}@projectshift.io`
+    student.email = `${student.name.first}.${student.name.last}@projectshift.io`
     student.linkedIn = ''
     student.phone = faker.phone.phoneNumberFormat()
     student.resume = ''

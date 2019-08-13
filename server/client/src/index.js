@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+// import rootReducer from "./reducers/index";
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import AdminView from './components/admin/AdminView';
+import EmployerView from './components/employer/EmployerView';
+import StudentDetail from './components/shared/StudentDetail';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  // <Provider store={store}>
+    <BrowserRouter>
+      <App>
+        <Switch>
+          <Route path='/admin' component={AdminView} />
+
+          <Route exact path='/:packageId' component={EmployerView} />
+          <Route exact path='/:packageId/:studentId' component={StudentDetail} />
+        </Switch>
+      </App>
+    </BrowserRouter>,
+  // </Provider>, 
+document.getElementById('root'));
