@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
   class AdminStudentView extends Component {
     //loads with student Id provided from URL
     componentDidMount(){
-  
       this.props.fetchStudent(this.props.match.params.studentId);
     }
   
@@ -65,7 +64,7 @@ import { Link } from 'react-router-dom';
     }
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return { current_student: state.current_student }
 }
 
