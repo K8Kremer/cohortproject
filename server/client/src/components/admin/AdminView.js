@@ -29,7 +29,6 @@ const AdminView = () => {
         <Route exact path='/admin/package/:packageId'  component={PackageDetailView} />
         <Route exact path='/admin/createpackage'       component={CreatePackage} />
         <Route exact path='/admin/editpackage'         component={EditPackage} />
-
       </Switch>
     </Fragment>
   )
