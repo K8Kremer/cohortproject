@@ -6,7 +6,7 @@ const lodash = require('lodash');
 //set route to get students 
 router.get('/', (req,res,next) => {
     let cohortQuery = req.query.cohort;
-    //if cohort query is specified return all students ordered by cohort and lastname
+    //if no cohort query is specified return all students ordered by cohort and lastname
     if (!cohortQuery) {
         Student
             .find()
