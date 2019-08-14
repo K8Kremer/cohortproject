@@ -41,11 +41,15 @@ class StudentList extends Component {
       <div className='col-8'>
       <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
         <h3>Students</h3>
+        <Button className='create-student'
+          onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
       </div>
       
       <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>   
+        
         <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <span>Choose a package: </span>
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
           {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
         </Dropdown.Toggle>
 
@@ -63,7 +67,7 @@ class StudentList extends Component {
         </Dropdown.Menu>
       </Dropdown>
       <Button className="submit-students"
-              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students</Button>
+              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
     </div>
       <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
         <tr style={{backgroundColor:'#679AB8'}}>
