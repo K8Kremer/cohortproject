@@ -15,6 +15,7 @@ class EditStudent extends Component {
     this.props.fetchStudent(this.props.match.params.studentId);
   }
   
+  /**TODO: Make the save button update the store */
 	onSubmit = formProps => {
 		this.props.editStudent(formProps, () => {
 			this.props.history.push('/');
@@ -24,7 +25,7 @@ class EditStudent extends Component {
 
 	render() {
 		const { handleSubmit } = this.props;
-		
+  
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
 					<fieldset>
