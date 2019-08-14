@@ -19,12 +19,15 @@ class StudentList extends Component {
 
       <div className='col-8'>
       <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
-        <tr style={{border: '1px solid #717D84', backgroundColor:'#679AB8'}}>
-          <th style={{textAlign: 'center', width:'10%'}}>Add to Package</th>
+        <tr style={{backgroundColor:'#679AB8'}}>
+          <th style={{textAlign: 'center', width:'10%'}}></th>
           <th style={{width:'20%'}}>First Name</th>
           <th style={{width:'20%'}}>Last Name</th>
           <th style={{width:'10%'}}>Cohort</th>
           <th style={{width:'20%'}}>Job-Seeking Status</th>
+          <th style={{textAlign: 'center', width:'10%'}}></th>
+          <th style={{textAlign: 'center', width:'10%'}}></th>
+  
         </tr>
         <tbody style={{backgroundColor: 'white'}}>
         {this.props.students.map((student) => {

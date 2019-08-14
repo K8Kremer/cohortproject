@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
+import { Link } from 'react-router-dom';
 //each contact is own component when rendered into contact list to eventually make deletion and editing easier with key but I probably won't make it to the extensions :)
 class StudentRow extends Component {
    
@@ -19,7 +18,10 @@ class StudentRow extends Component {
           <td style={{textAlign: 'left'}}>{student.cohort}</td>
           <td>{student.jobSeekingStatus}</td>
         
-        </tr>
+          <Link to={`/admin/student/${student._id}`}> <td><span className='badge badge-secondary'>View</span></td></Link>
+          <Link to={`/admin/editstudent/${student._id}`}> <td><span className='badge badge-secondary'>Edit</span></td></Link>
+      
+          </tr>
           )
         }
 }
