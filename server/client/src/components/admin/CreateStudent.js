@@ -3,18 +3,31 @@ import { reduxForm, Field } from 'redux-form';
 import { createStudent} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import Modal from 'react-modal';
-
-
+import { Redirect } from 'react-router'
 
 
 class CreateStudent extends Component {
+	state = {
+    redirectToNewPage: false
+	}
+
+	componentDidUpdate = (prevProps) => {
+		if (this.props.currentStudent.firstName !== prevProps.currentStudent.firstName && this.props.valid == true) {
+			this.setState({ redirectToNewPage: true }, () => {
+				window.alert(`Student ${this.props.currentStudent.firstName} created successfully!`)
+			});
+		}
+	}
+
 	onSubmit = formProps => {
 		this.props.createStudent(formProps, () => {
-			this.props.history.push('/');
-			console.log("submit button clicked")
 		});
+
 	};
+
+	dismissModal = () => {
+    this.props.toggle()
+  }
 
 	renderField(field) {
 		const { meta: { touched, error } } = field;
@@ -47,6 +60,12 @@ class CreateStudent extends Component {
 
 	render() {
 		const { handleSubmit } = this.props;
+
+		if (this.state.redirectToNewPage) {
+			return (
+			<Redirect to={`/admin/student/${this.props.currentStudent._id}`}/>
+			)
+		}
 		
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -269,6 +288,12 @@ function validate (values) {
 	return  errors;
 }
 
+function mapStateToProps(state) {
+	return {
+		currentStudent : state.current_student
+	}
+}
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({ createStudent }, dispatch);
 }
@@ -278,6 +303,6 @@ const createStudentForm = reduxForm({
 	form: 'createStudent'
 })(CreateStudent);
 
-export default connect(null, mapDispatchToProps)(createStudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(createStudentForm);
 
 
