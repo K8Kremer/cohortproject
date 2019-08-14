@@ -25,9 +25,11 @@ router.get('/students', (req, res, next) => {
     student.bio = faker.lorem.paragraph()
     student.address = faker.address.city() + ', ' + faker.address.state() + ', ' + faker.address.country()
     student.email = `${student.firstName}.${student.lastName}@projectshift.io`
-    student.linkedIn = ''
+    student.linkedIn = 'linkedin',
     student.phone = faker.phone.phoneNumberFormat()
-    student.resume = ''
+    student.resume = 'resume'
+    student.projectRepoLink = 'link to repo';
+    student.projectRepoDescription = faker.lorem.paragraph();
     student.cohort = faker.random.number({ min: 0, max: 7 });
     student.graduationDate = faker.date.future(2)
 
@@ -51,12 +53,8 @@ router.get('/packages', (req, res, next) => {
     package.students = [];
     package.packageNotes = faker.lorem.paragraph();
     package.replyEmail = faker.internet.email();
-    package.replyName = {
-      title: faker.name.title(),
-      first: faker.name.firstName(),
-      last: faker.name.lastName()
-    };
-    package.seenByEmployer = false;
+    package.replyName = faker.name.firstName() + ' ' + faker.name.lastName();
+    package.seenByEmployer = false; 
     package.isHidden = false;
     
     package.save((err) => {
