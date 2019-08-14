@@ -13,7 +13,7 @@ class StudentList extends Component {
       <>
         {this.props.students.map((student) => {
           return (
-            <div key={student._id}>{student.name.first} cohort {student.cohort}</div>
+            <div key={student._id}>{student.firstName} cohort {student.cohort}</div>
           )
         })}
       </>

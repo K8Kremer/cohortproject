@@ -2,36 +2,55 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStudent } from '../../actions';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 
   class AdminStudentView extends Component {
-    componentDidMount() {
-      this.props.fetchStudent("5d52d7ca9c840b774c6b7e5f")
-    }
+
   
     //hardcoded student id for testing purposes
-    handleClick = (event) => {
-      this.props.fetchStudent("5d52d7ca9c840b774c6b7e5f");
+    handleClick = () => {
+      this.props.fetchStudent("5d53249de79c6a14447a460c");
+    }
+    //blank for now
+    addStudentToPackage = () => {
+
     }
   
     render(){
-   
+      console.log(this.props.current_student)
       return (
         //placeholder button until list gets populated and we can move onClick to student row
-        <div>
+        <div style={{backgroundColor:"#9EAEB8"}}>
         <button btn btn-primary onClick={this.handleClick}>Placeholder for GET Student</button>
         
         <div className='container'>
           <div className='row'>
-            <div className='col-4'>
-              {/* <img src={this.props.current_student.picture.thumbnail}></img> */}
+            
+              
+          <div className='col-12 card shadow-sm p-3 mb-5 bg-white rounded'>
+            
+              <div className='card-header text-center'>
+                {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
+                <Link to = '/admin/editstudent/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 150}}>Edit</button></Link>
+                <Link to = '/employer/:packageId/student/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 20}}>View as Employer</button></Link>
+                <select style={{position:'absolute', top: 100,right: 20}}name='package' onChange={this.addStudentToPackage}>
+                  <option />
+                  {/* will need to render available packages into dropdown options here for now hard coding two options*/}
+                  <option value = 'package1'>Package 1</option>
+                  <option value = 'package1'>Package 2</option>
+                </select>
+ 
+              <img className='img-thumbnail rounded float-left' style={{height: 100, width: 100}}src={this.props.current_student.picture}></img>
+              <h2 style={{textAlign:'center', marginTop: 30, marginRight: 100}}>{this.props.current_student.firstName} {this.props.current_student.lastName}</h2>
               </div>
-            <div className='col-6'>
-             {/* <p><b>Last Name:</b> {name}</p> */}
-             {/* <p><b>First Name:</b> {this.props.current_student.name['last']}</p> */}
+              <div className='card-body text-center'>
+              
+              <p><em> {this.props.current_student.bio}</em></p>
+              </div>
               <p><b>Job Seeking Status:</b> {this.props.current_student.jobSeekingStatus}</p>
               <p><b>Project Repos:</b></p>
-              <p><b>Bio:</b> {this.props.current_student.bio}</p>
+              
               <p><b>Resume:</b> {this.props.current_student.resume}</p>
               <p><b>Location Preference:</b> {this.props.current_student.employmentLocationPreference}</p>
               <p><b>Type of Work Desired: </b>{this.props.current_student.typeOfWorkDesired}</p>
