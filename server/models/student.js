@@ -13,7 +13,7 @@ const StudentSchema = new Schema({
   employmentLocationPreference: { type: String, required: true},
   typeOfWorkDesired: { type: String, required: true},
   industriesPreferred: [],
-  picture: { type: String, required: true}, 
+  picture: String, 
   bio: { type: String, required: true},
   address: { type: String, required: true},
   email: { type: String, required: true},
