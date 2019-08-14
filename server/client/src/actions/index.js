@@ -7,7 +7,7 @@ import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE,
 const ROOT_URL = 'http://localhost:8000';
 
 export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(`${ROOT_URL}/students/`)
+	axios.get(`/students/`)
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -17,7 +17,7 @@ export const fetchStudents = (page = 1) => dispatch => {
 };
 
 export const createStudent = (student) => dispatch => {
-	axios.post(`${ROOT_URL}/students/`, { ...student })
+	axios.post(`/students/`, { ...student })
 	.then( response => {
 		dispatch({ type: CREATE_STUDENT, payload: response.data});
 	})
@@ -27,7 +27,7 @@ export const createStudent = (student) => dispatch => {
 }
 
 export const fetchPackages = () => dispatch => {
-	axios.get(`${ROOT_URL}/packages`)
+	axios.get(`/packages`)
 	.then( response => {
 		dispatch({ type: FETCH_PACKAGES, payload: response.data});
 	})
@@ -60,7 +60,7 @@ export const fetchStudent = (id) => dispatch => {
 }
 
 export const editStudent = (id) => dispatch => {
-	axios.post(`${ROOT_URL}/students/${id}`)
+	axios.post(`/students/${id}`)
 	.then( response => {
 		dispatch({ type: EDIT_STUDENT, payload: response.data});
 	})
@@ -70,7 +70,7 @@ export const editStudent = (id) => dispatch => {
 }
 
 export const fetchPackage = (id) => dispatch => {
-	axios.get(`${ROOT_URL}/packages/${id}`)
+	axios.get(`/packages/${id}`)
 		.then(response => {
 			dispatch({ type: FETCH_PACKAGE, payload: response.data });
 		})
@@ -80,7 +80,7 @@ export const fetchPackage = (id) => dispatch => {
 }
 
 export const createPackage = (newPackage) => dispatch => {
-	axios.post(`${ROOT_URL}/packages/`, { ...newPackage })
+	axios.post(`/packages/`, { ...newPackage })
 		.then(response => {
 			dispatch({ type: CREATE_PACKAGE, payload: response.data });
 		})
@@ -90,7 +90,7 @@ export const createPackage = (newPackage) => dispatch => {
 }
 
 export const editPackage = (id) => dispatch => {
-	axios.post(`${ROOT_URL}/packages/${id}`)
+	axios.post(`/packages/${id}`)
 		.then(response => {
 			dispatch({ type: EDIT_PACKAGE, payload: response.data });
 		})
