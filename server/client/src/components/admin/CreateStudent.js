@@ -12,6 +12,10 @@ class CreateStudent extends Component {
 	}
 
 	componentDidUpdate = (prevProps) => {
+    /**
+     * this.props.currentStudent is being changed to a boolean true when the form validation fails BUT WHY
+     * this.props.valid returns true when form validation is successful
+     */
 		if (this.props.currentStudent.firstName !== prevProps.currentStudent.firstName && this.props.valid == true) {
 			this.setState({ redirectToNewPage: true }, () => {
 				window.alert(`Student ${this.props.currentStudent.firstName} created successfully!`)
