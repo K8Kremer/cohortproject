@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
     }
   
     render(){
-      console.log(this.props.current_student)
+    
       return (
        
         <div style={{backgroundColor:"#9EAEB8"}}>
