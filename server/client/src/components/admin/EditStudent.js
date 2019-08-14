@@ -14,22 +14,24 @@ class EditStudent extends Component {
   componentDidMount() {
     this.props.fetchStudent(this.props.match.params.studentId);
   }
+
   componentWillReceiveProps() {
-    this.props.initialize({
-      firstName: `${this.props.current_student.firstName}`,
-      lastName: `${this.props.current_student.lastName}`,
-      address: `${this.props.current_student.address}`,
-      phoneNumber: `${this.props.current_student.phone}`,
-      email: `${this.props.current_student.email}`,
-      jobSeekingStatus: `${this.props.current_student.jobSeekingStatus}`,
-      graduationDate: `${this.props.current_student.graduationDate}`,
-      typeOfWorkDesired: `${this.props.current_student.typeOfWorkDesired}`,
-      employmentLocationPreference: `${this.props.current_student.employmentLocationPreference}`,
-      industriesPreferred: `${this.props.current_student.industriesPreferred}`,
-      bio: `${this.props.current_student.bio}`,
-    })
+      this.props.initialize({
+        firstName: `${this.props.current_student.firstName}`,
+        lastName: `${this.props.current_student.lastName}`,
+        address: `${this.props.current_student.address}`,
+        phoneNumber: `${this.props.current_student.phone}`,
+        email: `${this.props.current_student.email}`,
+        jobSeekingStatus: `${this.props.current_student.jobSeekingStatus}`,
+        graduationDate: `${this.props.current_student.graduationDate}`,
+        typeOfWorkDesired: `${this.props.current_student.typeOfWorkDesired}`,
+        employmentLocationPreference: `${this.props.current_student.employmentLocationPreference}`,
+        industriesPreferred: `${this.props.current_student.industriesPreferred}`,
+        bio: `${this.props.current_student.bio}`
+      })
   }
   
+  /**TODO: Make the save button update the store */
 	onSubmit = formProps => {
 		this.props.editStudent(formProps, () => {
 			this.props.history.push('/');
@@ -39,7 +41,7 @@ class EditStudent extends Component {
 
 	render() {
 		const { handleSubmit } = this.props;
-		
+  
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
