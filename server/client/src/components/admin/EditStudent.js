@@ -5,10 +5,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
+/******************
+ * TODO: If time permits: Figure a way out to populate the redux form Field tags
+ * with the correct values from the database.
+ */
+
 class EditStudent extends Component {
   componentDidMount() {
-    this.props.fetchStudent("5d52d7ca9c840b774c6b7e5f");  
+    this.props.fetchStudent("5d532607565704964a2c4206");
   }
+  componentWillReceiveProps() {
+    this.props.initialize({
+      firstName: `${this.props.current_student.firstName}`,
+      lastName: `${this.props.current_student.lastName}`,
+      address: `${this.props.current_student.address}`,
+      phoneNumber: `${this.props.current_student.phone}`,
+      email: `${this.props.current_student.email}`,
+      jobSeekingStatus: `${this.props.current_student.jobSeekingStatus}`,
+      graduationDate: `${this.props.current_student.graduationDate}`,
+      typeOfWorkDesired: `${this.props.current_student.typeOfWorkDesired}`,
+      employmentLocationPreference: `${this.props.current_student.employmentLocationPreference}`,
+      industriesPreferred: `${this.props.current_student.industriesPreferred}`,
+      bio: `${this.props.current_student.bio}`,
+    })
+  }
+  
 	onSubmit = formProps => {
 		this.props.editStudent(formProps, () => {
 			this.props.history.push('/');
@@ -22,12 +43,21 @@ class EditStudent extends Component {
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
-						<label>Name: </label>
+						<label>First Name: </label>
 						<Field 
-							name="name"
+							name="firstName"
 							type="text"
 							component="input"
-							autoComplete="none"
+              autoComplete="none"
+						/>
+					</fieldset>
+          <fieldset>
+						<label>Last Name: </label>
+						<Field 
+							name="lastName"
+							type="text"
+							component="input"
+              autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
@@ -42,7 +72,7 @@ class EditStudent extends Component {
 					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="Phone Number"
+							name="phoneNumber"
 							type="tel"
 							component="input"
 							autoComplete="none"
@@ -60,7 +90,7 @@ class EditStudent extends Component {
 					<fieldset>
 						<label>Link To Project Repos: </label>
 						<Field 
-							name="link to project repos"
+							name="projectRepos"
 							type="url"
 							component="input"
 							autoComplete="none"
@@ -68,23 +98,41 @@ class EditStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Job Seeking Status: </label>
-						<select>
+            <br /><label>current: </label>
+            <Field 
+              name="jobSeekingStatus"
+              type="text"
+              component="input"
+              autoComplete="none"
+              disabled={true}
+              />
+            <br /><label>edit: </label>
+						<select name="jobSeekingStatus">
 							<option value = "employed">Employed</option>
-							<option value = "actively-seeking-employment">Seeking Employment</option>
+							<option value = "actively-seeking-employment">Searching</option>
 							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
-						</select>
+						</select> 
 					</fieldset>
 					<fieldset>
 						<label>Graduation Date: </label>
 						<Field 
-							name="graduation date"
-							type="date"
+							name="graduationDate"
+							type="text"
 							component="input"
-							autoComplete="none"
+              autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
 						<label>Work Desired: </label>
+            <br /><label>current: </label>
+            <Field 
+							name="typeOfWorkDesired"
+							type="text"
+							component="input"
+              autoComplete="none"
+              disabled={true}
+						/>
+            <br /><label>edit: </label>
 						<select>
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
@@ -93,6 +141,15 @@ class EditStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Employment Location Preference: </label>
+            <br /><label>current: </label>
+            <Field 
+							name="employmentLocationPreference"
+							type="text"
+							component="input"
+              autoComplete="none"
+              disabled={true}
+						/>
+            <br /><label>edit: </label>
 						<select>
 							<option value = "local">Local Work Only</option>
 							<option value = "remote">Remote Work Only</option>
@@ -120,7 +177,14 @@ class EditStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<legend>Industries Preferred</legend>
+						<legend>Industries Preferred <br></br></legend>
+            <Field 
+							name="industriesPreferred"
+							type="text"
+							component="input"
+              autoComplete="none"
+              disabled={true}
+						/>
 						<div>
 							<input type="checkbox" id="finance" name="interest" value="finance"/>
 							<label htmlFor="finance">Finance</label>
@@ -144,7 +208,7 @@ class EditStudent extends Component {
 						name="bio"
 						type="text"
 						component="input"
-						autoComplete="none"
+            autoComplete="none"
 						/>
 					</fieldset>
 					<button>Save</button>
@@ -153,12 +217,17 @@ class EditStudent extends Component {
 	}
 }
 
+function mapStateToProps(state) {
+  return {current_student: state.current_student}
+}
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({ editStudent, fetchStudent }, dispatch);
 }
 
 const editStudentForm = reduxForm({
-	form: 'editStudent'
+  form: 'editStudent',
+  enableReinitialize: true
 })(EditStudent);
 
-export default connect(null, mapDispatchToProps)(editStudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(editStudentForm);
