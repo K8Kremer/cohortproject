@@ -141,8 +141,8 @@ class CreateStudent extends Component {
 						<Field name="jobSeekingStatus" component={this.renderSelectField}>
 							<option />
 							<option value = "employed">Employed</option>
-							<option value = "actively-seeking-employment">Seeking Employment</option>
-							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
+							<option value = "seeking-employment">Seeking Employment</option>
+							<option value = "open">Open</option>
 						</Field>
 					</fieldset>
 					<fieldset>
