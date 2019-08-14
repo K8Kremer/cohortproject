@@ -7,6 +7,7 @@ const PackageSchema = new Schema({
   companyName: { type: String, required: true},
   employerName: { type: String, required: true},// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
   employerEmail: { type: String, required: true},
+  employerURL: String,
   students: [{
     student: {type: Schema.Types.ObjectId, ref: 'Student', required: true},
     studentNotes: String,
