@@ -6,24 +6,22 @@ import { Link } from 'react-router-dom';
 
 
   class AdminStudentView extends Component {
-
-  
-    //hardcoded student id for testing purposes
-    //NOTE by dposse - Maybe simpler to get on componentDidMount instead of clicking button
-    handleClick = () => {
-      this.props.fetchStudent("5d5352038cc5b97774a6996d");
+    //loads with student Id provided from URL
+    componentDidMount(){
+      this.props.fetchStudent(this.props.match.params.studentId);
     }
-    //blank for now
+  
+
+    //blank for now, should eventually add functionality to attach student to a package on this page as well.  
     addStudentToPackage = () => {
 
     }
   
     render(){
-      console.log(this.props.current_student)
+    
       return (
-        //placeholder button until list gets populated and we can move onClick to student row
+       
         <div style={{backgroundColor:"#9EAEB8"}}>
-        <button btn btn-primary onClick={this.handleClick}>Placeholder for GET Student</button>
         
         <div className='container'>
           <div className='row'>
