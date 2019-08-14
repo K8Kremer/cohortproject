@@ -364,8 +364,8 @@ function validate (values) {
 	}
 
 	//check if work desired is empty
-	if ( !values.workDesired ) {
-		errors.workDesired = "Required"
+	if ( !values.typeOfWorkDesired ) {
+		errors.typeOfWorkDesired = "Required"
 	}
 
 	//check if employment location preference is empty
