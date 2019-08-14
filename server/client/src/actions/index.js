@@ -17,7 +17,7 @@ export const fetchStudents = (page = 1) => dispatch => {
 };
 
 export const createStudent = (student) => dispatch => {
-	axios.post(`/students/`, { ...student })
+  axios.post(`/students/`, { ...student })
 	.then( response => {
 		dispatch({ type: CREATE_STUDENT, payload: response.data});
 	})
@@ -51,7 +51,6 @@ export const addStudentToPackage = (student) => dispatch => {
 export const fetchStudent = (id) => dispatch => {
   axios.get(`/students/${id}`)
   .then( response => {
-    console.log(response)
     dispatch({ type: FETCH_STUDENT, payload: response.data});
   })
   .catch ( error => {
@@ -59,8 +58,9 @@ export const fetchStudent = (id) => dispatch => {
   })
 }
 
-export const editStudent = (id) => dispatch => {
-	axios.post(`/students/${id}`)
+export const editStudent = (id, studentUpdates) => dispatch => {
+  console.log(`${id}`, studentUpdates);
+  axios.post(`/students/${id}`, {...studentUpdates})
 	.then( response => {
 		dispatch({ type: EDIT_STUDENT, payload: response.data});
 	})

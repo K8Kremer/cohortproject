@@ -6,6 +6,7 @@ const StudentSchema = new Schema({
 
   firstName: { type: String, required: true},
   lastName: { type: String, required: true},
+  fullName: String,
   projectRepoLink: String,
   projectRepoDescription:  String,
   packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
@@ -17,9 +18,9 @@ const StudentSchema = new Schema({
   bio: { type: String, required: true},
   address: { type: String, required: true},
   email: { type: String, required: true},
-  linkedIn: { type: String, required: true},
+  linkedIn: String,
   phone: { type: String, required: true},
-  resume: { type: String, required: true},
+  resume: String,
   cohort: { type: Number, required: true},
   graduationDate: { type: Date, required: true},
 

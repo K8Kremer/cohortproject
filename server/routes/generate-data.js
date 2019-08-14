@@ -2,6 +2,7 @@ const router = require('express').Router();
 const faker = require('faker');
 const Student = require('../models/student');
 const Package = require('../models/package');
+const uuid = require('uuid/v1');
 
 //list of parameters for fake data
 //for real data, we may prefer a dropdown on the Front End
@@ -16,6 +17,7 @@ router.get('/students', (req, res, next) => {
     let student = new Student();
     student.firstName = faker.name.firstName()
     student.lastName = faker.name.lastName()
+    student.fullName= student.firstName + ' ' + student.lastName
     student.packages = []
     student.jobSeekingStatus = jobSeekingStatus[Math.floor(Math.random() * jobSeekingStatus.length)]
     student.employmentLocationPreference = employmentLocPref[Math.floor(Math.random() * employmentLocPref.length)]
@@ -50,6 +52,7 @@ router.get('/packages', (req, res, next) => {
     package.companyName = faker.company.companyName();
     package.employerName = faker.name.firstName() + ' ' + faker.name.lastName();
     package.employerEmail = faker.internet.email();
+    package.employerURL = uuid();
     package.students = [];
     package.packageNotes = faker.lorem.paragraph();
     package.replyEmail = faker.internet.email();
