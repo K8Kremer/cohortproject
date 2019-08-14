@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
-import {Link} from 'react-router-dom';
+import PackageRow from './PackageRow';
 
 class PackageList extends Component {
 
@@ -17,16 +17,39 @@ class PackageList extends Component {
 
   wrapPackages(packagesArray){
     // console.log(packagesArray);
+    
     return (
-      packagesArray.map(currentPackage => {
+      <>
+      <div className='row'>
+      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}>
+
+      </div>
+      <div className='col-8'>
+      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
+        <tr style={{backgroundColor:'#679AB8'}}>
+          <th style={{width:'20%'}}>Package</th>
+          <th style={{width:'20%'}}>Recipient</th>
+          <th style={{width:'10%'}}>Status</th>
+          <th style={{width:'20%'}}>Date Created</th>
+          <th style={{textAlign: 'center', width:'10%'}}></th>
+          <th style={{textAlign: 'center', width:'10%'}}></th>
+        </tr>
+        <tbody style={{backgroundColor: 'white'}}>
+      {packagesArray.map((currentPackage) => {
         return (
-          <li>
-            <Link to={`/admin/package/${currentPackage._id}`}> {currentPackage.packageName}</Link> 
-          </li>
+            <PackageRow key={currentPackage._id} currentPackage={currentPackage}/>
         )
-      })
+      })}
+          </tbody>
+      </table>
+      </div>
+      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}> </div>
+      
+      </div>
+      </>
     );
   }
+    
 
   render(){
     if(this.props.packages.length === 0){

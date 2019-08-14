@@ -63,7 +63,7 @@ import { Link } from 'react-router-dom';
               <p><b>Phone: </b>{this.props.current_student.phone}</p>
             </div>
         </div>
-        </div>
+          </div>
         </div>
         )
     }
