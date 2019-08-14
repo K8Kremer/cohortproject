@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { createStudent} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 
 
 
