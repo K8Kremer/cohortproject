@@ -54,10 +54,20 @@ class PackageDetailView extends Component {
           <div className='students col-sm-5'>
             <h4 className='d-block'>Students</h4>
             <div>
-            <ul>
+            <ul className='list-group'>
               {this.props.package.students !== [] ? 
                 <h5>No Students Yet!</h5> : 
-                this.props.package.students.map(student => <li>{student.firstName}</li>)
+                this.props.package.students.map(studentObject => 
+                  {
+                    return(
+                      <li className='list-group-item'>
+                        <h6>{studentObject.student.firstName} {studentObject.student.firstName}</h6>
+                        <p>{studentObject.studentNotes}</p>
+                        <Link to={``} className='btn btn-sm btn-primary'>Add/Edit Note</Link>
+                      </li>
+                    )
+                  }
+                )
               }
             </ul>
             </div>
