@@ -156,7 +156,7 @@ class CreateStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Work Desired: </label>
-						<Field name="workDesired" component={this.renderSelectField}>
+						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
 							<option />
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
@@ -260,8 +260,8 @@ function validate (values) {
 	}
 
 	//check if work desired is empty
-	if ( !values.workDesired ) {
-		errors.workDesired = "Required"
+	if ( !values.typeOfWorkDesired ) {
+		errors.typeOfWorkDesired = "Required"
 	}
 
 	//check if employment location preference is empty
