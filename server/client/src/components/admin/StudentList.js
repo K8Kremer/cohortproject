@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchStudents } from '../../actions';
+import StudentRow from './StudentRow';
 
 class StudentList extends Component {
   componentDidMount() {
@@ -11,11 +12,32 @@ class StudentList extends Component {
   render() {
     return (
       <>
+      <div className='row'>
+      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}>
+
+      </div>
+
+      <div className='col-8'>
+      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
+        <tr style={{border: '1px solid #717D84', backgroundColor:'#679AB8'}}>
+          <th>Add to Package</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Cohort</th>
+          <th>Job-Seeking Status</th>
+        </tr>
+        <tbody style={{backgroundColor: 'white'}}>
         {this.props.students.map((student) => {
           return (
-            <div key={student._id}>{student.firstName} cohort {student.cohort}</div>
+            <StudentRow key={student._id} student={student}/>
           )
         })}
+        </tbody>
+      </table>
+      </div>
+      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}> </div>
+      
+      </div>
       </>
     )
   }
