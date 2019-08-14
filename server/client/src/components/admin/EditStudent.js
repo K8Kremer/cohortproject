@@ -16,10 +16,11 @@ class EditStudent extends Component {
   }
   
 	onSubmit = formProps => {
-		this.props.editStudent(formProps, () => {
-			this.props.history.push('/');
-			console.log("save button clicked")
-		});
+		console.log(formProps);
+		console.log(this.props.match.params.studentId)
+		this.props.editStudent(this.props.match.params.studentId, formProps)
+		this.props.history.push('/');
+		console.log("save button clicked")
 	};
 
 	render() {
