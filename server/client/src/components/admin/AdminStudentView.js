@@ -31,7 +31,7 @@ import { Link } from 'react-router-dom';
             
               <div className='card-header text-center'>
                 {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
-                <Link to = '/admin/editstudent/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 150}}>Edit</button></Link>
+                <Link to = {`/admin/editstudent/${this.props.current_student._id}`}><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 150}}>Edit</button></Link>
                 <Link to = '/employer/:packageId/student/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 20}}>View as Employer</button></Link>
                 <select style={{position:'absolute', top: 100,right: 20}}name='package' onChange={this.addStudentToPackage}>
                   <option />
