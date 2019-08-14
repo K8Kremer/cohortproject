@@ -88,6 +88,8 @@ router.post('/:id', (req, res, next) => {
 
 //POST route for /students (adds students to DB)
 router.post('/', (req, res, next) => {
+  console.log(req);
+  console.log(req.body);
   //checks below here for request body data validation
  
   //we creating newStudent by referencing Student Schema
@@ -95,7 +97,7 @@ router.post('/', (req, res, next) => {
   //We are assuming that the front end will handle data validation. 
   const newStudent = new Student(req.body)
   newStudent.save((err, result) => {
-    if (err) return handleError(err);
+    if (err) console.log(err);
     // saved!
     res.send(result);
 
