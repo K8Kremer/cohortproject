@@ -5,7 +5,7 @@ import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE, FETCH_STUDENT, 
 const ROOT_URL = 'http://localhost:8000';
 
 export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(`${ROOT_URL}/students/`)
+	axios.get(`/students/`)
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -15,7 +15,7 @@ export const fetchStudents = (page = 1) => dispatch => {
 };
 
 export const createStudent = (student) => dispatch => {
-	axios.post(`${ROOT_URL}/students/`, { ...student })
+	axios.post(`/students/`, { ...student })
 	.then( response => {
 		dispatch({ type: CREATE_STUDENT, payload: response.data});
 	})
@@ -25,7 +25,7 @@ export const createStudent = (student) => dispatch => {
 }
 
 export const fetchPackages = () => dispatch => {
-	axios.get(`${ROOT_URL}/packages`)
+	axios.get(`/packages`)
 	.then( response => {
 		dispatch({ type: FETCH_PACKAGES, payload: response.data});
 	})
@@ -47,7 +47,7 @@ export const addStudentToPackage = (student) => dispatch => {
 }
   
 export const fetchStudent = (id) => dispatch => {
-  axios.get(`${ROOT_URL}/students/${id}`)
+  axios.get(`/students/${id}`)
   .then( response => {
     console.log(response)
     dispatch({ type: FETCH_STUDENT, payload: response.data});
@@ -58,7 +58,7 @@ export const fetchStudent = (id) => dispatch => {
 }
 
 export const editStudent = (id) => dispatch => {
-	axios.post(`${ROOT_URL}/students/${id}`)
+	axios.post(`/students/${id}`)
 	.then( response => {
 		dispatch({ type: EDIT_STUDENT, payload: response.data});
 	})

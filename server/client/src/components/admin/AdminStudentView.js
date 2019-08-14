@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
   class AdminStudentView extends Component {
     //loads with student Id provided from URL
     componentDidMount(){
-      console.log(this.props.match.params.studentId)
+  
       this.props.fetchStudent(this.props.match.params.studentId);
     }
   
