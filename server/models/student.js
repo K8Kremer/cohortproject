@@ -2,24 +2,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-  
-  firstName: String,
-  lastName: String,
+
+
+  firstName: { type: String, required: true},
+  lastName: { type: String, required: true},
+  projectRepoLink: String,
+  projectRepoDescription:  String,
   packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
-  jobSeekingStatus: String,
-  employmentLocationPreference: String,
-  typeOfWorkDesired: String,
+  jobSeekingStatus: { type: String, required: true},
+  employmentLocationPreference: { type: String, required: true},
+  typeOfWorkDesired: { type: String, required: true},
   industriesPreferred: [],
-  picture: String,
-  bio: String,
-  address: String,
-  projectRepo: String,
-  email: String,
-  linkedIn: String, 
-  phone: String,
-  resume: String,
-  cohort: Number,
-  graduationDate: Date,
+  picture: String, 
+  bio: { type: String, required: true},
+  address: { type: String, required: true},
+  email: { type: String, required: true},
+  linkedIn: { type: String, required: true},
+  phone: { type: String, required: true},
+  resume: { type: String, required: true},
+  cohort: { type: Number, required: true},
+  graduationDate: { type: Date, required: true},
+
   updated_at: Date,
   created_at: Date
 });

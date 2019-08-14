@@ -2,24 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PackageSchema = new Schema({
-  packageName: String,
-  packageLink: String,
-  companyName: String,
-  employerName: String,// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
-  employerEmail: String,
+  packageName: { type: String, required: true},
+  packageLink: { type: String, required: true},
+  companyName: { type: String, required: true},
+  employerName: { type: String, required: true},// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
+  employerEmail: { type: String, required: true},
   students: [{
-    student: {type: Schema.Types.ObjectId, ref: 'Student'},
-    studentNotes: String
+    student: {type: Schema.Types.ObjectId, ref: 'Student', required: true},
+    studentNotes: String,
   }],
   packageNotes: String,
-  replyEmail: String,
-  replyTitle: String,
-  replyFirst: String,
-  replyLast: String,
+  replyEmail: { type: String, required: true},
+  replyName: { type: String, required: true},
   seenByEmployer: false,
   isHidden: false,
   updated_at: Date,
-  created_at: Date
+  created_at: Date,
 });
 
 //updates our individual schema every time
