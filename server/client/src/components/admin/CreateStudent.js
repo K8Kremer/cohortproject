@@ -3,6 +3,9 @@ import { reduxForm, Field } from 'redux-form';
 import { createStudent} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
+
+
 
 
 class CreateStudent extends Component {
@@ -13,17 +16,55 @@ class CreateStudent extends Component {
 		});
 	};
 
+	renderField(field) {
+		const { meta: { touched, error } } = field;
+		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+	
+		return (
+		  <div className={className}>
+			<label>{field.label}</label>
+			<input className='form-control' type='text' {...field.input} />
+			<div className='text-help errors text-danger'>
+			  {touched ? error : ''}
+			</div>
+		  </div>
+		);
+	}
+
+	renderSelectField({ input, label, type, meta: { touched, error }, children }) {
+		return (
+		<div>
+		  <label>{label}</label>
+		  <div>
+			<select {...input}>
+			  {children}
+			</select>
+			{touched && error && <div className="text-danger">{error}</div>}
+		  </div>
+		</div>
+		)
+	}
+
 	render() {
 		const { handleSubmit } = this.props;
 		
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					<fieldset>
-						<label>Name: </label>
+						<label>First Name: </label>
 						<Field 
-							name="name"
+							name="firstName"
 							type="text"
 							component="input"
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
+						<label>Last Name: </label>
+						<Field 
+							name="lastName"
+							type="text"
+							component= {this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -32,6 +73,15 @@ class CreateStudent extends Component {
 						<Field 
 							name="address"
 							type="text"
+							component={this.renderField}
+							autoComplete="none"
+						/>
+					</fieldset>
+					<fieldset>
+						<label>Cohort Number: </label>
+						<Field 
+							name="cohort"
+							type="number"
 							component="input"
 							autoComplete="none"
 						/>
@@ -39,9 +89,9 @@ class CreateStudent extends Component {
 					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="Phone Number"
+							name="phone"
 							type="tel"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -50,97 +100,90 @@ class CreateStudent extends Component {
 						<Field
 						name="email"
 						type="email"
-						component="input"
+						component={this.renderField}
 						autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Link To Project Repos: </label>
+						<label>LinkedIn Profile: </label>
 						<Field 
-							name="link to project repos"
+							name="linkedIn"
 							type="url"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
 						<label>Job Seeking Status: </label>
-						<select>
+						<Field name="jobSeekingStatus" component={this.renderSelectField}>
+							<option />
 							<option value = "employed">Employed</option>
 							<option value = "actively-seeking-employment">Seeking Employment</option>
 							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Graduation Date: </label>
 						<Field 
-							name="graduation date"
+							name="graduationDate"
 							type="date"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
 						<label>Work Desired: </label>
-						<select>
+						<Field name="workDesired" component={this.renderSelectField}>
+							<option />
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
 							<option value = "full-stack">Full Stack</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Employment Location Preference: </label>
-						<select>
+						<Field name="employmentLocationPreference" component={this.renderSelectField}>
+							<option />
 							<option value = "local">Local Work Only</option>
 							<option value = "remote">Remote Work Only</option>
 							<option value = "relocation">Willing to Relocate</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Upload Photo: </label>
 						<Field 
-							name="upload photo"
+							name="picture"
 							type="file"
 							accept="image/png, image/jpeg"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
 						<label>Upload Resume: </label>
 						<Field 
-							name="upload resume"
+							name="resume"
 							type="file"
 							accept=".doc, .pdf"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
-						<legend>Industries Preferred</legend>
-						<div>
-							<input type="checkbox" id="finance" name="interest" value="finance"/>
-							<label htmlFor="finance">Finance</label>
-						</div>
-						<div>
-							<input type="checkbox" id="healthcare" name="interest" value="healthcare"/>
-							<label htmlFor="healthcare">Healthcare</label>
-						</div>
-						<div>
-							<input type="checkbox" id="gaming" name="interest" value="gaming"/>
-							<label htmlFor="gaming">Gaming</label>
-						</div>
-						<div>
-							<input type="checkbox" id="ecommerce" name="interest" value="ecommerce"/>
-							<label htmlFor="ecommerce">E-commerce</label>
-						</div>
+						<label>Industry Preferred: </label>
+						<Field name="industriesPreferred" component="select">
+							<option value = "finance">Finance</option>
+							<option value = "healthcare">Healthcare</option>
+							<option value = "gaming">Gaming</option>
+							<option value = "ecommerce">E-commerce</option>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Bio: </label>
 						<Field
 						name="bio"
 						type="text"
-						component="input"
+						component={this.renderField}
 						autoComplete="none"
 						/>
 					</fieldset>
@@ -150,11 +193,88 @@ class CreateStudent extends Component {
 	}
 }
 
+function validate (values) {
+	const errors = {};
+
+	//check if name field is empty
+	if ( !values.name ) {
+		errors.name = 'Required'
+	} 
+	
+	//check if address field is entered
+	if ( !values.address ) {
+		errors.address = 'Required'
+	}
+
+	//check that the phoneNumber field is not empty
+	if ( !values.phoneNumber ) {
+		errors.phoneNumber = 'Required'
+	} else {
+		let testPhoneNumber = values.phoneNumber.replace(/-/g,'');
+		
+		//check if the phoneNumber value entered is a number
+		if (!Number(testPhoneNumber)) {
+			errors.phoneNumber = "Enter a number"
+		
+		//check if the phoneNumber value contains 10 digits
+		} else if ( testPhoneNumber.length < 10 ) {
+			errors.phoneNumber = "Phone Number must be 10 digits"
+		}
+	} 
+
+	//check if the email field is empty
+	if ( !values.email ) {
+		errors.email = "Required"
+
+		//check if the email is valid
+	}  else if ( !values.email.includes("@") || !values.email.includes('.') ) {
+		errors.email = "Please enter a valid email"
+	}
+
+	//check if the graduation date is empty
+	if ( !values.graduationDate ) {
+		errors.graduationDate = "Required"
+	}
+
+	//check if work desired is empty
+	if ( !values.workDesired ) {
+		errors.workDesired = "Required"
+	}
+
+	//check if employment location preference is empty
+	if ( !values.employmentLocationPreference ) {
+		errors.employmentLocationPreference = "Required"
+	}
+
+	//check if job seeking status is empty
+	if ( !values.jobSeekingStatus ) {
+		errors.jobSeekingStatus = "Required"
+	}
+
+	//check if the upload photo is empty (CURRENTLY NOT REQUIRED)
+	// if ( !values.uplodatPhoto ) {
+	// 	errors.uploadPhoto = "Required"
+	// }
+
+	//check if the upload Resume is empty
+	if ( !values.uploadResume ) {
+		errors.uploadResume = "Required"
+	}
+
+	//check if the bio is empty
+	if ( !values.bio ) {
+		errors.bio = "Required"
+	}
+
+	return  errors;
+}
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({ createStudent }, dispatch);
 }
 
 const createStudentForm = reduxForm({
+	validate,
 	form: 'createStudent'
 })(CreateStudent);
 

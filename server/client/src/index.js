@@ -11,6 +11,8 @@ import { BrowserRouter, Switch, Route, Redirect  } from 'react-router-dom';
 import EmployerStudentView from './components/shared/EmployerStudentView';
 import PackageList from './components/admin/PackageList';
 import PackageDetailView from './components/admin/PackageDetailView';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import 'bootstrap/dist/css/bootstrap.css'
 
