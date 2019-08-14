@@ -14,6 +14,8 @@ import PackageDetailView from './components/admin/PackageDetailView';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
 ReactDOM.render(
