@@ -66,6 +66,7 @@ router.get('/', (req, res, next) => {
 //GET route here for Package by ID
 router.get('/:id', (req, res, next) => {
   //this takes advantage of our "middleware" helper function above
+  console.log(req.package);
   req.package ? res.status(200).send(req.package) : res.status(404).send('Package not found.');
 });
 

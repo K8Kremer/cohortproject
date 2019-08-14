@@ -1,6 +1,8 @@
 import axios from "axios";
 /** using redux thunk method of requesting data instead of a promise */
-import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE, FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT } from './types';
+import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE,
+				 FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT,
+				 FETCH_PACKAGE, CREATE_PACKAGE, EDIT_PACKAGE } from './types';
 
 const ROOT_URL = 'http://localhost:8000';
 
@@ -65,5 +67,35 @@ export const editStudent = (id) => dispatch => {
 	.catch( error => {
 		console.log(error);
 	})
+}
+
+export const fetchPackage = (id) => dispatch => {
+	axios.get(`${ROOT_URL}/packages/${id}`)
+		.then(response => {
+			dispatch({ type: FETCH_PACKAGE, payload: response.data });
+		})
+		.catch(error => {
+			console.log(error);
+		})
+}
+
+export const createPackage = (newPackage) => dispatch => {
+	axios.post(`${ROOT_URL}/packages/`, { ...newPackage })
+		.then(response => {
+			dispatch({ type: CREATE_PACKAGE, payload: response.data });
+		})
+		.catch(error => {
+			console.log(error);
+		})
+}
+
+export const editPackage = (id) => dispatch => {
+	axios.post(`${ROOT_URL}/packages/${id}`)
+		.then(response => {
+			dispatch({ type: EDIT_PACKAGE, payload: response.data });
+		})
+		.catch(error => {
+			console.log(error);
+		})
 }
 
