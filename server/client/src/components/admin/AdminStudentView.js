@@ -9,8 +9,9 @@ import { Link } from 'react-router-dom';
 
   
     //hardcoded student id for testing purposes
+    //NOTE by dposse - Maybe simpler to get on componentDidMount instead of clicking button
     handleClick = () => {
-      this.props.fetchStudent("5d53249de79c6a14447a460c");
+      this.props.fetchStudent("5d5352038cc5b97774a6996d");
     }
     //blank for now
     addStudentToPackage = () => {
