@@ -8,7 +8,7 @@ const PackageSchema = new Schema({
   employerName: String,// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
   employerEmail: String,
   students: [{
-    student: {type: Schema.Types.ObjectId, ref: 'Student'},
+    student: {type: Schema, ref: 'Student'},
     studentNotes: String
   }],
   packageNotes: String,
