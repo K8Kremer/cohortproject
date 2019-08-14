@@ -12,42 +12,41 @@ import { connect } from 'react-redux';
 
 class EditStudent extends Component {
   componentDidMount() {
-    this.props.fetchStudent("5d532607565704964a2c4206");
-  }
-  componentWillReceiveProps() {
-    this.props.initialize({
-      firstName: `${this.props.current_student.firstName}`,
-      lastName: `${this.props.current_student.lastName}`,
-      address: `${this.props.current_student.address}`,
-      phoneNumber: `${this.props.current_student.phone}`,
-      email: `${this.props.current_student.email}`,
-      jobSeekingStatus: `${this.props.current_student.jobSeekingStatus}`,
-      graduationDate: `${this.props.current_student.graduationDate}`,
-      typeOfWorkDesired: `${this.props.current_student.typeOfWorkDesired}`,
-      employmentLocationPreference: `${this.props.current_student.employmentLocationPreference}`,
-      industriesPreferred: `${this.props.current_student.industriesPreferred}`,
-      bio: `${this.props.current_student.bio}`,
-    })
+    this.props.fetchStudent(this.props.match.params.studentId);
   }
   
+  /**TODO: Make the save button update the store */
 	onSubmit = formProps => {
-		this.props.editStudent(formProps, () => {
-			this.props.history.push('/');
-			console.log("save button clicked")
-		});
-	};
+		this.props.editStudent(this.props.match.params.studentId, formProps)
+		this.props.history.push(`/admin/student/${this.props.match.params.studentId}`);
+  };
+  
+  renderSelectField({ input, label, type, meta: { touched, error }, children }) {
+		return (
+		<div>
+		  <label>{label}</label>
+		  <div>
+			<select {...input}>
+			  {children}
+			</select>
+			{touched && error && <div className="text-danger">{error}</div>}
+		  </div>
+		</div>
+		)
+	}
 
 	render() {
 		const { handleSubmit } = this.props;
-		
+  
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
 					<fieldset>
 						<label>First Name: </label>
 						<Field 
 							name="firstName"
 							type="text"
 							component="input"
+							defaultValue="MegaStar"
               autoComplete="none"
 						/>
 					</fieldset>
@@ -97,21 +96,13 @@ class EditStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Job Seeking Status: </label>
-            <br /><label>current: </label>
-            <Field 
-              name="jobSeekingStatus"
-              type="text"
-              component="input"
-              autoComplete="none"
-              disabled={true}
-              />
-            <br /><label>edit: </label>
-						<select name="jobSeekingStatus">
+						<label>Job Seeking Status: currently {this.props.initialValues.jobSeekingStatus}</label>
+						<Field name="jobSeekingStatus" component={this.renderSelectField}>
+							<option />
 							<option value = "employed">Employed</option>
-							<option value = "actively-seeking-employment">Searching</option>
-							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
-						</select> 
+							<option value = "seeking-employment">Seeking Employment</option>
+							<option value = "open">Open</option>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Graduation Date: </label>
@@ -123,38 +114,22 @@ class EditStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<label>Work Desired: </label>
-            <br /><label>current: </label>
-            <Field 
-							name="typeOfWorkDesired"
-							type="text"
-							component="input"
-              autoComplete="none"
-              disabled={true}
-						/>
-            <br /><label>edit: </label>
-						<select>
+						<label>Work Desired: currently {this.props.initialValues.typeOfWorkDesired} </label>
+						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
+							<option />
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
 							<option value = "full-stack">Full Stack</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
-						<label>Employment Location Preference: </label>
-            <br /><label>current: </label>
-            <Field 
-							name="employmentLocationPreference"
-							type="text"
-							component="input"
-              autoComplete="none"
-              disabled={true}
-						/>
-            <br /><label>edit: </label>
-						<select>
+						<label>Employment Location Preference: currently {this.props.initialValues.employmentLocationPreference}</label>
+						<Field name="employmentLocationPreference" component={this.renderSelectField}>
+							<option />
 							<option value = "local">Local Work Only</option>
 							<option value = "remote">Remote Work Only</option>
 							<option value = "relocation">Willing to Relocate</option>
-						</select>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Upload Photo: </label>
@@ -177,30 +152,13 @@ class EditStudent extends Component {
 						/>
 					</fieldset>
 					<fieldset>
-						<legend>Industries Preferred <br></br></legend>
-            <Field 
-							name="industriesPreferred"
-							type="text"
-							component="input"
-              autoComplete="none"
-              disabled={true}
-						/>
-						<div>
-							<input type="checkbox" id="finance" name="interest" value="finance"/>
-							<label htmlFor="finance">Finance</label>
-						</div>
-						<div>
-							<input type="checkbox" id="healthcare" name="interest" value="healthcare"/>
-							<label htmlFor="healthcare">Healthcare</label>
-						</div>
-						<div>
-							<input type="checkbox" id="gaming" name="interest" value="gaming"/>
-							<label htmlFor="gaming">Gaming</label>
-						</div>
-						<div>
-							<input type="checkbox" id="ecommerce" name="interest" value="ecommerce"/>
-							<label htmlFor="ecommerce">E-commerce</label>
-						</div>
+						<label>Industry Preferred: currently {this.props.initialValues.industriesPreferred} </label>
+            <Field name="industriesPreferred" component="select">
+							<option value = "finance">Finance</option>
+							<option value = "healthcare">Healthcare</option>
+							<option value = "gaming">Gaming</option>
+							<option value = "ecommerce">E-commerce</option>
+						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Bio: </label>
@@ -218,7 +176,7 @@ class EditStudent extends Component {
 }
 
 function mapStateToProps(state) {
-  return {current_student: state.current_student}
+  return {initialValues: state.current_student}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -227,6 +185,7 @@ function mapDispatchToProps(dispatch) {
 
 const editStudentForm = reduxForm({
   form: 'editStudent',
+  keepDirtyOnReinitialize: true,
   enableReinitialize: true
 })(EditStudent);
 

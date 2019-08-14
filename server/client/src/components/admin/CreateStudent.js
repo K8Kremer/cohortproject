@@ -8,8 +8,21 @@ import { Redirect } from 'react-router'
 
 class CreateStudent extends Component {
 	state = {
-    redirectToNewPage: false
+		redirectToNewPage: false,
+		picture: '',
+		resume: ''
 	}
+
+	constructor(){
+		super();
+		this.showImageUploadWidget = this.showImageUploadWidget.bind(this);
+		// this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	componentDidMount(){
+		this.setState({ picture: '', resume: '', redirectToNewPage: false });
+		console.log(this.state);
+	} 
 
 	componentDidUpdate = (prevProps) => {
     /**
@@ -17,21 +30,60 @@ class CreateStudent extends Component {
      * this.props.valid returns true when form validation is successful
      */
 		if (this.props.currentStudent.firstName !== prevProps.currentStudent.firstName && this.props.valid == true) {
-			this.setState({ redirectToNewPage: true }, () => {
+			this.setState({ picture: '', resume: '', redirectToNewPage: true }, () => {
 				window.alert(`Student ${this.props.currentStudent.firstName} created successfully!`)
 			});
 		}
 	}
 
 	onSubmit = formProps => {
-		this.props.createStudent(formProps, () => {
-		});
+		
+		if(this.state.picture !== ''){
+			formProps.picture = this.state.picture
+		}
+
+		if (this.state.resume !== '') {
+			formProps.resume = this.state.resume
+		}
+
+		// console.log(formProps);
+		this.props.createStudent(formProps);
 
 	};
 
 	dismissModal = () => {
     this.props.toggle()
-  }
+	}
+	
+	showImageUploadWidget = (imageUploadWidget) => {
+		imageUploadWidget.open()
+	}
+
+	checkUploadResult = (resultEvent, uploadType) => {
+		if (resultEvent.event === 'success') {
+
+			//we'll need to update our form with the URL generate by cloudinary, actually
+			// console.log(resultEvent);
+			// console.log(resultEvent.info.secure_url);
+			if(uploadType === 'image'){
+				this.setState({ picture: resultEvent.info.secure_url}, () => {
+					console.log('image uploaded successfully!')
+				})
+			}
+
+			if (uploadType === 'document') {
+				this.setState({ resume: resultEvent.info.secure_url }, () => {
+					console.log('resume uploaded successfully!')
+				})
+			}
+
+			// this.props.postPhoto({
+			// 	user_id: this.props.currentUser.id,
+			// 	caption: 'smiling face',
+			// 	url: resultEvent.info.secure_url
+			// })
+		}
+	}
 
 	renderField(field) {
 		const { meta: { touched, error } } = field;
@@ -45,6 +97,26 @@ class CreateStudent extends Component {
 			  {touched ? error : ''}
 			</div>
 		  </div>
+		);
+	}
+
+	renderUploadField(field) {
+		const { meta: { touched, error } } = field;
+		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
+		return (
+			<div className={className}>
+				<label>{field.label}</label>
+				<button
+					className='btn btn-sm btn-secondary'
+					onClick={this.showImageUploadWidget}
+				>
+					Upload Photo
+								</button>
+				<div className='text-help errors text-danger'>
+					{touched ? error : ''}
+				</div>
+			</div>
 		);
 	}
 
@@ -62,8 +134,22 @@ class CreateStudent extends Component {
 		)
 	}
 
+	
+
 	render() {
 		const { handleSubmit } = this.props;
+		
+		let imageUploadWidget = window.cloudinary.createUploadWidget({
+			//we set our cloudName globally within our public/index.html
+			// cloudName: '',
+			uploadPreset: 'u56bjavm'
+		}, (error, result) => { this.checkUploadResult(result, 'image') });
+
+		let resumeUploadWidget = window.cloudinary.createUploadWidget({
+			//we set our cloudName globally within our public/index.html
+			// cloudName: '',
+			uploadPreset: 'u56bjavm'
+		}, (error, result) => { this.checkUploadResult(result, 'document') });
 
 		if (this.state.redirectToNewPage) {
 			return (
@@ -73,6 +159,7 @@ class CreateStudent extends Component {
 		
 		return (
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+				
 					<fieldset>
 						<label>First Name: </label>
 						<Field 
@@ -141,8 +228,8 @@ class CreateStudent extends Component {
 						<Field name="jobSeekingStatus" component={this.renderSelectField}>
 							<option />
 							<option value = "employed">Employed</option>
-							<option value = "actively-seeking-employment">Seeking Employment</option>
-							<option value = "not-seeking-employment">Not Actively Seeking Employment</option>
+							<option value = "seeking-employment">Seeking Employment</option>
+							<option value = "open">Open</option>
 						</Field>
 					</fieldset>
 					<fieldset>
@@ -156,7 +243,7 @@ class CreateStudent extends Component {
 					</fieldset>
 					<fieldset>
 						<label>Work Desired: </label>
-						<Field name="workDesired" component={this.renderSelectField}>
+						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
 							<option />
 							<option value = "front-end">Front End</option>
 							<option value = "back-end">Back End</option>
@@ -173,24 +260,34 @@ class CreateStudent extends Component {
 						</Field>
 					</fieldset>
 					<fieldset>
-						<label>Upload Photo: </label>
-						<Field 
-							name="picture"
-							type="file"
-							accept="image/png, image/jpeg"
-							component={this.renderField}
-							autoComplete="none"
-						/>
+						<label>Profile Photo: </label>
+						{this.state.picture === '' ?
+						<button
+							className='btn btn-sm btn-secondary'
+							onClick={e => {
+								e.preventDefault();
+								this.showImageUploadWidget(imageUploadWidget);
+							}}
+						>
+							Upload Photo
+						</button> :
+						<h6>Photo uploaded!</h6>
+						}
 					</fieldset>
 					<fieldset>
-						<label>Upload Resume: </label>
-						<Field 
-							name="resume"
-							type="file"
-							accept=".doc, .pdf"
-							component={this.renderField}
-							autoComplete="none"
-						/>
+						<label>Resume: </label>
+						{this.state.resume === '' ?
+							<button
+								className='btn btn-sm btn-secondary'
+								onClick={e => {
+									e.preventDefault();
+									this.showImageUploadWidget(resumeUploadWidget);
+								}}
+							>
+								Upload Resume
+							</button> :
+							<h6>Resume uploaded!</h6>
+						}
 					</fieldset>
 					<fieldset>
 						<label>Industry Preferred: </label>
@@ -210,7 +307,14 @@ class CreateStudent extends Component {
 						autoComplete="none"
 						/>
 					</fieldset>
-					<button>Save</button>
+				<button type='submit'
+				// onClick={e => {
+				// 	// e.preventDefault();
+				// 	console.log('fired click!');
+					
+				// 	handleSubmit(this.onSubmit);
+				// }}
+				>Save</button>
 				</form>
 		)
 	}
@@ -260,8 +364,8 @@ function validate (values) {
 	}
 
 	//check if work desired is empty
-	if ( !values.workDesired ) {
-		errors.workDesired = "Required"
+	if ( !values.typeOfWorkDesired ) {
+		errors.typeOfWorkDesired = "Required"
 	}
 
 	//check if employment location preference is empty
