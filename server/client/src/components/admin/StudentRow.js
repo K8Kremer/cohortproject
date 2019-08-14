@@ -13,10 +13,10 @@ class StudentRow extends Component {
           const { student } = this.props;
           return(
          <tr onClick={this.handleClick()}>
-          <td><input type='radio' value='addToPackage' /></td>
+          <td style={{textAlign: 'center'}}><input type='checkbox' value='addToPackage' /></td>
           <td>{student.firstName}</td>
           <td>{student.lastName}</td>
-          <td>{student.cohort}</td>
+          <td style={{textAlign: 'left'}}>{student.cohort}</td>
           <td>{student.jobSeekingStatus}</td>
         
         </tr>
