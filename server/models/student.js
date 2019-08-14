@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
 
+
   firstName: { type: String, required: True},
   lastName: { type: String, required: True},
   projectRepoLink: String,
@@ -21,6 +22,7 @@ const StudentSchema = new Schema({
   resume: { type: String, required: True},
   cohort: { type: Number, required: True},
   graduationDate: { type: Date, required: True},
+
   updated_at: Date,
   created_at: Date
 });

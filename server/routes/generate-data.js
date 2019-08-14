@@ -14,27 +14,22 @@ const industries = ['Artificial Intelligence', 'Machine Learning', 'Internet of 
 router.get('/students', (req, res, next) => {
   for (let i = 0; i < 90; i++) {
     let student = new Student();
-    student.name = {
-      title: faker.name.title(),
-      first: faker.name.firstName(),
-      last: faker.name.lastName()
-    }
+    student.firstName = faker.name.firstName()
+    student.lastName = faker.name.lastName()
     student.packages = []
     student.jobSeekingStatus = jobSeekingStatus[Math.floor(Math.random() * jobSeekingStatus.length)]
     student.employmentLocationPreference = employmentLocPref[Math.floor(Math.random() * employmentLocPref.length)]
     student.typeOfWorkDesired = typeOfWork[Math.floor(Math.random() * typeOfWork.length)]
     student.industriesPreferred = [industries[Math.floor(Math.random() * industries.length)]]
-    student.picture = {
-      large: faker.image.imageUrl(800, 800, "people"),
-      medium: faker.image.imageUrl(500, 500, "people"),
-      thumbnail: faker.image.imageUrl(250, 250, "people")
-    }
+    student.picture = faker.image.imageUrl(800, 800, "people")
     student.bio = faker.lorem.paragraph()
     student.address = faker.address.city() + ', ' + faker.address.state() + ', ' + faker.address.country()
-    student.email = `${student.name.first}.${student.name.last}@projectshift.io`
-    student.linkedIn = ''
+    student.email = `${student.firstName}.${student.lastName}@projectshift.io`
+    student.linkedIn = 'linkedin',
     student.phone = faker.phone.phoneNumberFormat()
-    student.resume = ''
+    student.resume = 'resume'
+    student.projectRepoLink = 'link to repo';
+    student.projectRepoDescription = faker.lorem.paragraph();
     student.cohort = faker.random.number({ min: 0, max: 7 });
     student.graduationDate = faker.date.future(2)
 
@@ -58,12 +53,8 @@ router.get('/packages', (req, res, next) => {
     package.students = [];
     package.packageNotes = faker.lorem.paragraph();
     package.replyEmail = faker.internet.email();
-    package.replyName = {
-      title: faker.name.title(),
-      first: faker.name.firstName(),
-      last: faker.name.lastName()
-    };
-    package.seenByEmployer = false;
+    package.replyName = faker.name.firstName() + ' ' + faker.name.lastName();
+    package.seenByEmployer = false; 
     package.isHidden = false;
     
     package.save((err) => {
