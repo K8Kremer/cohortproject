@@ -52,7 +52,7 @@ class PackageDetailView extends Component {
             </div>
           </div>
           <div className='students col-sm-5'>
-            <h4 className='d-block'>Students</h4>
+            <h4 className='d-block'>Students</h4> <Link to={``} className='btn btn-sm btn-primary'>Add Student</Link>
             <div>
             <ul className='list-group'>
               {this.props.package.students !== [] ? 
