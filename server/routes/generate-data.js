@@ -16,6 +16,7 @@ router.get('/students', (req, res, next) => {
     let student = new Student();
     student.firstName = faker.name.firstName()
     student.lastName = faker.name.lastName()
+    student.fullName= student.firstName + ' ' + student.lastName
     student.packages = []
     student.jobSeekingStatus = jobSeekingStatus[Math.floor(Math.random() * jobSeekingStatus.length)]
     student.employmentLocationPreference = employmentLocPref[Math.floor(Math.random() * employmentLocPref.length)]
