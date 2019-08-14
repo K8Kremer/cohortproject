@@ -52,7 +52,7 @@ router.param('id', function (req, res, next) {
 
   else {
     Student.findById(id).exec((err, result) => {
-      if (err) throw err;
+      if (err) return next(err);
       if (result === undefined) {
         res.status(404).send('Student not found, please check Student ID.');
       } else {
@@ -80,9 +80,9 @@ router.post('/:id', (req, res, next) => {
     req.body,
     //this parameter tells Mongo to return the updated object to us
     { new: true }, 
-    //throw an error or return our shiny updated Student
+    //return an error or return our shiny updated Student
     function (err, result) {
-      if (err) throw err;
+      if (err) return next(err);
       res.send(result);
   });
 });
@@ -98,7 +98,7 @@ router.post('/', (req, res, next) => {
   const concattedFullName = req.body.firstName + req.body.lastName;
   newStudent.fullName = concattedFullName;
   newStudent.save((err, result) => {
-    if (err) return handleError(err);
+    if (err) return next(err);
     // saved!
     res.send(result);
 
