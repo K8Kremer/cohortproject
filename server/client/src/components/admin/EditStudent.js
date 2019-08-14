@@ -14,21 +14,6 @@ class EditStudent extends Component {
   componentDidMount() {
     this.props.fetchStudent(this.props.match.params.studentId);
   }
-  componentWillReceiveProps() {
-    this.props.initialize({
-      firstName: `${this.props.current_student.firstName}`,
-      lastName: `${this.props.current_student.lastName}`,
-      address: `${this.props.current_student.address}`,
-      phoneNumber: `${this.props.current_student.phone}`,
-      email: `${this.props.current_student.email}`,
-      jobSeekingStatus: `${this.props.current_student.jobSeekingStatus}`,
-      graduationDate: `${this.props.current_student.graduationDate}`,
-      typeOfWorkDesired: `${this.props.current_student.typeOfWorkDesired}`,
-      employmentLocationPreference: `${this.props.current_student.employmentLocationPreference}`,
-      industriesPreferred: `${this.props.current_student.industriesPreferred}`,
-      bio: `${this.props.current_student.bio}`,
-    })
-  }
   
 	onSubmit = formProps => {
 		this.props.editStudent(formProps, () => {
@@ -41,13 +26,14 @@ class EditStudent extends Component {
 		const { handleSubmit } = this.props;
 		
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
 					<fieldset>
 						<label>First Name: </label>
 						<Field 
 							name="firstName"
 							type="text"
 							component="input"
+							defaultValue="MegaStar"
               autoComplete="none"
 						/>
 					</fieldset>
@@ -218,7 +204,7 @@ class EditStudent extends Component {
 }
 
 function mapStateToProps(state) {
-  return {current_student: state.current_student}
+  return {initialValues: state.current_student}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -227,8 +213,8 @@ function mapDispatchToProps(dispatch) {
 
 const editStudentForm = reduxForm({
   form: 'editStudent',
-  enableReinitialize: true,
-  // keepDirtyOnReinitialize: true
+  keepDirtyOnReinitialize: true,
+  enableReinitialize: true
 })(EditStudent);
 
 export default connect(mapStateToProps, mapDispatchToProps)(editStudentForm);
