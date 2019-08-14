@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 class EditStudent extends Component {
   componentDidMount() {
-    this.props.fetchStudent("5d532607565704964a2c4206");
+    this.props.fetchStudent(this.props.match.params.studentId);
   }
   componentWillReceiveProps() {
     this.props.initialize({
@@ -227,7 +227,8 @@ function mapDispatchToProps(dispatch) {
 
 const editStudentForm = reduxForm({
   form: 'editStudent',
-  enableReinitialize: true
+  enableReinitialize: true,
+  // keepDirtyOnReinitialize: true
 })(EditStudent);
 
 export default connect(mapStateToProps, mapDispatchToProps)(editStudentForm);
