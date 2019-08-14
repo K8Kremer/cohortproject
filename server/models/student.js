@@ -6,6 +6,7 @@ const StudentSchema = new Schema({
 
   firstName: { type: String, required: true},
   lastName: { type: String, required: true},
+  fullName: String,
   projectRepoLink: String,
   projectRepoDescription:  String,
   packages: [{type: Schema.Types.ObjectId, ref: 'Package'}],
