@@ -5,11 +5,12 @@ const lodash = require('lodash');
 
 //set route to get students 
 router.get('/', (req,res,next) => {
-    let cohortQuery = req.query.cohort;
+  let cohortQuery = req.query.cohort; 
+  let fullNameQuery = req.query.fullName || '';
     //if no cohort query is specified return all students ordered by cohort and lastname
     if (!cohortQuery) {
         Student
-            .find()
+            .find({ fullName: { $regex: new RegExp(fullNameQuery, 'i')}})
             .sort({'cohort': 1, 'name.last': 1})
             .exec((err, students) => {
                 if (err) {
@@ -20,7 +21,7 @@ router.get('/', (req,res,next) => {
     //if there is a cohort query get students sorted by lastname
     } else if (cohortQuery) {
         Student
-            .find({cohort: cohortQuery})
+            .find({cohort: cohortQuery, fullName: { $regex: new RegExp(fullNameQuery, 'i')}})
             .sort({'name.last': 1})
             .exec((err, students) => {
               if (err) {
@@ -94,6 +95,8 @@ router.post('/', (req, res, next) => {
   //which is passing in the request body.
   //We are assuming that the front end will handle data validation. 
   const newStudent = new Student(req.body)
+  const concattedFullName = req.body.firstName + req.body.lastName;
+  newStudent.fullName = concattedFullName;
   newStudent.save((err, result) => {
     if (err) return handleError(err);
     // saved!
