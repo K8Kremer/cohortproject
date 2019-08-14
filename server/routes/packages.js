@@ -16,7 +16,7 @@ router.param('id', function (req, res, next) {
 
   else {
     Package.findById(id).exec((err, result) => {
-      if (err) throw err;
+      if (err) return next(err);
       if (result === undefined) {
         res.status(404).send('Package not found, please check Package ID.');
       } else {
@@ -81,9 +81,9 @@ router.post('/:id', (req, res, next) => {
     req.body,
     //this parameter tells Mongo to return the updated object to us
     { new: true }, 
-    //throw an error or return our shiny updated Package
+    //return an error or return our shiny updated Package
     function (err, result) {
-      if (err) throw err;
+      if (err) return next(err);
       res.send(result);
   });
 });
@@ -97,7 +97,7 @@ router.post('/', (req, res, next) => {
   //We are assuming that the front end will handle data validation. 
   const newPackage = new Package(req.body)
   newPackage.save((err, result) => {
-    if (err) return handleError(err);
+    if (err) return next(err);
     // saved!
     res.send(result);
   });
