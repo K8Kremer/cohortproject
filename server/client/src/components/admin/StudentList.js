@@ -4,17 +4,28 @@ import { bindActionCreators } from 'redux';
 import { fetchStudents, fetchPackage, fetchPackages, editPackage } from '../../actions';
 import StudentRow from './StudentRow';
 import { Dropdown, Button } from 'react-bootstrap'
+import { Redirect } from 'react-router'
 import SearchBar from './Search'
 
 class StudentList extends Component {
 
   state = {
-    addedStudentList : []
+    addedStudentList : [],
+    redirect: false
   }
 
   componentDidMount() {
     this.props.fetchStudents();
     this.props.fetchPackages();
+  }
+
+  async componentDidUpdate(prevProps) {
+    let currPack = await this.props.currentPackage
+    let prevPack = await prevProps.currentPackage
+    if (currPack._id == prevPack._id && currPack.students !== prevPack.students) {
+      alert(`Students added to ${currPack.packageName}`)
+      this.setState({addedStudentList: [], redirect: true});
+    }
   }
 
   handleStudentClick = (student, checked) =>  {
@@ -27,11 +38,19 @@ class StudentList extends Component {
 
   handlePackageSubmit = (pckg, students) => {
     if (pckg && students) {
-      this.props.editPackage(pckg._id, students);
+      this.props.editPackage(pckg._id, {students});
     }
+    this.setState({addedStudentList: []});
   }
 
   render() {
+
+    if (this.state.redirect) {
+			return (
+			<Redirect to={`/admin/package/${this.props.currentPackage._id}`}/>
+			)
+		}
+    
     return (
       <>
       <div className='row'>
@@ -46,7 +65,7 @@ class StudentList extends Component {
           onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
       </div>
       
-      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>   
+      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
         
         <Dropdown>
         <span>Choose a package: </span>
@@ -60,7 +79,9 @@ class StudentList extends Component {
               key={pckg.id} 
               href='#' 
               onClick={ e => 
-                {this.props.fetchPackage(pckg._id)}}
+                {
+                  e.preventDefault();
+                  this.props.fetchPackage(pckg._id)}}
                 >
                 {pckg.packageName}
             </Dropdown.Item>
@@ -85,7 +106,7 @@ class StudentList extends Component {
         <tbody style={{backgroundColor: 'white'}}>
         {this.props.students.map((student) => {
           return (
-            <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick}/>
+            <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
           )
         })}
         </tbody>

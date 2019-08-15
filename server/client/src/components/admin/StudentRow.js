@@ -9,7 +9,7 @@ class StudentRow extends Component {
         <td style={{textAlign: 'center'}}><input 
           type='checkbox' 
           value='addToPackage' 
-          onClick={ e=> e.target.checked ? console.log(this.props.handleStudentClick(student, true)) : this.props.handleStudentClick(student, false) }/></td>
+          onClick={ e=> e.target.checked ? this.props.handleStudentClick(student, true) : this.props.handleStudentClick(student, false) }/></td>
         <td>{student.firstName}</td>
         <td>{student.lastName}</td>
         <td style={{textAlign: 'left'}}>{student.cohort}</td>
