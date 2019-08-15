@@ -11,6 +11,7 @@ import { BrowserRouter, Switch, Route, Redirect  } from 'react-router-dom';
 import EmployerStudentView from './components/shared/EmployerStudentView';
 import PackageList from './components/admin/PackageList';
 import PackageDetailView from './components/admin/PackageDetailView';
+import LogIn from './components/admin/LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -29,9 +30,8 @@ ReactDOM.render(
           <Route path='/admin' component={AdminView} />
           <Route exact path='/employer/:packageId' component={EmployerView} />
           <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
-          <Route path='/' render={() => (
-            <Redirect to='/admin/studentlist' />
-          )} />
+          <Route path='/' component= {LogIn} />
+          />
         </Switch>
       </App>
     </BrowserRouter>
