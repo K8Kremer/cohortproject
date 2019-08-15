@@ -11,31 +11,14 @@ class EditPackage extends Component {
     redirect: false
   }
   componentDidMount() {
-    console.log(this.props.current_package);
     this.props.fetchPackage(this.props.packageId);
   }
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      this.props.history.push(`/admin/package/${this.props.currentPackage._id}`)
-    }
-  }
-
-  componentDidUpdate = (prevProps) => {
-    console.log('component update currentPackage',this.props.current_package);
-    if(this.props.currentPackage !== undefined){
-      if (this.props.currentPackage._id !== prevProps.currentPackage._id && this.props.valid == true) {
-        this.setState({ redirect: true }, () => {
-          window.alert(`Package ${this.props.currentPackage.packageName} updated successfully!`)
-          this.renderRedirect();
-        });
-      }
-    }
-  }
-
-
   onSubmit = formProps => {
-    this.props.editPackage(this.props.currentPackage._id, formProps)
+    console.log(formProps);
+    this.props.editPackage(this.props.packageId, formProps);
+    window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
+    this.props.history.push(`/admin/package/${this.props.packageId}`);
   };
 
   render() {
@@ -144,7 +127,7 @@ class EditPackage extends Component {
 
 function validate(values) {
   const errors = {};
-
+  
   //check if name field is empty
   if (!values.packageName) {
     errors.packageName = 'Required'
@@ -190,7 +173,9 @@ function mapDispatchToProps(dispatch) {
 
 const editPackageForm = reduxForm({
   validate,
-  form: 'editPackage'
+  form: 'editPackage',
+  keepDirtyOnReinitialize: true,
+  enableReinitialize: true
 })(EditPackage);
 
 export default connect(mapStateToProps, mapDispatchToProps)(editPackageForm);
