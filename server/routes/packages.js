@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Package = require('../models/package');
 const lodash = require('lodash');
+const uuidv1 = require('uuid/v1');
+
 
 //placing a helper function here for routes with the ID parameter
 router.param('id', function (req, res, next) {
@@ -16,7 +18,7 @@ router.param('id', function (req, res, next) {
 
   else {
     Package.findById(id).exec((err, result) => {
-      if (err) throw err;
+      if (err) return next(err);
       if (result === undefined) {
         res.status(404).send('Package not found, please check Package ID.');
       } else {
@@ -81,9 +83,9 @@ router.post('/:id', (req, res, next) => {
     req.body,
     //this parameter tells Mongo to return the updated object to us
     { new: true }, 
-    //throw an error or return our shiny updated Package
+    //return an error or return our shiny updated Package
     function (err, result) {
-      if (err) throw err;
+      if (err) return next(err);
       res.send(result);
   });
 });
@@ -91,13 +93,13 @@ router.post('/:id', (req, res, next) => {
 //POST route for /packages (adds packages to DB)
 router.post('/', (req, res, next) => {
   //checks below here for request body data validation
- 
   //we creating newPackage by referencing Package Schema
   //which is passing in the request body.
   //We are assuming that the front end will handle data validation. 
   const newPackage = new Package(req.body)
+  newPackage.employerURL = uuidv1();
   newPackage.save((err, result) => {
-    if (err) return handleError(err);
+    if (err) return next(err);
     // saved!
     res.send(result);
   });

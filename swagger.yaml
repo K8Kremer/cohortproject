@@ -350,6 +350,9 @@ definitions:
         type: string
         format: email
         example: "Seanathan Doherty"
+      employerURL:
+        type: string
+        example: "Seanathan Doherty"
       employerEmail:
         type: string
         format: email

@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudent } from '../../actions';
+import { fetchStudent, fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+
 
 
   class AdminStudentView extends Component {
     //loads with student Id provided from URL
     componentDidMount(){
       this.props.fetchStudent(this.props.match.params.studentId);
+      this.props.fetchPackages();
     }
   
 
     //blank for now, should eventually add functionality to attach student to a package on this page as well.  
     addStudentToPackage = () => {
-
+      console.log('added student to package');
     }
   
     render(){
@@ -36,9 +38,13 @@ import { Link } from 'react-router-dom';
                 <select style={{position:'absolute', top: 100,right: 20}}name='package' onChange={this.addStudentToPackage}>
                   <option />
                   {/* will need to render available packages into dropdown options here for now hard coding two options*/}
-                  <option value = 'package1'>Package 1</option>
-                  <option value = 'package1'>Package 2</option>
+                  {this.props.packages.map((p) => {
+                  return (
+                    <option>{p.packageName}</option>
+                  )
+                })}
                 </select>
+                
  
               <img className='img-thumbnail rounded float-left' style={{height: 100, width: 100}}src={this.props.current_student.picture}></img>
               <h2 style={{textAlign:'center', marginTop: 30, marginRight: 100}}>{this.props.current_student.firstName} {this.props.current_student.lastName}</h2>
@@ -58,17 +64,20 @@ import { Link } from 'react-router-dom';
               <p><b>Phone: </b>{this.props.current_student.phone}</p>
             </div>
         </div>
-        </div>
+          </div>
         </div>
         )
     }
 };
 
 function mapStateToProps(state) {
-  return { current_student: state.current_student }
+  return { 
+    current_student: state.current_student,
+    packages: state.packages
+   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchStudent}, dispatch);
+  return bindActionCreators({ fetchStudent, fetchPackages}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdminStudentView);

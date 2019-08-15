@@ -1,15 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStudents } from '../../actions';
+import { fetchStudents, fetchPackage, fetchPackages, editPackage } from '../../actions';
 import StudentRow from './StudentRow';
+import { Dropdown, Button } from 'react-bootstrap'
+import { Redirect } from 'react-router'
+import SearchBar from './Search'
 
 class StudentList extends Component {
+
+  state = {
+    addedStudentList : [],
+    redirect: false
+  }
+
   componentDidMount() {
     this.props.fetchStudents();
+    this.props.fetchPackages();
+  }
+
+  async componentDidUpdate(prevProps) {
+    let currPack = await this.props.currentPackage
+    let prevPack = await prevProps.currentPackage
+    if (currPack._id == prevPack._id && currPack.students !== prevPack.students) {
+      alert(`Students added to ${currPack.packageName}`)
+      this.setState({addedStudentList: [], redirect: true});
+    }
+  }
+
+  handleStudentClick = (student, checked) =>  {
+    if (checked) {
+      this.setState({addedStudentList: this.state.addedStudentList.concat([{student, studentNotes: ''}])})
+    } else {
+      this.setState({addedStudentList: this.state.addedStudentList.filter(s=> s.student._id !== student._id)})
+    }
+  }
+
+  handlePackageSubmit = (pckg, students) => {
+    if (pckg && students) {
+      this.props.editPackage(pckg._id, {students});
+    }
+    this.setState({addedStudentList: []});
   }
 
   render() {
+
+    if (this.state.redirect) {
+			return (
+			<Redirect to={`/admin/package/${this.props.currentPackage._id}`}/>
+			)
+		}
+    
     return (
       <>
       <div className='row'>
@@ -18,6 +59,39 @@ class StudentList extends Component {
       </div>
 
       <div className='col-8'>
+      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
+        <h3>Students</h3>
+        <Button className='create-student'
+          onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
+      </div>
+      
+      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
+        
+        <Dropdown>
+        <span>Choose a package: </span>
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+          {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {this.props.packages.map((pckg) => {
+            return <Dropdown.Item 
+              key={pckg.id} 
+              href='#' 
+              onClick={ e => 
+                {
+                  e.preventDefault();
+                  this.props.fetchPackage(pckg._id)}}
+                >
+                {pckg.packageName}
+            </Dropdown.Item>
+          })}
+        </Dropdown.Menu>
+      </Dropdown>
+      <Button className="submit-students"
+              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
+      <SearchBar />
+    </div>
       <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
         <tr style={{backgroundColor:'#679AB8'}}>
           <th style={{textAlign: 'center', width:'10%'}}></th>
@@ -32,7 +106,7 @@ class StudentList extends Component {
         <tbody style={{backgroundColor: 'white'}}>
         {this.props.students.map((student) => {
           return (
-            <StudentRow key={student._id} student={student}/>
+            <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
           )
         })}
         </tbody>
@@ -48,12 +122,14 @@ class StudentList extends Component {
 
 function mapStateToProps(state) {
   return {
-    students: state.students
+    students: state.students,
+    packages: state.packages,
+    currentPackage: state.current_package
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchStudents }, dispatch);
+  return bindActionCreators({ fetchStudents, fetchPackage, fetchPackages, editPackage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentList);
