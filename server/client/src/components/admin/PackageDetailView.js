@@ -60,8 +60,8 @@ class PackageDetailView extends Component {
                 this.props.package.students.map(studentObject => 
                   {
                     return(
-                      <li className='list-group-item'>
-                        <h6>{studentObject.student.firstName} {studentObject.student.firstName}</h6>
+                      <li className='list-group-item package-student'>
+                        <h6>{studentObject.student.firstName} {studentObject.student.firstName}</h6><button type="button" className="close package-student-delete" aria-label="Remove Student"><span aria-hidden="true">&times;</span></button>
                         <p>{studentObject.studentNotes}</p>
                         <Link to={``} className='btn btn-sm btn-primary'>Add/Edit Note</Link>
                       </li>

@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const PackageSchema = new Schema({
   packageName: { type: String, required: true},
-  packageLink: { type: String, required: true},
   companyName: { type: String, required: true},
   employerName: { type: String, required: true},// Can we change the employer name to be more unique, so ppl don't confuse employer with company? 
   employerEmail: { type: String, required: true},

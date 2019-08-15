@@ -8,7 +8,7 @@ class PackageRow extends Component {
       <tr>
         <td>{currentPackage.packageName}</td>
         <td>{currentPackage.companyName}</td>
-        <td style={{textAlign: 'left'}}>{currentPackage.seenByEmployer}</td>
+        <td style={{ textAlign: 'left' }}>{currentPackage.seenByEmployer ? 'Viewed' : 'Unopened'}</td>
         <td>{currentPackage.created_at}</td>
       
         <Link to={`/admin/package/${currentPackage._id}`}> <td><span className='badge badge-secondary'>View</span></td></Link>

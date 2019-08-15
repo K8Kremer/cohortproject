@@ -6,10 +6,10 @@
 }
 
 #sidebar{
- width: 200px;
+ width: 250px;
  height: 100vh;
 position: fixed;
-margin-top:75px;
+margin-top:65px;
 background-color: #3C5B6F;
 z-index: 1;
 
