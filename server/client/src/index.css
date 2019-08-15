@@ -2,6 +2,6 @@
   display: none;
 }
 
-.pacakge-student:hover + .package-student-delete, .package-student-delete:hover {
+.package-student:hover + .package-student-delete, .package-student-delete:hover {
     display: inline-block;
 }
