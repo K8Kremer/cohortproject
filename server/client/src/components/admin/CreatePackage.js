@@ -57,7 +57,19 @@ render() {
           <label className='col-sm-2 col-form-label'>Recipient Name: </label>
           <div className='col-md-6'>
           <Field 
-            name="recipientName"
+            name="employerName"
+            type="text"
+            component="input"
+            autoComplete="none"
+            className="form-control "
+          />
+      </div>
+      </div>
+      <div className='form-group row'>
+          <label className='col-sm-2 col-form-label'>Recipient Email: </label>
+          <div className='col-md-6'>
+          <Field 
+            name="employerEmail"
             type="text"
             component="input"
             autoComplete="none"
@@ -69,7 +81,7 @@ render() {
           <label className='col-sm-2 col-form-label'>Recipient Company: </label>
           <div className='col-md-6'>
           <Field 
-            name="company"
+            name="companyName"
             type="text"
             component="input"
             autoComplete="none"
@@ -81,7 +93,7 @@ render() {
           <label className='col-sm-2 col-form-label'>Project Shift Employee Name: </label>
           <div className='col-md-6'>
           <Field 
-            name="employeeName"
+            name="replyName"
             type="text"
             component="input"
             autoComplete="none"
@@ -93,7 +105,7 @@ render() {
           <label className='col-sm-2 col-form-label'>Project Shift Email: </label>
           <div className='col-md-6'>
           <Field 
-            name="email"
+            name="replyEmail"
             type="email"
             component="input"
             autoComplete="none"
