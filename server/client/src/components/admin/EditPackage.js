@@ -15,10 +15,15 @@ class EditPackage extends Component {
   }
 
   onSubmit = formProps => {
-    console.log(formProps);
-    this.props.editPackage(this.props.packageId, formProps);
-    window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
-    this.props.history.push(`/admin/package/${this.props.packageId}`);
+    //tried Error checking here, but it didn't like the initialValues property
+
+    // if(this.props.valid){
+      this.props.editPackage(this.props.packageId, formProps);
+      window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
+      this.props.history.push(`/admin/package/${this.props.packageId}`);
+    // } else {
+    //   window.alert(`Package ${this.props.initialValues.packageName} still has validation issues, please update and try again.`);
+    // }
   };
 
   render() {
