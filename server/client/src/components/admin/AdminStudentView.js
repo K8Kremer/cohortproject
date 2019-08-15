@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 
+
   class AdminStudentView extends Component {
     //loads with student Id provided from URL
     componentDidMount(){

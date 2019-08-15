@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { fetchStudents, fetchPackage, fetchPackages, editPackage } from '../../actions';
 import StudentRow from './StudentRow';
 import { Dropdown, Button } from 'react-bootstrap'
+import SearchBar from './Search'
 
 class StudentList extends Component {
 
@@ -68,6 +69,7 @@ class StudentList extends Component {
       </Dropdown>
       <Button className="submit-students"
               onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
+      <SearchBar />
     </div>
       <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
         <tr style={{backgroundColor:'#679AB8'}}>
