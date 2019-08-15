@@ -16,7 +16,7 @@ class CreateStudent extends Component {
 	constructor(){
 		super();
 		this.showImageUploadWidget = this.showImageUploadWidget.bind(this);
-		// this.onSubmit = this.onSubmit.bind(this);
+		
 	}
 
 	componentDidMount(){
@@ -252,7 +252,7 @@ class CreateStudent extends Component {
 						</Field>
 					</fieldset>
 					<fieldset>
-						<label>Profile Photo: </label>
+						<label className='mr-3'>Profile Photo: </label>
 						{this.state.picture === '' ?
 						<button
 							className='btn btn-sm btn-secondary'
@@ -267,7 +267,7 @@ class CreateStudent extends Component {
 						}
 					</fieldset>
 					<fieldset>
-						<label>Resume: </label>
+					<label className='mr-3'>Resume: </label>
 						{this.state.resume === '' ?
 							<button
 								className='btn btn-sm btn-secondary'
