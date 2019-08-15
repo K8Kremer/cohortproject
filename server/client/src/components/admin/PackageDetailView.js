@@ -27,7 +27,7 @@ class PackageDetailView extends Component {
         </div>
       );
     }
-
+    
     return (
       <div className='container'>
         <div className='row mb-4'> 
@@ -38,7 +38,7 @@ class PackageDetailView extends Component {
         <div className='row'> 
           <div className='col-sm-7'>
             <div className='your-info border rounded px-2 mb-4'>
-              <h4 className='d-inline-block'>Your Info</h4>
+              <h4 className='d-inline-block'>Package Notes</h4>
               <p>{this.props.package.packageNotes}</p>
               <h5>Employer Has Viewed: {this.props.package.seenByEmployer ? 'Yes' : 'Not Yet'}</h5>
               <h6>Created On: {this.props.package.created_at}</h6>
@@ -53,20 +53,23 @@ class PackageDetailView extends Component {
           </div>
           <div className='students col-sm-5'>
             <div className='mb-2'>
-            <b className='mr-5'>Students</b> <Link to={``} className='btn btn-sm btn-primary'>Add Student</Link>
+            <b className='mr-5'>Students</b>
             </div>
             <div>
             <ul className='list-group'>
               {this.props.package.students == [] ? 
                 <h5>No Students Yet!</h5> : 
+                
                 this.props.package.students.map(studentObject => 
                   {
                     return(
+                      
                       <li className='list-group-item package-student shadow-sm mb-2'>
-                        <h6>{studentObject.student.firstName} {studentObject.student.lastName}</h6>
+                        <h5 className='text-center'>{studentObject.student.firstName} {studentObject.student.lastName}</h5>
                         <button type="button" className="close" aria-label="Remove Student"><span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
-                        <p>{studentObject.studentNotes.length == 0 ? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
-                        <Link to={``} className='btn btn-sm btn-info'>Add/Edit Note</Link>
+                        <label><em>Student Notes:</em></label>
+                        <p className='offset-xs-1'>{studentObject.studentNotes.length === 0 || studentObject.studentNotes === ' '? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
+                        
                       </li>
                     )
                   }
