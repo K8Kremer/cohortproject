@@ -92,8 +92,11 @@ router.post('/:id', (req, res, next) => {
 
 //POST route for /packages (adds packages to DB)
 router.post('/', (req, res, next) => {
+  //store the date the package was created in order to parse it
+  let dateCreated = new Date(req.body.created_at);
+  let parsedDateCreated = dateCreated.toLocaleDateString();
+  req.body.created_at = parsedDateCreated;
   //checks below here for request body data validation
- 
   //we creating newPackage by referencing Package Schema
   //which is passing in the request body.
   //We are assuming that the front end will handle data validation. 
