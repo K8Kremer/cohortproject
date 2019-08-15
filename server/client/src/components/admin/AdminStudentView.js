@@ -18,8 +18,8 @@ import { Dropdown, Button } from 'react-bootstrap'
   
     handlePackageSubmit = (pckg, student) => {
       if (pckg) {
-        this.setState({addedStudentList: this.state.addedStudentList.concat([{student}])})
-        this.props.addStudentToPackage(pckg._id, this.state.addedStudentList);
+        this.setState({addedStudentList: this.state.addedStudentList.concat([{student, studentNotes: ''}])})
+        this.props.addStudentToPackage(pckg._id, student);
       }
       console.log(student);
       console.log(this.state.addedStudentList);
@@ -91,7 +91,8 @@ function mapStateToProps(state) {
   return { 
     current_student: state.current_student,
     packages: state.packages,
-    currentPackage: state.current_package
+    currentPackage: state.current_package,
+    student: state.current_student
    }
 }
 
