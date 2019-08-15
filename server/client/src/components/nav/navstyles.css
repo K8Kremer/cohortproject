@@ -1,50 +1,41 @@
-/* Styling copied and then adjusted from react-burger-docs */
-.bm-item {
-  display: inline-block;
 
-  /* Our sidebar item styling */
-  text-decoration: none;
-  font-size: 35px;
-  margin-bottom: 20px;
-  color: #d1d1d1;
-  transition: color 0.2s;
+.wrapper{
+  display: flex;
+  width: 100%;
+  align-items: stretch;
 }
 
-/* Change color on hover */
-.bm-item:hover {
-  color: white;
+#sidebar{
+ width: 250px;
+ height: 100vh;
+position: fixed;
+margin-top:65px;
+background-color: #3C5B6F;
+z-index: 1;
+
 }
 
-
-/* Position and sizing of burger button */
-.bm-burger-button {
-  position: absolute;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 30px;
+.menu-item {
+  text-align: center;
+  font-size: 25px;
+  padding: 20px;
 }
 
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: #3C5B6F;
+.link{
+  color:white;
 }
 
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
+.link:hover {
+  color: grey;
 }
 
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #bdc3c7;
+#sticky{
+  position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
-/* General sidebar styles */
-.bm-menu {
-  background: #3C5B6F;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+.navbar{
+  background-color: white;
+  width: 100%
 }
-
