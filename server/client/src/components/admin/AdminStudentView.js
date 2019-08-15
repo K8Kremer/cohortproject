@@ -17,11 +17,19 @@ import { Dropdown, Button } from 'react-bootstrap'
       this.props.fetchPackages();
     }
    
-    componentDidUpdate(prevProps, student) {
+    componentDidUpdate(prevProps) {
       if (this.props.currentPackage !== prevProps.currentPackage){
-        console.log(this.props.currentPackage.students)
-        this.setState({addedStudentArray: this.props.addedStudentList.concat([{student, studentNotes: ''}])})
+      
+        let currStudent = {student: this.props.student, studentNotes: ''};
+        this.setState({addedStudentArray: []}, () => {
+          console.log(this.props.addedStudentList)
+          this.setState({ addedStudentArray: [...this.props.addedStudentList, currStudent]})
+        })
+        // this.setState({addedStudentArray: this.props.addedStudentList.concat({currStudent}, {currNotes})})
       }
+      // if ( this.props.currentPackage.packageName !== prevProps.currentPackage.packageName ) {
+      //   ;
+      // }
     }
   
     handlePackageSubmit = (pckg, student) => {
@@ -58,7 +66,7 @@ import { Dropdown, Button } from 'react-bootstrap'
                     {this.props.packages.map((pckg) => {
                       return <Dropdown.Item 
                         key={pckg.id} 
-                        href='#' 
+                        href='#'
                         onClick={ e => 
                           {this.props.fetchPackage(pckg._id)}}
                           >
