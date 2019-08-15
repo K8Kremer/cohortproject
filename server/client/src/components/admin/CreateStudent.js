@@ -299,15 +299,7 @@ class CreateStudent extends Component {
 						autoComplete="none"
 						/>
 					</fieldset>
-					<fieldset>
-						<label>Bio: </label>
-						<Field
-						name="bio"
-						type="text"
-						component={this.renderField}
-						autoComplete="none"
-						/>
-					</fieldset>
+				
 				<button type='submit'>Save</button>
 				</form>
 		)
