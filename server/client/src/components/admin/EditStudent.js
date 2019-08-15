@@ -24,13 +24,9 @@ class EditStudent extends Component {
 
 	}
 
-	componentDidMount() {
-		this.setState({ picture: '', resume: '', redirectToNewPage: false });
-		console.log(this.state);
-	}
-
   componentDidMount() {
-    this.props.fetchStudent(this.props.match.params.studentId);
+		this.props.fetchStudent(this.props.match.params.studentId);
+		this.setState({ picture: '', resume: '', redirectToNewPage: false });
   }
   
   /**TODO: Make the save button update the store */
@@ -239,7 +235,7 @@ class EditStudent extends Component {
             autoComplete="none"
 						/>
 					</fieldset>
-					<button>Save</button>
+				<button type='submit'>Save</button>
 				</form>
 		)
 	}

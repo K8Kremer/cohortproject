@@ -299,14 +299,7 @@ class CreateStudent extends Component {
 						autoComplete="none"
 						/>
 					</fieldset>
-				<button type='submit'
-				// onClick={e => {
-				// 	// e.preventDefault();
-				// 	console.log('fired click!');
-					
-				// 	handleSubmit(this.onSubmit);
-				// }}
-				>Save</button>
+				<button type='submit'>Save</button>
 				</form>
 		)
 	}
