@@ -18,7 +18,7 @@ class StudentList extends Component {
       </div>
 
       <div className='col-8'>
-      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
+      <table className='shadow p-3 mb-5 bg-white rounded' className='table table-hover'>
         <tr style={{backgroundColor:'#679AB8'}}>
           <th style={{textAlign: 'center', width:'10%'}}></th>
           <th style={{width:'20%'}}>First Name</th>
