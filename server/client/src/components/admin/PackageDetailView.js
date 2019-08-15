@@ -38,7 +38,7 @@ class PackageDetailView extends Component {
         <div className='row'> 
           <div className='col-sm-7'>
             <div className='your-info border rounded px-2 mb-4'>
-              <h4 className='d-inline-block'>Your Info</h4>
+              <h4 className='d-inline-block'>Package Notes</h4>
               <p>{this.props.package.packageNotes}</p>
               <h5>Employer Has Viewed: {this.props.package.seenByEmployer ? 'Yes' : 'Not Yet'}</h5>
               <h6>Created On: {this.props.package.created_at}</h6>
@@ -53,7 +53,7 @@ class PackageDetailView extends Component {
           </div>
           <div className='students col-sm-5'>
             <div className='mb-2'>
-            <b className='mr-5'>Students</b> <Link to={``} className='btn btn-sm btn-primary'>Add Student</Link>
+            <b className='mr-5'>Students</b>
             </div>
             <div>
             <ul className='list-group'>
