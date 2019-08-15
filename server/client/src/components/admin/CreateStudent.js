@@ -21,7 +21,6 @@ class CreateStudent extends Component {
 
 	componentDidMount(){
 		this.setState({ picture: '', resume: '', redirectToNewPage: false });
-		console.log(this.state);
 	} 
 
 	componentDidUpdate = (prevProps) => {
@@ -77,18 +76,19 @@ class CreateStudent extends Component {
 		}
 	}
 
-	renderField(field) {
-		const { meta: { touched, error } } = field;
-		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+	renderField( {input, label, type, meta: { touched, error, warning}}) {
+		
+		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 	
 		return (
-		  <div className={className}>
-			<label>{field.label}</label>
-			<input className='form-control' type='text' {...field.input} />
-			<div className='text-help errors text-danger'>
-			  {touched ? error : ''}
+		  <div >
+        <label className='control-label'>{label}</label>
+        <div>
+			<input {...input} type={type} className='form-control' />
+      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
 			</div>
-		  </div>
+      </div>
+		  
 		);
 	}
 
@@ -157,7 +157,7 @@ class CreateStudent extends Component {
 						<Field 
 							name="firstName"
 							type="text"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -184,7 +184,7 @@ class CreateStudent extends Component {
 						<Field 
 							name="cohort"
 							type="number"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -307,16 +307,25 @@ class CreateStudent extends Component {
 }
 
 function validate (values) {
-	const errors = {};
+  const errors = {};
+
 
 	//check if name field is empty
-	if ( !values.name ) {
-		errors.name = 'Required'
-	} 
+	if ( !values.firstName ) {
+		errors.firstName = 'Required'
+  } 
+  
+  if (!values.lastName) {
+		errors.lastName = 'Required'
+	}
 	
 	//check if address field is entered
 	if ( !values.address ) {
 		errors.address = 'Required'
+  }
+  
+  if (!values.cohort) {
+		errors.cohort = 'Required'
 	}
 
 	//check that the phoneNumber field is not empty
@@ -393,8 +402,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const createStudentForm = reduxForm({
+  form: 'createStudent',
 	validate,
-	form: 'createStudent'
 })(CreateStudent);
 
 export default connect(mapStateToProps, mapDispatchToProps)(createStudentForm);
