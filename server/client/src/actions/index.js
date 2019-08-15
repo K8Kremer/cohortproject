@@ -85,7 +85,7 @@ export const fetchPackage = (id) => dispatch => {
 }
 
 export const createPackage = (newPackage) => dispatch => {
-	axios.post(`/packages/`, { ...newPackage })
+  axios.post(`/packages/`, { ...newPackage })
 		.then(response => {
 			dispatch({ type: CREATE_PACKAGE, payload: response.data });
 		})

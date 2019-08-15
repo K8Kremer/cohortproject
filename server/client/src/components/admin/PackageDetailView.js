@@ -15,7 +15,7 @@ class PackageDetailView extends Component {
 
   render(){
     
-    if(this.props.package === {}){
+    if(Object.keys(this.props.package).length === 0){
       
       return(
         <div className='container'>
@@ -32,7 +32,7 @@ class PackageDetailView extends Component {
       <div className='container'>
         <div className='row mb-4'> 
           <h2>Packages > {this.props.package.packageName}</h2>
-          <Link to={`/admin/packages/${this.props.package._id}/edit`} className='btn btn-md btn-info float-right'>Edit</Link><Link to={`admin/packages/${this.props.package._id}/view`} className='btn btn-md btn-secondary float-right'>View As Employer</Link>
+          <Link to={`/admin/editpackage/${this.props.package._id}`} className='btn btn-md btn-info float-right'>Edit</Link><Link to={`admin/packages/${this.props.package._id}/view`} className='btn btn-md btn-secondary float-right'>View As Employer</Link>
         </div>
          
         <div className='row'> 
@@ -52,18 +52,21 @@ class PackageDetailView extends Component {
             </div>
           </div>
           <div className='students col-sm-5'>
-            <h4 className='d-block'>Students</h4> <Link to={``} className='btn btn-sm btn-primary'>Add Student</Link>
+            <div className='mb-2'>
+            <b className='mr-5'>Students</b> <Link to={``} className='btn btn-sm btn-primary'>Add Student</Link>
+            </div>
             <div>
             <ul className='list-group'>
-              {this.props.package.students !== [] ? 
+              {this.props.package.students == [] ? 
                 <h5>No Students Yet!</h5> : 
                 this.props.package.students.map(studentObject => 
                   {
                     return(
-                      <li className='list-group-item'>
-                        <h6>{studentObject.student.firstName} {studentObject.student.firstName}</h6>
-                        <p>{studentObject.studentNotes}</p>
-                        <Link to={``} className='btn btn-sm btn-primary'>Add/Edit Note</Link>
+                      <li className='list-group-item package-student shadow-sm mb-2'>
+                        <h6>{studentObject.student.firstName} {studentObject.student.lastName}</h6>
+                        <button type="button" className="close" aria-label="Remove Student"><span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
+                        <p>{studentObject.studentNotes.length == 0 ? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
+                        <Link to={``} className='btn btn-sm btn-info'>Add/Edit Note</Link>
                       </li>
                     )
                   }

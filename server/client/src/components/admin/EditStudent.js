@@ -25,13 +25,9 @@ class EditStudent extends Component {
 
 	}
 
-	componentDidMount() {
-		this.setState({ picture: '', resume: '', redirectToNewPage: false });
-		console.log(this.state);
-	}
-
   componentDidMount() {
-    this.props.fetchStudent(this.props.match.params.studentId);
+		this.props.fetchStudent(this.props.match.params.studentId);
+		this.setState({ picture: '', resume: '', redirectToNewPage: false });
   }
   
   /**TODO: Make the save button update the store */
@@ -45,7 +41,7 @@ class EditStudent extends Component {
 		}
 
 		this.props.editStudent(this.props.match.params.studentId, formProps);
-		window.alert('Student Updated!');
+		window.alert(`Student ${this.props.initialValues.firstName} updated successfully!`);
 		this.props.history.push(`/admin/student/${this.props.match.params.studentId}`);
 	};
 	
@@ -241,7 +237,7 @@ class EditStudent extends Component {
             autoComplete="none"
 						/>
 					</fieldset>
-					<button>Save</button>
+				<button type='submit'>Save</button>
 				</form>
 				</div>
 		)

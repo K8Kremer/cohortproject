@@ -1,0 +1,7 @@
+.package-student-delete{
+  display: none;
+}
+
+.package-student:hover .package-student-delete {
+  display: inline-block;
+}
