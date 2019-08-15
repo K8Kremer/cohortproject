@@ -1,4 +1,4 @@
-import React, { Component }  from 'react' 
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const Card = styled.div`
@@ -9,15 +9,24 @@ const Card = styled.div`
   border: #9EAEB8; 
 `
 
+const CardImg = styled.img`
+  border-radius: 100px;
+  border: 1px solid #9EAEB8; 
+  marginBottom: 5px; 
+  width: 150px;
+  height: 150px; 
+`
+
 class EmployerCard extends Component {
-  
+
   render() {
     return (
       <div className="col-md-4 col-sm-6" key={this.props.cardId} style={{ marginBottom: 15 }}>
         <Card className="card">
           <div className="views-row" style={{ padding: 15, textAlign: 'center' }}>
             <div className=" ">
-              <img className="img-responsive" style={{ borderRadius: 100, border: '1px solid #9EAEB8', marginBottom: 5 }} src="https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg" width="150" height="150" alt=""></img>            </div>
+              <CardImg className="img-responsive" src="https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg" alt=""></CardImg>
+            </div>
             <div className=" ">
               <h4 className=" ">FirstName LastName</h4>
             </div>
