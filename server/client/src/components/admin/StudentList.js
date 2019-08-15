@@ -26,7 +26,7 @@ class StudentList extends Component {
 
   handlePackageSubmit = (pckg, students) => {
     if (pckg && students) {
-      this.props.editPackage(pckg._id, students);
+      this.props.editPackage(pckg._id, {students});
     }
   }
 
