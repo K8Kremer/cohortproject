@@ -5,24 +5,27 @@
   height: 100vh;
 }
 
-form {
+.createPackageForm {
   margin-top: 20px;
   background-color: white;
   border: 2px solid #3C5A6B;
 }
 
-h1{
+.styled-header{
     text-align: left;
     color:#3C5A6B;
 }
 
-.btn {
+#create{
+  background-color: #3C5A6B;
+  border: solid 2px #3C5A6B;
   position: relative;
   left: 230px;
- 
 }
 
-#create{
+#createPackage{
+  position: relative;
+  right: 50;
   background-color: #3C5A6B;
   border: solid 2px #3C5A6B;
 }

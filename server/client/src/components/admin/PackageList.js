@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import PackageRow from './PackageRow';
+import './FormStyle.css';
 
 class PackageList extends Component {
 
@@ -25,6 +26,10 @@ class PackageList extends Component {
 
       </div>
       <div className='col-8'>
+        <div className='row'>
+      <h1>Packages</h1>
+      <button className='btn btn-primary' id='createPackage'>New Package</button>
+      </div>
       <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
         <tr style={{backgroundColor:'#679AB8'}}>
           <th style={{width:'20%'}}>Package</th>
