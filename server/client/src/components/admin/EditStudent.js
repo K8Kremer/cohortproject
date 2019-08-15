@@ -44,7 +44,7 @@ class EditStudent extends Component {
 		}
 
 		this.props.editStudent(this.props.match.params.studentId, formProps);
-		window.alert('Student Updated!');
+		window.alert(`Student ${this.props.initialValues.firstName} updated successfully!`);
 		this.props.history.push(`/admin/student/${this.props.match.params.studentId}`);
 	};
 	
