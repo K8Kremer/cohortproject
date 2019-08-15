@@ -3,41 +3,47 @@ import { reduxForm, Field } from 'redux-form';
 import { createPackage} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './FormStyle.css';
 
 class CreatePackage extends Component {
   state = {
-    redirectToNewPage: false
+    redirect: false
   }
+  componentDidMount(){
+    console.log(this.props.current_package);
+  }
+
+  renderRedirect = () => {
+    if( this.state.redirect ){
+      this.props.history.push(`/admin/package/${this.props.currentPackage._id}`)
+    }
+  }
+
 	componentDidUpdate = (prevProps) => {
-    /**
-     * this.props.currentStudent is being changed to a boolean true when the form validation fails BUT WHY
-     * this.props.valid returns true when form validation is successful
-     */
+  
 		if (this.props.currentPackage._id !== prevProps.currentPackage._id && this.props.valid == true) {
-			this.setState({ redirectToNewPage: true }, () => {
-				window.alert(`Package ${this.props.currentPackage._id} created successfully!`)
+			this.setState({ redirect: true }, () => {
+        window.alert(`Package ${this.props.currentPackage._id} created successfully!`)
+        this.renderRedirect();
 			});
 		}
 	}
 
 
 onSubmit = formProps => {
-  this.props.createPackage(formProps, () =>{
-  });
-
-
+  this.props.createPackage(formProps)
 };
 
 render() {
   const { handleSubmit } = this.props;
- 
+
   
   return (
     <div className='background row'>
       <div className='col-md-2'></div>
       <div className='col-md-8'>
-      
+      <h1>Create New Package</h1>
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
       <div className='form-group row'>
          
@@ -125,7 +131,7 @@ render() {
           />
           </div>
       </div>
-        <button className='btn btn-primary'>Save</button>
+        <button type='submit'className='btn btn-primary' id='create'>Create</button>
       </form>
       </div>
       </div>
