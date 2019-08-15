@@ -10,21 +10,31 @@ const Note = styled.div`
   border-radius: 0.25rem;
 `
 
-const EmployerNote = () => {
-  return (
-    <div className="container-fluid">
-      <Note>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
+const EmployerNote = ({ packageNotes = '' }) => {
+  if (!packageNotes) {
+    return (
+      <div className="container-fluid">
+        <div className="row justify-content-md-center" style={{ margin: 0 }}>
+          <div className="col-md-6">
+            <p>
             </p>
-      </Note>
-    </div>
-  )
+          </div>
+        </div>
+      </div>
+    )
+  } else {
+    return (
+      <div className="container-fluid">
+        <div className="row justify-content-md-center" style={{ margin: 0 }}>
+          <Note className="col-md-6">
+            <p>
+              {packageNotes}
+            </p>
+          </Note>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default EmployerNote 
