@@ -72,7 +72,13 @@ router.get('/:id', (req, res, next) => {
   //this takes advantage of our "middleware" helper function above
   req.package ? res.status(200).send(req.package) : res.status(404).send('Package not found.');
 });
+//DELETE route to remove a student object from the students array referencing by the mongo _id
+router.delete('/:id/:studentId', (req, res) => {
+  req.package.students.pull(req.params.studentId)
+  req.package.save()
 
+  
+});
 //POST route here for Package by ID - to update individual info
 router.post('/:id', (req, res, next) => {
   //checks below here for request body data validation

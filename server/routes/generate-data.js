@@ -67,4 +67,28 @@ router.get('/packages', (req, res, next) => {
   res.status(200).end()
 });
 
+router.get('/packages', (req, res, next) => {
+  for (let i = 0; i < 10; i++) {
+    let package = new Package();
+
+    package.packageName = faker.lorem.word();
+    package.packageLink = faker.commerce.productName();
+    package.companyName = faker.company.companyName();
+    package.employerName = faker.name.firstName() + ' ' + faker.name.lastName();
+    package.employerEmail = faker.internet.email();
+    package.employerURL = uuid();
+    package.students = [];
+    package.packageNotes = faker.lorem.paragraph();
+    package.replyEmail = faker.internet.email();
+    package.replyName = faker.name.firstName() + ' ' + faker.name.lastName();
+    package.seenByEmployer = false; 
+    package.isHidden = false;
+    
+    package.save((err) => {
+      if (err) throw err
+    })
+  }
+  res.status(200).end()
+});
+
 module.exports = router;
