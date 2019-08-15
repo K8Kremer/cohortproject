@@ -32,7 +32,7 @@ class PackageDetailView extends Component {
       <div className='container'>
         <div className='row mb-4'> 
           <h2>Packages > {this.props.package.packageName}</h2>
-          <Link to={`/admin/packages/${this.props.package._id}/edit`} className='btn btn-md btn-info float-right'>Edit</Link><Link to={`admin/packages/${this.props.package._id}/view`} className='btn btn-md btn-secondary float-right'>View As Employer</Link>
+          <Link to={`/admin/editpackage/${this.props.package._id}`} className='btn btn-md btn-info float-right'>Edit</Link><Link to={`admin/packages/${this.props.package._id}/view`} className='btn btn-md btn-secondary float-right'>View As Employer</Link>
         </div>
          
         <div className='row'> 
