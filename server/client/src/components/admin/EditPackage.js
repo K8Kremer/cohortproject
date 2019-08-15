@@ -9,8 +9,7 @@ import './FormStyle.css';
 
 class EditPackage extends Component {
   state = {
-    redirect: false,
-    students: []
+    redirect: false
   }
   componentDidMount() {
     this.props.fetchPackage(this.props.packageId);
@@ -21,7 +20,6 @@ class EditPackage extends Component {
     
     //grab our current values for student Objects array
     let updatedStudentsArray = this.props.packageStudents;
-
     //snag the keys for our notes within the formProps object
     let notesArray = Object.keys(formProps).filter(formPropKey => formPropKey.includes('studentNotes'));
     
@@ -29,13 +27,24 @@ class EditPackage extends Component {
     _.forEach(updatedStudentsArray,(studentObject) => {
       //we'll rely upon the student ID to get the specific key within our notes Array
       let myNoteKey = notesArray.filter(studentNotesKey => studentNotesKey.includes(studentObject.student._id));
-      studentObject.studentNotes = formProps[myNoteKey];
+      if(formProps[myNoteKey] !== undefined){
+        studentObject.studentNotes = formProps[myNoteKey];
+      }
+      else if (studentObject.studentNotes === undefined)  {
+        studentObject.studentNotes = '';
+      }
+      else if (studentObject.studentNotes === ' ') {
+        studentObject.studentNotes = '';
+      }
+
     });
-    
+
     formProps.students = updatedStudentsArray;
-    console.log(formProps);
+    
+    //remove our studentNotes-Id
+    let cleanedFormProps = _.omit(formProps, notesArray )
     // if(this.props.valid){
-    this.props.editPackage(this.props.packageId, formProps);
+    this.props.editPackage(this.props.packageId, cleanedFormProps);
     window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
     this.props.history.push(`/admin/package/${this.props.packageId}`);
     // } else {
@@ -160,6 +169,7 @@ class EditPackage extends Component {
                         name={`studentNotes-${studentObject.student._id}`}
                         type="text"
                         component="textarea"
+                        placeholder={studentObject.studentNotes}
                         autoComplete="none"
                         className="form-control form-control-lg"
                       />

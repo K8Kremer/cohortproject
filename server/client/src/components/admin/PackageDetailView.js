@@ -27,7 +27,7 @@ class PackageDetailView extends Component {
         </div>
       );
     }
-
+    
     return (
       <div className='container'>
         <div className='row mb-4'> 
@@ -59,14 +59,16 @@ class PackageDetailView extends Component {
             <ul className='list-group'>
               {this.props.package.students == [] ? 
                 <h5>No Students Yet!</h5> : 
+                
                 this.props.package.students.map(studentObject => 
                   {
                     return(
+                      
                       <li className='list-group-item package-student shadow-sm mb-2'>
                         <h5 className='text-center'>{studentObject.student.firstName} {studentObject.student.lastName}</h5>
                         <button type="button" className="close" aria-label="Remove Student"><span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
                         <label><em>Student Notes:</em></label>
-                        <p className='offset-xs-1'>{studentObject.studentNotes.length == 0 ? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
+                        <p className='offset-xs-1'>{studentObject.studentNotes.length === 0 || studentObject.studentNotes === ' '? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
                         
                       </li>
                     )
