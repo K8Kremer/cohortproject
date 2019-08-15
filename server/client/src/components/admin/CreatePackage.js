@@ -43,8 +43,8 @@ render() {
     <div className='background row'>
       <div className='col-md-2'></div>
       <div className='col-md-8'>
-      <h1>Create New Package</h1>
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <h1 className='styled-header'>Create New Package</h1>
+      <form className='createPackageForm'onSubmit={handleSubmit(this.onSubmit.bind(this))}>
       <div className='form-group row'>
          
           <label className='col-sm-2 col-form-label'>Package Name: </label>
