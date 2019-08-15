@@ -6,8 +6,13 @@ import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE,
 
 const ROOT_URL = 'http://localhost:8000';
 
-export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(`/students/`)
+export const fetchStudents = (page = 1, fullName = '', cohort = null) => dispatch => {
+	axios.get(`/students/`, {
+		params: {
+			fullName,
+			cohort
+		}
+	})
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -62,7 +67,7 @@ export const editStudent = (id, studentUpdates) => dispatch => {
   console.log(`${id}`, studentUpdates);
   axios.post(`/students/${id}`, {...studentUpdates})
 	.then( response => {
-		dispatch({ type: EDIT_STUDENT, payload: response.data});
+		dispatch({ type: EDIT_STUDENT, payload: response.data})
 	})
 	.catch( error => {
 		console.log(error);
@@ -90,7 +95,7 @@ export const createPackage = (newPackage) => dispatch => {
 }
 
 export const editPackage = (id, updates) => dispatch => {
-	axios.post(`/packages/${id}`, {students : updates})
+	axios.post(`/packages/${id}`, updates)
 		.then(response => {
 			dispatch({ type: EDIT_PACKAGE, payload: response.data });
 		})
