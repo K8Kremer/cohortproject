@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudent, fetchPackage, fetchPackages, addStudentToPackage, editPackage} from '../../actions';
+import { fetchStudent, fetchPackage, fetchPackages, editPackage} from '../../actions';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button } from 'react-bootstrap'
@@ -113,6 +113,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchStudent, fetchPackages, fetchPackage, addStudentToPackage, editPackage}, dispatch);
+  return bindActionCreators({ fetchStudent, fetchPackages, fetchPackage, editPackage}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdminStudentView);
