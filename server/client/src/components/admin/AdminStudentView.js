@@ -17,10 +17,15 @@ import { Dropdown, Button } from 'react-bootstrap'
       this.props.fetchPackages();
     }
   
-    handlePackageSubmit = (pckg, student) => {
+    handlePackageSelect = (pckg, student) => {
       if (pckg) {
         this.setState({addedStudentList: this.state.addedStudentList.concat([{student, studentNotes: ''}])})
-        this.props.addStudentToPackage(pckg._id, student);
+      }
+      
+    }
+    handlePackageSubmit = (pckg, student) => {
+      if (pckg) {
+        this.props.addStudentToPackage(pckg._id, {student});
       }
       console.log(student);
       console.log(this.state.addedStudentList);
@@ -54,7 +59,7 @@ import { Dropdown, Button } from 'react-bootstrap'
                         key={pckg.id} 
                         href='#' 
                         onClick={ e => 
-                          {this.props.fetchPackage(pckg._id)}}
+                          {this.props.fetchPackage(pckg._id); this.handlePackageSelect(pckg._id, this.props.current_student._id)}}
                           >
                           {pckg.packageName}
                       </Dropdown.Item>

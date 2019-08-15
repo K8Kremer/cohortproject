@@ -96,7 +96,7 @@ export const editPackage = (id, updates) => dispatch => {
 }
 
 export const addStudentToPackage = (id, updates) => dispatch => {
-	axios.post(`/packages/${id}`, {student : updates})
+	axios.post(`/packages/${id}`, updates)
 	.then( response => {
 		dispatch({ type: ADD_STUDENT_TO_PACKAGE, payload: response.data});
 		console.log(response.data)
