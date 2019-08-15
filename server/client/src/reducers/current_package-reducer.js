@@ -1,4 +1,4 @@
-import { FETCH_PACKAGE } from '../actions/types';
+import { FETCH_PACKAGE, EDIT_PACKAGE } from '../actions/types';
 
 export default function (state = {}, action) {
   if (action.error) {
@@ -6,6 +6,8 @@ export default function (state = {}, action) {
   }
   switch (action.type) {
     case FETCH_PACKAGE:
+      return action.payload;
+    case EDIT_PACKAGE:
       return action.payload;
     default:
       return state;
