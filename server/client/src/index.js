@@ -12,9 +12,8 @@ import EmployerStudentView from './components/shared/EmployerStudentView';
 import PackageList from './components/admin/PackageList';
 import PackageDetailView from './components/admin/PackageDetailView';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css'
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
