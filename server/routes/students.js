@@ -10,7 +10,7 @@ router.get('/', (req,res,next) => {
     //if no cohort query is specified return all students ordered by cohort and lastname
     if (!cohortQuery) {
         Student
-            .find({ fullName: { $regex: new RegExp(fullNameQuery, 'i')}})
+            .find()
             .sort({'cohort': 1, 'name.last': 1})
             .exec((err, students) => {
                 if (err) {

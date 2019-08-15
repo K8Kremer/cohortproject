@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudent, fetchPackage, fetchPackages, addStudentToPackage } from '../../actions';
+import { fetchStudent, fetchPackage, fetchPackages, addStudentToPackage, editPackage} from '../../actions';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button } from 'react-bootstrap'
@@ -8,7 +8,7 @@ import { Dropdown, Button } from 'react-bootstrap'
 
   class AdminStudentView extends Component {
     state = {
-      addedStudentList : []
+      addedStudentArray : []
     }
 
     //loads with student Id provided from URL
@@ -16,19 +16,20 @@ import { Dropdown, Button } from 'react-bootstrap'
       this.props.fetchStudent(this.props.match.params.studentId);
       this.props.fetchPackages();
     }
-  
-    handlePackageSelect = (pckg, student) => {
-      if (pckg) {
-        this.setState({addedStudentList: this.state.addedStudentList.concat([{student, studentNotes: ''}])})
+   
+    componentDidUpdate(prevProps, student) {
+      if (this.props.currentPackage !== prevProps.currentPackage){
+        console.log(this.props.currentPackage.students)
+        this.setState({addedStudentArray: this.props.addedStudentList.concat([{student, studentNotes: ''}])})
       }
-      
     }
+  
     handlePackageSubmit = (pckg, student) => {
       if (pckg) {
-        this.props.addStudentToPackage(pckg._id, {student});
+       this.props.editPackage(pckg._id, {students: student});
       }
-      console.log(student);
-      console.log(this.state.addedStudentList);
+      this.setState({addedStudentArray: []});
+      alert(`${this.props.student.firstName} ${this.props.student.lastName} added to ${this.props.currentPackage.packageName}`)
     }
 
     render(){
@@ -59,7 +60,7 @@ import { Dropdown, Button } from 'react-bootstrap'
                         key={pckg.id} 
                         href='#' 
                         onClick={ e => 
-                          {this.props.fetchPackage(pckg._id); this.handlePackageSelect(pckg._id, this.props.current_student._id)}}
+                          {this.props.fetchPackage(pckg._id)}}
                           >
                           {pckg.packageName}
                       </Dropdown.Item>
@@ -67,7 +68,7 @@ import { Dropdown, Button } from 'react-bootstrap'
                   </Dropdown.Menu>
                 </Dropdown>
                 <Button className="submit-students" style={{position:'absolute', top: 100,right: 30}}
-              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.props.current_student._id)}>Submit Student To Package</Button>
+              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentArray)}>Submit Student To Package</Button>
  
               <img className='img-thumbnail rounded float-left' style={{height: 100, width: 100}}src={this.props.current_student.picture}></img>
               <h2 style={{textAlign:'center', marginTop: 30, marginRight: 100}}>{this.props.current_student.firstName} {this.props.current_student.lastName}</h2>
@@ -98,11 +99,12 @@ function mapStateToProps(state) {
     current_student: state.current_student,
     packages: state.packages,
     currentPackage: state.current_package,
-    student: state.current_student
+    student: state.current_student,
+    addedStudentList: state.current_package.students
    }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchStudent, fetchPackages, fetchPackage, addStudentToPackage}, dispatch);
+  return bindActionCreators({ fetchStudent, fetchPackages, fetchPackage, addStudentToPackage, editPackage}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdminStudentView);
