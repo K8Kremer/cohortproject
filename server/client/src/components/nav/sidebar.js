@@ -6,7 +6,7 @@ import './navstyles.css';
 //adjust these links as necessary for routing
 function SideBar () {
   return(
-   <div className='wrapper'>
+   
      <nav id='sidebar'>
       <ul className='list-unstyled components'>
         <li className='menu-item'>
@@ -17,10 +17,7 @@ function SideBar () {
         </li>
       </ul>
      </nav>
-     <div id='content'>
-
-     </div>
-   </div>
+   
   )
   }
   
