@@ -63,10 +63,11 @@ class PackageDetailView extends Component {
                   {
                     return(
                       <li className='list-group-item package-student shadow-sm mb-2'>
-                        <h6>{studentObject.student.firstName} {studentObject.student.lastName}</h6>
+                        <h5 className='text-center'>{studentObject.student.firstName} {studentObject.student.lastName}</h5>
                         <button type="button" className="close" aria-label="Remove Student"><span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
-                        <p>{studentObject.studentNotes.length == 0 ? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
-                        <Link to={``} className='btn btn-sm btn-info'>Add/Edit Note</Link>
+                        <label><em>Student Notes:</em></label>
+                        <p className='offset-xs-1'>{studentObject.studentNotes.length == 0 ? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
+                        
                       </li>
                     )
                   }

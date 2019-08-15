@@ -4,11 +4,13 @@ import { editPackage, fetchPackage } from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import _ from 'lodash';
 import './FormStyle.css';
 
 class EditPackage extends Component {
   state = {
-    redirect: false
+    redirect: false,
+    students: []
   }
   componentDidMount() {
     this.props.fetchPackage(this.props.packageId);
@@ -16,19 +18,41 @@ class EditPackage extends Component {
 
   onSubmit = formProps => {
     //tried Error checking here, but it didn't like the initialValues property
+    
+    //grab our current values for student Objects array
+    let updatedStudentsArray = this.props.packageStudents;
 
+    //snag the keys for our notes within the formProps object
+    let notesArray = Object.keys(formProps).filter(formPropKey => formPropKey.includes('studentNotes'));
+    
+    //iterate through our current Students array using lodash
+    _.forEach(updatedStudentsArray,(studentObject) => {
+      //we'll rely upon the student ID to get the specific key within our notes Array
+      let myNoteKey = notesArray.filter(studentNotesKey => studentNotesKey.includes(studentObject.student._id));
+      studentObject.studentNotes = formProps[myNoteKey];
+    });
+    
+    formProps.students = updatedStudentsArray;
+    console.log(formProps);
     // if(this.props.valid){
-      this.props.editPackage(this.props.packageId, formProps);
-      window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
-      this.props.history.push(`/admin/package/${this.props.packageId}`);
+    this.props.editPackage(this.props.packageId, formProps);
+    window.alert(`Package ${this.props.initialValues.packageName} updated successfully!`);
+    this.props.history.push(`/admin/package/${this.props.packageId}`);
     // } else {
     //   window.alert(`Package ${this.props.initialValues.packageName} still has validation issues, please update and try again.`);
     // }
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, packageStudents } = this.props;
 
+    if (this.props.initialValues._id !== this.props.packageId){
+      return(
+        <div>
+          One moment, loading your craft, small-batch Package...
+        </div>
+      )
+    }
 
     return (
       <div className='background row'>
@@ -122,6 +146,29 @@ class EditPackage extends Component {
                 />
               </div>
             </div>
+
+            <div className='form-group row'>
+              <label className='col-sm-2 col-form-label'>Student Notes: </label>
+              <div className='col-md-6'>
+                {packageStudents.map(studentObject => {
+                  return (
+                    <>
+                      <label className='col-form-label'>
+                        {studentObject.student.firstName} {studentObject.student.lastName}
+                      </label>
+                      <Field
+                        name={`studentNotes-${studentObject.student._id}`}
+                        type="text"
+                        component="textarea"
+                        autoComplete="none"
+                        className="form-control form-control-lg"
+                      />
+                    </>
+                  );
+                })
+                }
+              </div>
+            </div>
             <button type='submit' className='btn btn-primary' id='create'>Update</button>
           </form>
         </div>
@@ -168,7 +215,8 @@ function validate(values) {
 function mapStateToProps(state, ownProps) {
   return {
     packageId: ownProps.match.params.packageId,
-    initialValues: state.current_package
+    initialValues: state.current_package,
+    packageStudents: state.current_package.students
   }
 }
 
