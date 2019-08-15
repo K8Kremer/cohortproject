@@ -38,8 +38,9 @@ export const fetchPackages = () => dispatch => {
 
 //fetch individual package
 
-export const addStudentToPackage = (student) => dispatch => {
-	axios.post(`/students`, { student })
+export const addStudentToPackage = (id, updates) => dispatch => {
+	console.log(`${id}`, updates);
+	axios.post(`/packages/${id}`, { student : updates})
 	.then( response => {
 		dispatch({ type: ADD_STUDENT_TO_PACKAGE, payload: response.data});
 	})
