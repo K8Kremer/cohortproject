@@ -8,7 +8,7 @@ const PackageSchema = new Schema({
   employerEmail: { type: String, required: true},
   employerURL: String,
   students: [{
-    student: {type: Schema.Types.ObjectId, ref: 'Student', required: true},
+    student: {},
     studentNotes: String,
   }],
   packageNotes: String,
