@@ -11,8 +11,7 @@ import EmployerCard from './EmployerCard';
 import EmployerNote from './EmployerNote';
 
 class EmployerView extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -21,20 +20,34 @@ class EmployerView extends Component {
   }
 
   renderList() {
-    const test = [0, 1, 2, 3, 4, 5];
-    return test.map((i) => {
+    if (this.props.package.students === 0) {
       return (
-        <EmployerCard key={i} cardId={i} />
+        <EmployerCard key={0} />
       )
-    })
+    } else {
+      return this.props.package.students.map(studentObject => {
+        return (
+          <EmployerCard key={studentObject._id} packageId={this.props.packageId} studentNotes={studentObject.studentNotes} student={studentObject.student} />
+        )
+      })
+    }
   }
 
   render() {
+    if (Object.keys(this.props.package).length === 0) {
+      return (
+        <Fragment>
+          <EmployerHeader />
+          <EmployerTitle />
+          <EmployerNote packageNotes='' />
+        </Fragment>
+      )
+    }
     return (
       <Fragment>
         <EmployerHeader />
-        <EmployerTitle employerName={this.props.package.employerName} companyName={this.props.package.companyName} replyName={this.props.package.replyName}/>
-        <EmployerNote />
+        <EmployerTitle employerName={this.props.package.employerName} companyName={this.props.package.companyName} replyName={this.props.package.replyName} />
+        <EmployerNote packageNotes={this.props.package.packageNotes} />
         <div className="container-fluid">
           <div className="row" style={{ margin: 0 }}>
             {this.renderList()}
@@ -45,10 +58,7 @@ class EmployerView extends Component {
   }
 };
 
-//export default EmployerView;
-
 function mapStateToProps(state, ownProps) {
-  
   return {
     packageId: ownProps.match.params.packageId,
     package: state.current_package
