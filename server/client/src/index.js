@@ -24,21 +24,19 @@ const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Container fluid={true} style={{padding: 0}}>
-        <App>
-          <Switch>
-            {/* turn these into protected routes with login */}
-            {/* EmployerStudenView rendered here so it does not use the admin navbar and sidebar */}
-            <Route exact path='/admin/employerstudentview/:studentId' component={EmployerStudentView} />
-            <Route path='/admin' component={AdminView} />
-            <Route exact path='/employer/:packageId' component={EmployerView} />
-            <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
-            <Route path='/' render={() => (
-              <Redirect to='/admin/studentlist' />
-            )} />
-          </Switch>
-        </App>
-      </Container>
+      <App>
+        <Switch>
+          {/* turn these into protected routes with login */}
+          {/* EmployerStudenView rendered here so it does not use the admin navbar and sidebar */}
+          <Route exact path='/admin/employerstudentview/:studentId' component={EmployerStudentView} />
+          <Route path='/admin' component={AdminView} />
+          <Route exact path='/employer/:packageId' component={EmployerView} />
+          <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
+          <Route path='/' render={() => (
+            <Redirect to='/admin/studentlist' />
+          )} />
+        </Switch>
+      </App>
     </BrowserRouter>
   </Provider>, 
 document.getElementById('root'));
