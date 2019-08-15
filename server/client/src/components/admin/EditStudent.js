@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
+
 /******************
  * TODO: If time permits: Figure a way out to populate the redux form Field tags
  * with the correct values from the database.
@@ -99,6 +100,7 @@ class EditStudent extends Component {
 		}, (error, result) => { this.checkUploadResult(result, 'document') });
 
 		return (
+			<div>
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
 					<fieldset>
 						<label>First Name: </label>
@@ -241,6 +243,7 @@ class EditStudent extends Component {
 					</fieldset>
 					<button>Save</button>
 				</form>
+				</div>
 		)
 	}
 }
