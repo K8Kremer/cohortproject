@@ -58,8 +58,9 @@ export const fetchStudent = (id) => dispatch => {
   })
 }
 
-export const editStudent = (id) => dispatch => {
-	axios.post(`/students/${id}`)
+export const editStudent = (id, studentUpdates) => dispatch => {
+  console.log(`${id}`, studentUpdates);
+  axios.post(`/students/${id}`, {...studentUpdates})
 	.then( response => {
 		dispatch({ type: EDIT_STUDENT, payload: response.data});
 	})
@@ -88,8 +89,8 @@ export const createPackage = (newPackage) => dispatch => {
 		})
 }
 
-export const editPackage = (id) => dispatch => {
-	axios.post(`/packages/${id}`)
+export const editPackage = (id, updates) => dispatch => {
+	axios.post(`/packages/${id}`, {students : updates})
 		.then(response => {
 			dispatch({ type: EDIT_PACKAGE, payload: response.data });
 		})
