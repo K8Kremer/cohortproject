@@ -24,8 +24,12 @@
 }
 
 #createPackage{
-  position: relative;
-  right: 50;
+
   background-color: #3C5A6B;
   border: solid 2px #3C5A6B;
+  margin-top: 10px;
+}
+
+#nopad{
+  padding: 0px;
 }
