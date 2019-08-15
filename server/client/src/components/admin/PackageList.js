@@ -33,14 +33,15 @@ class PackageList extends Component {
       <div className='col-8' id='nopad'>
        
      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
-       <tr style={{backgroundColor:'#9EAEB8'}}>
-       <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
-       <th style={{width:'20%'}}></th>
+       <tbody>
+        <tr style={{backgroundColor:'#9EAEB8'}}>
+           <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
+          <th style={{width:'20%'}}></th>
           <th style={{width:'10%'}}></th>
           <th style={{width:'20%'}}></th>
           <th style={{width:'10%'}}><button className='btn btn-primary' id='createPackage' onClick={this.handleClick}>New Package</button></th>
           <th style={{width:'10%'}}></th>
-       </tr>
+        </tr>
         <tr style={{backgroundColor:'#679AB8'}}>
           <th style={{width:'20%'}}>Package</th>
           <th style={{width:'20%'}}>Recipient</th>
@@ -48,7 +49,8 @@ class PackageList extends Component {
           <th style={{width:'20%'}}>Date Created</th>
           <th style={{textAlign: 'center', width:'10%'}}></th>
           <th style={{textAlign: 'center', width:'10%'}}></th>
-        </tr>
+         </tr>
+         </tbody>
         <tbody style={{backgroundColor: 'white'}}>
       {packagesArray.map((currentPackage) => {
         return (
