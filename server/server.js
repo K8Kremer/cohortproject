@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const keys = require('./config/keys');
+var cloudinary = require('cloudinary').v2;
 
 //mongoose.connect('mongodb://localhost/psGroupProject', { useNewUrlParser: true })
 
