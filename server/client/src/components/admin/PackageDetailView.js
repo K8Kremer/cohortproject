@@ -16,7 +16,12 @@ class PackageDetailView extends Component {
 
   removeStudent(studentId){
     let newStudentArray = this.props.package.students.filter(studentObject => studentObject.student._id !== studentId);
-    this.props.editPackage(this.props.packageId, { students: newStudentArray })
+    this.props.editPackage(this.props.packageId, { students: newStudentArray });
+  }
+  
+  formatDate = (date) => {
+    let newDate = new Date(date);
+     return newDate.toLocaleDateString();
   }
 
   render(){
@@ -48,8 +53,8 @@ class PackageDetailView extends Component {
               <h4 className='d-inline-block'>Package Notes</h4>
               <p>{this.props.package.packageNotes}</p>
               <h5>Employer Has Viewed: {this.props.package.seenByEmployer ? 'Yes' : 'Not Yet'}</h5>
-              <h6>Created On: {this.props.package.created_at}</h6>
-              <h6>Last Updated: {this.props.package.updated_at}</h6>
+              <h6>Created On: {this.formatDate(this.props.package.created_at)}</h6>
+              <h6>Last Updated: {this.formatDate(this.props.package.updated_at)}</h6>
             </div>
             <div className='employer-info border rounded px-2'>
               <h4 className='d-block'>Employer Info</h4>
