@@ -48,8 +48,29 @@
   border-color: transparent;
   margin-bottom: 4px;
   margin-top: 4px;
-  color: white;
+  
 }
+
+.username {
+  background: url(https://png.pngtree.com/svg/20160425/86b402aa9c.svg) no-repeat scroll 6px 3px;
+  background-color: rgba(65, 77, 87, 0.568);
+  opacity: .60;
+  padding-left: 15px;
+  background-size: 20px;
+  text-indent: 20px;
+
+  
+}
+
+.password {
+  background: url(https://png.pngtree.com/svg/20160428/dd7ae0f39c.svg) no-repeat scroll 6px 3px;
+  background-color: rgba(65, 77, 87, 0.568);
+  opacity: .60;
+  padding-left: 15px;
+  background-size: 20px;
+  text-indent: 20px;
+}
+
 
 .error-text {
   color: red;
