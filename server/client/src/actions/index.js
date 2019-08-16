@@ -30,8 +30,12 @@ export const createStudent = (student) => dispatch => {
 	})
 }
 
-export const fetchPackages = () => dispatch => {
-	axios.get(`/packages`)
+export const fetchPackages = (companyName = '') => dispatch => {
+	axios.get(`/packages/`, {
+		params: {
+			companyName
+		}
+	})
 	.then( response => {
 		dispatch({ type: FETCH_PACKAGES, payload: response.data});
 	})

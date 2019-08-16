@@ -84,7 +84,7 @@ class StudentList extends Component {
             </Dropdown>
             <Button className="submit-students" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
               onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
-            <SearchBar />
+            <SearchBar searchType='students' />
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
