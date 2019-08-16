@@ -64,10 +64,9 @@ class EditPackage extends Component {
     }
 
     return (
-      <div className='background row'>
-        <div className='col-md-2'></div>
-        <div className='col-md-8'>
-          <h1>Edit Package</h1>
+      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+       	<div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+          <h3 className="mb-4" style={{color: '#3C5A6B'}}>Edit Package</h3>
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
             <div className='form-group row'>
 
