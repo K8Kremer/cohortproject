@@ -15,8 +15,8 @@ class StudentRow extends Component {
         <td style={{textAlign: 'left'}}>{student.cohort}</td>
         <td>{student.jobSeekingStatus}</td>
         <td>
-          <Link to={`/admin/student/${student._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>View</span></Link>
-          <Link to={`/admin/editstudent/${student._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
+          <Link to={`/admin/student/${student._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>View</span></Link>
+          <Link to={`/admin/editstudent/${student._id}`}><span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
         </td>
       </tr>
     )

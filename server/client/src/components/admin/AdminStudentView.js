@@ -38,6 +38,11 @@ class AdminStudentView extends Component {
   }
 
   handlePackageSubmit = (pckg, student) => {
+    if (Object.keys(pckg).length==0) {
+      alert('Please select a package')
+      return null;
+    }
+    
     if (pckg) {
       this.props.editPackage(pckg._id, { students: student });
     }
@@ -64,7 +69,7 @@ class AdminStudentView extends Component {
           minHeight: "100vh"
         }}
       >
-        <div className="mx-auto card shadow-sm p-3 mb-5 bg-white rounded">
+        <div className="mx-auto card shadow-sm p-3 mb-5 bg-white rounded col-10">
           <div className="card-header text-center">
             {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
             <Link to={`/admin/editstudent/${this.props.current_student._id}`}>
@@ -81,7 +86,7 @@ class AdminStudentView extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/employer/:packageId/student/:studentId">
+            <Link to="/employer/:packageId/student/:studentId" target='_blank'>
               <button
                 type="button"
                 className="btn btn-sm"
