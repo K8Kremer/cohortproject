@@ -38,6 +38,11 @@ class AdminStudentView extends Component {
   }
 
   handlePackageSubmit = (pckg, student) => {
+    if (Object.keys(pckg).length==0) {
+      alert('Please select a package')
+      return null;
+    }
+    
     if (pckg) {
       this.props.editPackage(pckg._id, { students: student });
     }
@@ -81,7 +86,7 @@ class AdminStudentView extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/employer/:packageId/student/:studentId">
+            <Link to="/employer/:packageId/student/:studentId" target='_blank'>
               <button
                 type="button"
                 className="btn btn-sm"
