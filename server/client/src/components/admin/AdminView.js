@@ -22,19 +22,25 @@ const AdminView = () => {
       <PageHeader />
       <Row noGutters={true}>  
         <SideBar />
-        <div style={{marginLeft: '250px'}}>
-          <Switch>
-            <Route exact path='/admin/login'                  component={LoginPage} />
-            <Route exact path='/admin/studentlist'            component={StudentList} />
-            <Route exact path='/admin/student/:studentId'     component={AdminStudentView} />
-            <Route exact path='/admin/createstudent'          component={CreateStudent} />
-            <Route exact path='/admin/editstudent/:studentId' component={EditStudent} />
-            <Route exact path='/admin/packagelist'            component={PackageList} />
-            <Route exact path='/admin/package/:packageId'     component={PackageDetailView} />
-            <Route exact path='/admin/createpackage'          component={CreatePackage} />
-            <Route exact path='/admin/editpackage/:packageId' component={EditPackage} />
-            <Redirect to='/admin/studentlist' />
-          </Switch>
+        <div style={{marginLeft: '250px', width:2000}}>
+          <div className="p-3 pt-5 pr-5" style={{backgroundColor: '#9EAEB8'}} >
+            <div className="ml-4 pt-1" style={{backgroundColor: 'white'}}>
+              <Switch>
+                <Route exact path='/admin/login'                  component={LoginPage} />
+                <Route exact path='/admin/studentlist'            component={StudentList} />
+                <Route exact path='/admin/student/:studentId'     component={AdminStudentView} />
+                <Route exact path='/admin/createstudent'          component={CreateStudent} />
+                <Route exact path='/admin/editstudent/:studentId' component={EditStudent} />
+                <Route exact path='/admin/packagelist'            component={PackageList} />
+                <Route exact path='/admin/package/:packageId'     component={PackageDetailView} />
+                <Route exact path='/admin/createpackage'          component={CreatePackage} />
+                <Route exact path='/admin/editpackage/:packageId' component={EditPackage} />
+                <Redirect to='/admin/studentlist' />
+              </Switch>
+            </div>
+           
+          </div>
+          
         </div>
       </Row>
       </Container>

@@ -81,41 +81,37 @@ class CreateStudent extends Component {
 		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 	
 		return (
-		  <div >
-        <label className='control-label'>{label}</label>
-        <div>
-			<input {...input} type={type} className='form-control' />
-      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
-			</div>
-      </div>
+		  	<div className="mb-4" style={{maxWidth: 300}}>
+				<input {...input} type={type} className='form-control' style={{verticalAlign: 'text-top'}}/>
+				{touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}	
+      		</div>
 		  
 		);
 	}
 
-	renderUploadField(field) {
-		const { meta: { touched, error } } = field;
-		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+	// renderUploadField(field) {
+	// 	const { meta: { touched, error } } = field;
+	// 	const className = `form-group mb-4 ${touched && error ? 'has-danger' : ''}`;
 
-		return (
-			<div className={className}>
-				<label>{field.label}</label>
-				<button
-					className='btn btn-sm btn-secondary'
-					onClick={this.showImageUploadWidget}
-				>
-					Upload Photo
-								</button>
-				<div className='text-help errors text-danger'>
-					{touched ? error : ''}
-				</div>
-			</div>
-		);
-	}
+	// 	return (
+	// 		<div className={className}>
+	// 			<label>{field.label}</label>
+	// 			<button
+	// 				className='btn btn-sm btn-secondary'
+	// 				onClick={this.showImageUploadWidget}
+	// 			>
+	// 				Upload Photo
+	// 							</button>
+	// 			<div className='text-help errors text-danger'>
+	// 				{touched ? error : ''}
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 
-	renderSelectField({ input, label, type, meta: { touched, error }, children }) {
+	renderSelectField({ input, meta: { touched, error }, children }) {
 		return (
-		<div>
-		  <label>{label}</label>
+		<div className="mb-4">
 		  <div>
 			<select {...input}>
 			  {children}
@@ -123,6 +119,14 @@ class CreateStudent extends Component {
 			{touched && error && <div className="text-danger">{error}</div>}
 		  </div>
 		</div>
+		)
+	}
+
+	renderTextArea() {
+		return (
+			<div className="mb-4">
+				<textarea rows="10" cols='60'></textarea>
+			</div>
 		)
 	}
 
@@ -150,9 +154,9 @@ class CreateStudent extends Component {
 		}
 		
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+				<form className="ml-5 mt-5 mb-5" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				
-					<fieldset>
+					<fieldset >
 						<label>First Name: </label>
 						<Field 
 							name="firstName"
@@ -251,11 +255,12 @@ class CreateStudent extends Component {
 							<option value = "relocation">Willing to Relocate</option>
 						</Field>
 					</fieldset>
-					<fieldset>
+					<fieldset className="mb-4">
 						<label className='mr-3'>Profile Photo: </label>
 						{this.state.picture === '' ?
 						<button
 							className='btn btn-sm btn-secondary'
+							style={{backgroundColor: '#679AB8', color: 'white'}}
 							onClick={e => {
 								e.preventDefault();
 								this.showImageUploadWidget(imageUploadWidget);
@@ -266,11 +271,12 @@ class CreateStudent extends Component {
 						<h6>Photo uploaded!</h6>
 						}
 					</fieldset>
-					<fieldset>
+					<fieldset className="mb-4">
 					<label className='mr-3'>Resume: </label>
 						{this.state.resume === '' ?
 							<button
 								className='btn btn-sm btn-secondary'
+								style={{backgroundColor: '#679AB8', color: 'white'}}
 								onClick={e => {
 									e.preventDefault();
 									this.showImageUploadWidget(resumeUploadWidget);
@@ -281,7 +287,7 @@ class CreateStudent extends Component {
 							<h6>Resume uploaded!</h6>
 						}
 					</fieldset>
-					<fieldset>
+					<fieldset className="mb-4">
 						<label>Industry Preferred: </label>
 						<Field name="industriesPreferred" component="select">
 							<option value = "finance">Finance</option>
@@ -295,12 +301,13 @@ class CreateStudent extends Component {
 						<Field
 						name="bio"
 						type="text"
-						component={this.renderField}
+						component={this.renderTextArea}
 						autoComplete="none"
 						/>
 					</fieldset>
 				
-				<button type='submit'>Save</button>
+					<button className="mb-4" style={{backgroundColor: '#679AB8', color: 'white'}} type='submit'>Save</button>
+				
 				</form>
 		)
 	}
