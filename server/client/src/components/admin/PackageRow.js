@@ -9,7 +9,6 @@ class PackageRow extends Component {
   }
   render(){
     const { currentPackage } = this.props;
-    console.log(currentPackage)
     return(
       <tr style={{backgroundColor: this.props.backgroundColor}}>
         <td>{currentPackage.packageName}</td>
