@@ -8,12 +8,13 @@ const Card = styled.div`
   background: transparent; 
   height: 100%;
   border: #9EAEB8; 
+  align-items: center;
 `
 
 const CardImg = styled.img`
   border-radius: 100px;
   border: 1px solid #9EAEB8; 
-  marginBottom: 5px; 
+  margin-bottom: 15px; 
   width: 150px;
   height: 150px; 
 `
@@ -36,13 +37,15 @@ const EmployerCard = ({ student = {}, studentNotes = '', packageId = '' }) => {
           <div className=" ">
             <span className=" "><hr></hr></span>
           </div>
-          <div className=" ">
+          <div className="extra-margin">
             <p>
               {studentNotes || student.bio || ''}
             </p>
           </div>
-          <div className=" " style={{ color: '#3C5A6B', backgroundColor: 'transparent' }}>
-            <Link className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: 'transparent' }} to={`/employer/${packageId}/student/${student._id}`}>See Full Profile</Link>
+          <div className="button-bottom" style={{width: '100%'}}>
+          <div className=" justify-content-center mb-4 mt-4" style={{ color: '#3C5A6B', backgroundColor: 'transparent'}}>
+            <Link className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: '#679AB8', color: 'white' }} to={`/employer/${packageId}/student/${student._id}`}>See Full Profile</Link>
+          </div>
           </div>
         </div>
       </Card>
