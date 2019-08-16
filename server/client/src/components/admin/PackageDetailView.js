@@ -50,6 +50,8 @@ class PackageDetailView extends Component {
          
         <div className='row'> 
           <div className='col-sm-7 pt-4'>
+           <h4 className='your-info' style={{color: '#3C5A6B'}}>URL for Employer</h4>
+           <p className style={{color: '#3C5A6B'}}>https://aqueous-harbor-15886.herokuapp.com/employer/{this.props.package._id}</p>
             <div className='your-info border rounded mb-4'>
               <h4 className='d-inline-block' style={{color: '#3C5A6B'}}>Package Notes</h4>
               <p>{this.props.package.packageNotes}</p>
