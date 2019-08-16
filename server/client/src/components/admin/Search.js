@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.updateSearchFlag == true) {
       if(this.props.searchType === 'students'){
-        this.props.fetchStudents(1, this.state.searchTerm)
+        this.props.fetchStudents(1, this.state.searchTerm, this.props.dropdownFilter)
       } else if (this.props.searchType === 'packages'){
         this.props.fetchPackages(this.state.searchTerm, this.props.dropdownFilter)
       }
@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
   sendSearch(e) {
     this.setState({searchTerm: e.target.value}, () => {
       if(this.props.searchType === 'students'){
-        this.props.fetchStudents(1, this.state.searchTerm)
+        this.props.fetchStudents(1, this.state.searchTerm, this.props.dropdownFilter)
       } else if (this.props.searchType === 'packages'){
         this.props.fetchPackages(this.state.searchTerm, this.props.dropdownFilter)
       }
