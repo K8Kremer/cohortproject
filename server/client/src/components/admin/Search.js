@@ -1,14 +1,14 @@
 import React from 'react'
-import { fetchStudents } from '../../actions';
+import { fetchStudents, fetchPackages } from '../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 class SearchBar extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-        fullName: ''
+        searchTerm: ''
     }
 
     this.sendSearch = this.sendSearch.bind(this)
@@ -16,8 +16,12 @@ class SearchBar extends React.Component {
   
 
   sendSearch(e) {
-    this.setState({fullName: e.target.value}, () => {
-      this.props.fetchStudents(1, this.state.fullName)
+    this.setState({searchTerm: e.target.value}, () => {
+      if(this.props.searchType === 'students'){
+        this.props.fetchStudents(1, this.state.searchTerm)
+      } else if (this.props.searchType === 'packages'){
+        this.props.fetchPackages(this.state.searchTerm)
+      }
     });
   }
 
@@ -31,7 +35,7 @@ class SearchBar extends React.Component {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ fetchStudents }, dispatch)
+  return bindActionCreators({ fetchStudents, fetchPackages }, dispatch)
 }
 
 export default connect ( null, mapDispatchToProps)( SearchBar);

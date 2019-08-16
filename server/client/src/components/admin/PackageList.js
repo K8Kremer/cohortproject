@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import PackageRow from './PackageRow';
+import SearchBar from './Search'
 import './FormStyle.css';
 
 class PackageList extends Component {
@@ -35,10 +36,10 @@ class PackageList extends Component {
      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
        <tbody>
         <tr style={{backgroundColor:'#9EAEB8'}}>
-           <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
+          <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
           <th style={{width:'20%'}}></th>
-          <th style={{width:'20%'}}></th>
-          <th style={{width:'20%'}}></th>
+          <th style={{ width: '20%' }}><SearchBar searchType='packages' /></th>
+          <th style={{width:'20%'}}>        </th>
           <th style={{width:'20%'}}><button className='btn btn-primary' id='createPackage' onClick={this.handleClick}>New Package</button></th>
           {/* <th style={{width:'10%'}}></th> */}
         </tr>
@@ -47,7 +48,7 @@ class PackageList extends Component {
           <th style={{width:'20%'}}>Recipient</th>
           <th style={{width:'20%'}}>Status</th>
           <th style={{width:'20%'}}>Date Created</th>
-          <th style={{ textAlign: 'center',width:'20%'}}>Links</th>
+          <th style={{ textAlign: 'center',width:'20%'}}></th>
           {/* <th style={{textAlign: 'center', width:'10%'}}></th> */}
          </tr>
          </tbody>
@@ -69,14 +70,7 @@ class PackageList extends Component {
     
 
   render(){
-    if(this.props.packages.length === 0){
-      return(
-        <div>
-          No Packages here just yet! Please make one from our friendly action bar above.
-        </div>
-      )
-    }
-
+    
     return (
       <div>
           {this.wrapPackages(this.props.packages)}
