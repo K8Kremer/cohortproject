@@ -40,7 +40,7 @@ class PackageList extends Component {
           </div>
 
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
-          <SearchBar searchType='packages' dropdownFilter={}/>
+          <SearchBar searchType='packages' dropdownFilter='filter'/>
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
