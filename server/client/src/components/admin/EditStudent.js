@@ -147,7 +147,7 @@ class EditStudent extends Component {
 					<fieldset>
 						<label>Link To Project Repos: </label>
 						<Field 
-							name="projectRepos"
+							name="projectRepoLink"
 							type="url"
 							component="input"
 							autoComplete="none"
