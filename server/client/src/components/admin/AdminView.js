@@ -22,7 +22,7 @@ const AdminView = () => {
       <PageHeader />
       <Row noGutters={true}>  
         <SideBar />
-        <div style={{marginLeft: '250px'}}>
+        <div style={{marginLeft: '250px', width: '100%'}}>
           <Switch>
             <Route exact path='/admin/login'                  component={LoginPage} />
             <Route exact path='/admin/studentlist'            component={StudentList} />
