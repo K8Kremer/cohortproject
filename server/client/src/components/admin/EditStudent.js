@@ -157,9 +157,9 @@ class EditStudent extends Component {
 						<label>Job Seeking Status: currently {this.props.initialValues.jobSeekingStatus}</label>
 						<Field name="jobSeekingStatus" component={this.renderSelectField}>
 							<option />
-							<option value = "employed">Employed</option>
-							<option value = "seeking-employment">Seeking Employment</option>
-							<option value = "open">Open</option>
+							<option value = "Employed">Employed</option>
+							<option value = "Seeking Employment">Seeking Employment</option>
+							<option value = "Open">Open</option>
 						</Field>
 					</fieldset>
 					<fieldset>
@@ -175,18 +175,18 @@ class EditStudent extends Component {
 						<label>Work Desired: currently {this.props.initialValues.typeOfWorkDesired} </label>
 						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
 							<option />
-							<option value = "front-end">Front End</option>
-							<option value = "back-end">Back End</option>
-							<option value = "full-stack">Full Stack</option>
+							<option value = "Front End">Front End</option>
+							<option value = "Back End">Back End</option>
+							<option value = "Full Stack">Full Stack</option>
 						</Field>
 					</fieldset>
 					<fieldset>
 						<label>Employment Location Preference: currently {this.props.initialValues.employmentLocationPreference}</label>
 						<Field name="employmentLocationPreference" component={this.renderSelectField}>
 							<option />
-							<option value = "local">Local Work Only</option>
-							<option value = "remote">Remote Work Only</option>
-							<option value = "relocation">Willing to Relocate</option>
+							<option value="Local">Local Work Only</option>
+							<option value="Remote">Remote Work Only</option>
+							<option value="Relocation">Willing to Relocate</option>
 						</Field>
 					</fieldset>
 					<fieldset>
@@ -222,10 +222,14 @@ class EditStudent extends Component {
 					<fieldset>
 						<label>Industry Preferred: currently {this.props.initialValues.industriesPreferred} </label>
             <Field name="industriesPreferred" component="select">
-							<option value = "finance">Finance</option>
-							<option value = "healthcare">Healthcare</option>
-							<option value = "gaming">Gaming</option>
-							<option value = "ecommerce">E-commerce</option>
+							<option value="Finance">Finance</option>
+							<option value="Healthcare">Healthcare</option>
+							<option value="Gaming">Gaming</option>
+							<option value="Ecommerce">E-commerce</option>
+							<option value="IoT">Internet of Things</option>
+							<option value="AI">Artificial Intelligence</option>
+							<option value="Blockchain">Blockchain</option>
+							<option value="Insurance">Insurance</option>
 						</Field>
 					</fieldset>
 					<fieldset>
