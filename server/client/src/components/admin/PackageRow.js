@@ -16,9 +16,9 @@ class PackageRow extends Component {
         <td>{this.formatDate(currentPackage.created_at)}</td>
       
         <td>
-          <Link to={`/admin/package/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>View</span></Link>
-          <Link to={`/admin/editpackage/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
-          <Link to={`/employer/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
+          <Link to={`/admin/package/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>View</span></Link>
+          <Link to={`/admin/editpackage/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
+          <Link to={`/employer/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
         </td>
        
       </tr>
