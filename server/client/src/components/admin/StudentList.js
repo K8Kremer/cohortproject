@@ -57,7 +57,7 @@ class StudentList extends Component {
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
             <h3>Students</h3>
             <Button className='create-student' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
-              onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
+              onClick={e=> this.props.history.push('/admin/createstudent')}>New Student</Button>
           </div>
         
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
@@ -88,7 +88,7 @@ class StudentList extends Component {
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
-            <tr style={{backgroundColor:'#679AB8'}}>
+            <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
               <th style={{textAlign: 'center', width:'10px'}}></th>
               <th style={{width:'calc(20%-2px)'}}>First Name</th>
               <th style={{width:'calc(20%-2px)'}}>Last Name</th>
