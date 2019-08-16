@@ -81,7 +81,14 @@ class PackageList extends Component {
     
 
   render(){
-    
+    //Redux Form will set certain properties to True if there are errors within your Form.
+    //we have this here due to the async getPackages action, waiting for an array.
+    if(this.props.packages.length === undefined) {
+      return (
+        <div>Hold please, loading is a bit slow...</div>
+      )
+    }
+
     return (
       <>
           {this.wrapPackages(this.props.packages)}
