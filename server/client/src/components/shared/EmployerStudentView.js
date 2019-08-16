@@ -4,7 +4,7 @@ import EmployerTitle from '../employer/EmployerTitle';
 import { Link } from 'react-router-dom';
 
 const EmployerStudentView = (ownProps) => {
-  console.log(ownProps);
+  
   return (
     <Fragment>
       <EmployerHeader />
