@@ -150,158 +150,163 @@ class CreateStudent extends Component {
 		}
 		
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				
-					<fieldset>
-						<label>First Name: </label>
-						<Field 
-							name="firstName"
-							type="text"
+			<div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+       	 		<div className='mx-3 px-3 pt-4' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+					<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+					
+						<fieldset>
+							<label>First Name: </label>
+							<Field 
+								name="firstName"
+								type="text"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Last Name: </label>
+							<Field 
+								name="lastName"
+								type="text"
+								component= {this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Address: </label>
+							<Field 
+								name="address"
+								type="text"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Cohort Number: </label>
+							<Field 
+								name="cohort"
+								type="number"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Phone Number: </label>
+							<Field 
+								name="phone"
+								type="tel"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Email: </label>
+							<Field
+							name="email"
+							type="email"
 							component={this.renderField}
 							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Last Name: </label>
-						<Field 
-							name="lastName"
-							type="text"
-							component= {this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Address: </label>
-						<Field 
-							name="address"
-							type="text"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Cohort Number: </label>
-						<Field 
-							name="cohort"
-							type="number"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Phone Number: </label>
-						<Field 
-							name="phone"
-							type="tel"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Email: </label>
-						<Field
-						name="email"
-						type="email"
-						component={this.renderField}
-						autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>LinkedIn Profile: </label>
-						<Field 
-							name="linkedIn"
-							type="url"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Job Seeking Status: </label>
-						<Field name="jobSeekingStatus" component={this.renderSelectField}>
-							<option />
-							<option value = "employed">Employed</option>
-							<option value = "seeking-employment">Seeking Employment</option>
-							<option value = "open">Open</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Graduation Date: </label>
-						<Field 
-							name="graduationDate"
-							type="date"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Work Desired: </label>
-						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
-							<option />
-							<option value = "front-end">Front End</option>
-							<option value = "back-end">Back End</option>
-							<option value = "full-stack">Full Stack</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Employment Location Preference: </label>
-						<Field name="employmentLocationPreference" component={this.renderSelectField}>
-							<option />
-							<option value = "local">Local Work Only</option>
-							<option value = "remote">Remote Work Only</option>
-							<option value = "relocation">Willing to Relocate</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label className='mr-3'>Profile Photo: </label>
-						{this.state.picture === '' ?
-						<button
-							className='btn btn-sm btn-secondary'
-							onClick={e => {
-								e.preventDefault();
-								this.showImageUploadWidget(imageUploadWidget);
-							}}
-						>
-							Upload Photo
-						</button> :
-						<h6>Photo uploaded!</h6>
-						}
-					</fieldset>
-					<fieldset>
-					<label className='mr-3'>Resume: </label>
-						{this.state.resume === '' ?
+							/>
+						</fieldset>
+						<fieldset>
+							<label>LinkedIn Profile: </label>
+							<Field 
+								name="linkedIn"
+								type="url"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Job Seeking Status: </label>
+							<Field name="jobSeekingStatus" component={this.renderSelectField}>
+								<option />
+								<option value = "employed">Employed</option>
+								<option value = "seeking-employment">Seeking Employment</option>
+								<option value = "open">Open</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Graduation Date: </label>
+							<Field 
+								name="graduationDate"
+								type="date"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Work Desired: </label>
+							<Field name="typeOfWorkDesired" component={this.renderSelectField}>
+								<option />
+								<option value = "front-end">Front End</option>
+								<option value = "back-end">Back End</option>
+								<option value = "full-stack">Full Stack</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Employment Location Preference: </label>
+							<Field name="employmentLocationPreference" component={this.renderSelectField}>
+								<option />
+								<option value = "local">Local Work Only</option>
+								<option value = "remote">Remote Work Only</option>
+								<option value = "relocation">Willing to Relocate</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label className='mr-3'>Profile Photo: </label>
+							{this.state.picture === '' ?
 							<button
 								className='btn btn-sm btn-secondary'
 								onClick={e => {
 									e.preventDefault();
-									this.showImageUploadWidget(resumeUploadWidget);
+									this.showImageUploadWidget(imageUploadWidget);
 								}}
 							>
-								Upload Resume
+								Upload Photo
 							</button> :
-							<h6>Resume uploaded!</h6>
-						}
-					</fieldset>
-					<fieldset>
-						<label>Industry Preferred: </label>
-						<Field name="industriesPreferred" component="select">
-							<option value = "finance">Finance</option>
-							<option value = "healthcare">Healthcare</option>
-							<option value = "gaming">Gaming</option>
-							<option value = "ecommerce">E-commerce</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Bio: </label>
-						<Field
-						name="bio"
-						type="text"
-						component={this.renderField}
-						autoComplete="none"
-						/>
-					</fieldset>
-				
-				<button type='submit'>Save</button>
-				</form>
+							<h6>Photo uploaded!</h6>
+							}
+						</fieldset>
+						<fieldset>
+						<label className='mr-3'>Resume: </label>
+							{this.state.resume === '' ?
+								<button
+									className='btn btn-sm btn-secondary'
+									onClick={e => {
+										e.preventDefault();
+										this.showImageUploadWidget(resumeUploadWidget);
+									}}
+								>
+									Upload Resume
+								</button> :
+								<h6>Resume uploaded!</h6>
+							}
+						</fieldset>
+						<fieldset>
+							<label>Industry Preferred: </label>
+							<Field name="industriesPreferred" component="select">
+								<option value = "finance">Finance</option>
+								<option value = "healthcare">Healthcare</option>
+								<option value = "gaming">Gaming</option>
+								<option value = "ecommerce">E-commerce</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Bio: </label>
+							<Field
+							name="bio"
+							type="text"
+							component={this.renderField}
+							autoComplete="none"
+							/>
+						</fieldset>
+					
+					<button type='submit'>Save</button>
+					</form>
+					</div>
+					</div>
+					
 		)
 	}
 }
