@@ -64,7 +64,7 @@ class AdminStudentView extends Component {
           minHeight: "100vh"
         }}
       >
-        <div className="mx-auto card shadow-sm p-3 mb-5 bg-white rounded col-10">
+        <div className="mx-auto card shadow p-3 mb-5 bg-white rounded col-10">
           <div className="card-header text-center">
             {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
             <Link to={`/admin/editstudent/${this.props.current_student._id}`}>
