@@ -3,7 +3,6 @@ import { reduxForm, Field } from 'redux-form';
 import { createPackage} from '../../actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import './FormStyle.css';
 
 class CreatePackage extends Component {
@@ -35,93 +34,97 @@ onSubmit = formProps => {
   this.props.createPackage(formProps)
 };
 
+renderField( {input, label, type, meta: { touched, error, warning}}) {
+  return (
+    <div >
+      <label className='control-label'>{label}</label>
+      <div>
+    <input {...input} type={type} className='form-control' />
+    {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+    </div>
+    
+  );
+}
+
+
 render() {
   const { handleSubmit } = this.props;
 
-  
+
   return (
-    <div className='background row'>
-      <div className='col-md-2'></div>
-      <div className='col-md-8'>
+    
+<>
+      <div className="background row mx-0 pt-3 pb-3">
+       <div className='mx-3 px-3'>
+      
       <h1 className='styled-header'>Create New Package</h1>
-      <form className='createPackageForm'onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-      <div className='form-group row'>
-         
-          <label className='col-sm-2 col-form-label'>Package Name: </label>
-        
-          <div className='col-md-6'>
+      <form className='createPackageForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      
+          <label className='col-form-label'>Package Name: </label>
           <Field 
             name="packageName"
             type="text"
-            component ="input"
+            component ={this.renderField}
             autoComplete="none"
-            className="form-control "
+            className="form-control"
           />
-          </div>
-         </div>
-       <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Recipient Name: </label>
-          <div className='col-md-6'>
+         
+       
+      
+          <label className='col-form-label'>Recipient Name: </label>
           <Field 
             name="employerName"
             type="text"
-            component="input"
+            component={this.renderField}
             autoComplete="none"
             className="form-control "
           />
-      </div>
-      </div>
-      <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Recipient Email: </label>
-          <div className='col-md-6'>
+   
+          <label className='col-form-label'>Recipient Email: </label>
+        
           <Field 
             name="employerEmail"
             type="text"
-            component="input"
+            component={this.renderField}
             autoComplete="none"
             className="form-control "
           />
-      </div>
-      </div>
-      <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Recipient Company: </label>
-          <div className='col-md-6'>
+   
+          <label className='col-form-label'>Recipient Company: </label>
+      
           <Field 
             name="companyName"
             type="text"
-            component="input"
+            component={this.renderField}
             autoComplete="none"
             className="form-control "
           />
-      </div>
-      </div>
-      <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Project Shift Employee Name: </label>
-          <div className='col-md-6'>
+   
+          <label className='col-form-label'>Project Shift Employee Name: </label>
+          
           <Field 
             name="replyName"
             type="text"
-            component="input"
+            component={this.renderField}
             autoComplete="none"
             className="form-control "
           />
-       </div>
-      </div>
-      <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Project Shift Email: </label>
-          <div className='col-md-6'>
+    
+     
+          <label className='col-form-label'>Project Shift Email: </label>
+       
           <Field 
             name="replyEmail"
             type="email"
-            component="input"
+            component={this.renderField}
             autoComplete="none"
             className="form-control "
           />
-      </div>
-      </div>
-      <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Package Notes: </label>
-          <div className='col-md-6'>
+    
+     
+          <label className='col-form-label'>Package Notes: </label>
+         
           <Field
           name="text"
           type="text"
@@ -129,12 +132,12 @@ render() {
           autoComplete="none"
           className="form-control form-control-lg"
           />
-          </div>
-      </div>
         <button type='submit'className='btn btn-primary' id='create'>Create</button>
       </form>
       </div>
-      </div>
+    </div>
+   
+</>
   )
 }
 }
@@ -148,25 +151,30 @@ if ( !values.packageName ) {
 } 
 
 //check if address field is entered
-if ( !values.recipientName ) {
-  errors.recipientName = 'Required'
+if ( !values.employerName ) {
+  errors.employerName = 'Required'
 }
 
-if ( !values.company ) {
-  errors.company = 'Required'
+if ( !values.companyName ) {
+  errors.companyName = 'Required'
 } 
 
-if ( !values.employeeName ) {
-  errors.employeeName = 'Required'
+if ( !values.replyName ) {
+  errors.replyName = 'Required'
 } 
 
+if ( !values.employerEmail ) {
+  errors.employerEmail = "Required"
+} else if ( !values.employerEmail.includes("@") || !values.employerEmail.includes('.') ) {
+  errors.employerEmail = "Please enter a valid email"
+}
 //check if the email field is empty
-if ( !values.email ) {
-  errors.email = "Required"
+if ( !values.replyEmail ) {
+  errors.replyEmail = "Required"
 
   //check if the email is valid
-}  else if ( !values.email.includes("@") || !values.email.includes('.') ) {
-  errors.email = "Please enter a valid email"
+}  else if ( !values.replyEmail.includes("@") || !values.replyEmail.includes('.') ) {
+  errors.replyEmail = "Please enter a valid email"
 }
 
 
