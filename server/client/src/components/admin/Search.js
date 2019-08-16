@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
     this.sendSearch = this.sendSearch.bind(this)
   }
   
-
+  //we'll need to include our dropdownFilter prop as part of this execution
   sendSearch(e) {
     this.setState({searchTerm: e.target.value}, () => {
       if(this.props.searchType === 'students'){
