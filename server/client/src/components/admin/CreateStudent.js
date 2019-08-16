@@ -273,7 +273,8 @@ class CreateStudent extends Component {
 							<label className='mr-3'>Profile Photo: </label>
 							{this.state.picture === '' ?
 							<button
-								className='btn btn-sm btn-secondary'
+                className='btn btn-sm btn-secondary'
+                style={{backgroundColor: '#679AB8'}}
 								onClick={e => {
 									e.preventDefault();
 									this.showImageUploadWidget(imageUploadWidget);
@@ -288,7 +289,8 @@ class CreateStudent extends Component {
 						<label className='mr-3'>Resume: </label>
 							{this.state.resume === '' ?
 								<button
-									className='btn btn-sm btn-secondary'
+                  className='btn btn-sm btn-secondary'
+                  style={{backgroundColor: '#679AB8'}}
 									onClick={e => {
 										e.preventDefault();
 										this.showImageUploadWidget(resumeUploadWidget);
