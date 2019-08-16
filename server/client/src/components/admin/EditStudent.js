@@ -114,7 +114,7 @@ class EditStudent extends Component {
 
 		return (
 			<div>
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this),console.log('handled!'))} initialValues>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
 					<fieldset>
 						<label>First Name: </label>
 						<Field 
