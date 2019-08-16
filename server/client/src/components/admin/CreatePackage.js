@@ -33,14 +33,12 @@ onSubmit = formProps => {
 
 renderField( {input, label, type, meta: { touched, error, warning}}) {
   return (
-    <div >
-      <label className='control-label'>{label}</label>
+    <div className='mb-4' style={{width: 250}}>
       <div>
-    <input {...input} type={type} className='form-control' />
-    {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
-    </div>
-    </div>
-    
+        <input {...input} type={type} className='form-control' />
+          {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
+    </div> 
   );
 }
 
@@ -51,32 +49,35 @@ render() {
 
   return (
     
-<>
-      <div className="background row mx-0 pt-3 pb-3">
-       <div className='mx-3 px-3'>
+
+    <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+    <div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+    <h3 className="mb-4" style={{color: '#3C5A6B'}}>Create New Package</h3>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
       
-      <h1 className='styled-header'>Create New Package</h1>
-      <form className='createPackageForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-      
-          <label className='col-form-label'>Package Name: </label>
-          <Field 
-            name="packageName"
-            type="text"
-            component ={this.renderField}
-            autoComplete="none"
-            className="form-control"
-          />
+          <fieldset>
+            <label>Package Name: </label>
+            <Field 
+              name="packageName"
+              type="text"
+              component ={this.renderField}
+              autoComplete="none"
+              className="form-control"
+            />
+          </fieldset>
          
        
       
-          <label className='col-form-label'>Recipient Name: </label>
-          <Field 
-            name="employerName"
-            type="text"
-            component={this.renderField}
-            autoComplete="none"
-            className="form-control "
-          />
+          <fieldset>
+            <label className='col-form-label'>Recipient Name: </label>
+            <Field 
+              name="employerName"
+              type="text"
+              component={this.renderField}
+              autoComplete="none"
+              className="form-control "
+            />
+          </fieldset>
    
           <label className='col-form-label'>Recipient Email: </label>
         
@@ -134,7 +135,7 @@ render() {
       </div>
     </div>
    
-</>
+
   )
 }
 }
