@@ -138,10 +138,6 @@ class CreateStudent extends Component {
 		  
 		);
 	}
-  
-
-
-	
 
 	render() {
 		const { handleSubmit } = this.props;
