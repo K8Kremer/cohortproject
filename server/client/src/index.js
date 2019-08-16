@@ -13,7 +13,6 @@ import PackageList from './components/admin/PackageList';
 import PackageDetailView from './components/admin/PackageDetailView';
 import LogIn from './components/admin/LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 
 
 
