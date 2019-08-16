@@ -13,6 +13,10 @@
  /* margin-top:65px; */
  background-color: #3C5B6F;
  }
+
+ .shadow {
+  box-shadow: 0 10px 10px 10px black;
+}
  
  #gradient{
    width: 250px;
