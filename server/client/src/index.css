@@ -72,6 +72,18 @@
   text-indent: 20px;
 }
 
+.extra-margin {
+  margin-bottom: 70px;
+}
+
+.button-bottom {
+  position: absolute;
+  bottom: 0;
+  padding-right: 30px
+  /* left: 33.33%; */
+  
+}
+
 
 .error-text {
   color: red;

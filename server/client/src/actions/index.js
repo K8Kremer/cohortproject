@@ -1,6 +1,6 @@
 import axios from "axios";
 /** using redux thunk method of requesting data instead of a promise */
-import { FETCH_STUDENTS, FETCH_PACKAGES, FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT,
+import { EMPTY_PACKAGE_FILTER, FETCH_STUDENTS, FETCH_PACKAGES, FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT,
 				 FETCH_PACKAGE, CREATE_PACKAGE, EDIT_PACKAGE, UPDATE_SEARCH } from './types';
 
 const ROOT_URL = 'http://localhost:8000';
@@ -69,8 +69,15 @@ export const editStudent = (id, studentUpdates) => dispatch => {
 	})
 }
 
-export const fetchPackage = (id) => dispatch => {
-	axios.get(`/packages/${id}`)
+export const fetchPackage = (id, isAdmin = null) => dispatch => {
+	console.log(isAdmin);
+	axios.get(`/packages/${id}/${isAdmin}`
+	// , {
+	// 	params: {
+	// 		isAdmin
+	// 		}
+	// 	}
+		)
 		.then(response => {
 			dispatch({ type: FETCH_PACKAGE, payload: response.data });
 		})
@@ -101,4 +108,8 @@ export const editPackage = (id, updates) => dispatch => {
 
 export const updateSearch = (update) => dispatch => {
 	dispatch({ type: UPDATE_SEARCH, payload: update})
+}
+
+export const emptyPackageFilter = (update) => dispatch => {
+	dispatch({ type: EMPTY_PACKAGE_FILTER, payload: update})
 }

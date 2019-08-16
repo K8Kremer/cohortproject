@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStudents, fetchPackage, fetchPackages, editPackage } from '../../actions';
+import { emptyPackageFilter, fetchStudents, fetchPackage, fetchPackages, editPackage, updateSearch } from '../../actions';
 import StudentRow from './StudentRow';
 import { Dropdown, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router';
@@ -14,13 +14,13 @@ class StudentList extends Component {
 
   state = {
     addedStudentList : [],
-    redirect: false
+    redirect: false,
+    filterName: ''
   }
 
   componentDidMount() {
     this.props.fetchStudents();
     this.props.fetchPackages();
-    
   }
 
   componentDidUpdate(prevProps) {
@@ -83,7 +83,8 @@ class StudentList extends Component {
           </div>
         
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
-            <Dropdown>
+            <Dropdown
+            onSelect={(ekey, e)=> this.props.updateSearch(true)}>
               <span>Choose a package: </span>
               <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}>
                 {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
@@ -102,11 +103,63 @@ class StudentList extends Component {
                       {pckg.packageName}
                   </Dropdown.Item>
                 })}
+                  <Dropdown.Item
+                    
+                    onClick={ e => 
+                    {
+                      e.preventDefault();
+                      this.props.emptyPackageFilter({});
+                    }}
+                  ><strong>Clear Package Choice</strong></Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            <Dropdown
+            onSelect={(ekey, e)=> this.props.updateSearch(true)}>
+              <Dropdown.Toggle 
+                variant="primary" 
+                id="dropdown-basic" 
+                style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+                >
+                 {this.state.filterName || 'Cohorts'}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {/**TODO: Make this smarter not harder */}
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '0'})}
+                >0</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '1'})}
+                >1</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '2'})}
+                >2</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '3'})}
+                >3</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '4'})}
+                >4</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '5'})}
+                >5</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '6'})}
+                >6</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '7'})}
+                >7</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: '8'})}
+                >8</Dropdown.Item>
+                <Dropdown.Item
+                onClick={e=> this.setState({filterName: null})}
+                >All</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>   
             <Button className="submit-students" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
-              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
-            <SearchBar searchType='students' dropdownFilter='filter' />
+              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Add To Package</Button>
+            <SearchBar searchType='students' dropdownFilter={this.state.filterName} />
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
@@ -150,7 +203,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchStudents, fetchPackage, fetchPackages, editPackage }, dispatch);
+  return bindActionCreators({ emptyPackageFilter, updateSearch, fetchStudents, fetchPackage, fetchPackages, editPackage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

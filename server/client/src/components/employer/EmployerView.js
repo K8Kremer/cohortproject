@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 // import styled from 'styled-components'
 import { connect } from 'react-redux';
-import { fetchPackage } from '../../actions';
+import { fetchPackage, editPackage } from '../../actions';
 import { bindActionCreators } from 'redux';
 //import { Link } from 'react-router-dom';
 
@@ -16,13 +16,20 @@ class EmployerView extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.isAdmin);
     this.props.fetchPackage(this.props.packageId);
+    console.log(this.props.isAdmin);
+    console.log(this.ownProps);
+    let isAdmin = this.props.isAdmin.split('=')
+    if (isAdmin[1] !== 'true'){
+      this.props.editPackage(this.props.packageId, {seenByEmployer: true})
+    }
   }
 
   renderList() {
     if (this.props.package.students.length === 0) {
       return (
-        <EmployerCard key={0} />
+        <div></div>
       )
     } else {
       return this.props.package.students.map(studentObject => {
@@ -61,12 +68,13 @@ class EmployerView extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     packageId: ownProps.match.params.packageId,
-    package: state.current_package
+    package: state.current_package,
+    isAdmin: ownProps.location.search
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPackage }, dispatch);
+  return bindActionCreators({ fetchPackage, editPackage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployerView);

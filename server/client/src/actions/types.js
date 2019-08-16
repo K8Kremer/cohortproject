@@ -8,3 +8,4 @@ export const FETCH_PACKAGE = "fetch_package";
 export const CREATE_PACKAGE = "create_package";
 export const EDIT_PACKAGE = "edit_package";
 export const UPDATE_SEARCH = "update_search";
+export const EMPTY_PACKAGE_FILTER = "empty_package_filter";

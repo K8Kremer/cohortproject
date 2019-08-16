@@ -52,6 +52,29 @@ class EditPackage extends Component {
     // }
   };
 
+  renderField( {input, label, type, meta: { touched, error, warning}}) {
+		return (
+		  <div className="mb-4" style={{width: 250}}>
+        <div>
+			    <input {...input} type={type} className='form-control' />
+            {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+			  </div>
+      </div>
+		);
+  }
+  
+  renderTextArea( {input, label, type, meta: { touched, error, warning}}) {
+		return (
+		  <div className="mb-4" style={{width:500}}>
+        <div>
+			<textarea rows='5' cols='20' {...input} type={type} className='form-control' />
+      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+			</div>
+      </div>
+		  
+		);
+	}
+
   render() {
     const { handleSubmit, packageStudents } = this.props;
 
@@ -64,122 +87,109 @@ class EditPackage extends Component {
     }
 
     return (
-      <div className='background row'>
-        <div className='col-md-2'></div>
-        <div className='col-md-8'>
-          <h1>Edit Package</h1>
+      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+       	<div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+          <h3 className="mb-4" style={{color: '#3C5A6B'}}>Edit Package</h3>
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
-            <div className='form-group row'>
+            
 
-              <label className='col-sm-2 col-form-label'>Package Name: </label>
+              <fieldset>
+                <label>Package Name: </label>
+                  <Field
+                    name="packageName"
+                    type="text"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
+              
+            
+              <fieldset>
+                <label>Recipient Name: </label>
+                  <Field
+                    name="employerName"
+                    type="text"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
 
-              <div className='col-md-6'>
-                <Field
-                  name="packageName"
-                  type="text"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Recipient Name: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="employerName"
-                  type="text"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Recipient Email: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="employerEmail"
-                  type="text"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Recipient Company: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="companyName"
-                  type="text"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Project Shift Employee Name: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="replyName"
-                  type="text"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Project Shift Email: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="replyEmail"
-                  type="email"
-                  component="input"
-                  autoComplete="none"
-                  className="form-control "
-                />
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-2 col-form-label'>Package Notes: </label>
-              <div className='col-md-6'>
-                <Field
-                  name="packageNotes"
-                  type="text"
-                  component="textarea"
-                  autoComplete="none"
-                  className="form-control form-control-lg"
-                />
-              </div>
-            </div>
+
+              <fieldset>
+                <label>Recipient Email: </label>
+                  <Field
+                    name="employerEmail"
+                    type="text"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
+
+
+              <fieldset>
+                <label>Recipient Company: </label>
+                  <Field
+                    name="companyName"
+                    type="text"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
+
+              <fieldset>
+                <label>Project Shift Employee Name: </label>
+                  <Field
+                    name="replyName"
+                    type="text"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
+
+              <fieldset>
+                <label>Project Shift Email: </label>
+                  <Field
+                    name="replyEmail"
+                    type="email"
+                    component={this.renderField}
+                    autoComplete="none"
+                  />
+              </fieldset>
+
+              <fieldset>
+                <label>Package Notes: </label>
+                  <Field
+                    name="packageNotes"
+                    type="text"
+                    component={this.renderTextArea}
+                    autoComplete="none"
+                  />
+              </fieldset>
 
             <div className='form-group row'>
               <label className='col-sm-2 col-form-label'>Student Notes: </label>
               <div className='col-md-6'>
                 {packageStudents.map(studentObject => {
                   return (
-                    <>
-                      <label className='col-form-label'>
-                        {studentObject.student.firstName} {studentObject.student.lastName}
-                      </label>
-                      <Field
-                        name={`studentNotes-${studentObject.student._id}`}
-                        type="text"
-                        component="textarea"
-                        placeholder={studentObject.studentNotes}
-                        autoComplete="none"
-                        className="form-control form-control-lg"
-                      />
-                    </>
+                      <fieldset>
+                        <label>
+                          {studentObject.student.firstName} {studentObject.student.lastName}
+                        </label>
+                        <Field
+                          name={`studentNotes-${studentObject.student._id}`}
+                          type="text"
+                          component={this.renderTextArea}
+                          placeholder={studentObject.studentNotes}
+                          autoComplete="none"
+                        />
+                      </fieldset>
                   );
                 })
                 }
               </div>
             </div>
-            <button type='submit' className='btn btn-primary' id='create'>Update</button>
+            <button type='submit' className='mb-4 btn btn-sm btn-secondary'
+              style={{backgroundColor: '#679AB8'}}>Update</button>
           </form>
         </div>
       </div>
