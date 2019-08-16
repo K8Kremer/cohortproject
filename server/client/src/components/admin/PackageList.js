@@ -42,7 +42,7 @@ class PackageList extends Component {
         <tr style={{backgroundColor:'#9EAEB8'}}>
           <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
           <th style={{width:'20%'}}></th>
-          <th style={{ width: '20%' }}><SearchBar searchType='packages' /></th>
+          <th style={{ width: '20%' }}><SearchBar searchType='packages' dropdownFilter={}/></th>
           <th style={{width:'20%'}}>        </th>
           <th style={{width:'20%'}}><button className='btn btn-primary' id='createPackage' onClick={this.handleClick}>New Package</button></th>
           {/* <th style={{width:'10%'}}></th> */}
