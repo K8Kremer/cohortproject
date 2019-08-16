@@ -81,8 +81,7 @@ class CreateStudent extends Component {
 		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 	
 		return (
-		  <div >
-        <label className='control-label'>{label}</label>
+		  <div className="mb-4" style={{width: 250}}>
         <div>
 			<input {...input} type={type} className='form-control' />
       {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
@@ -114,8 +113,7 @@ class CreateStudent extends Component {
 
 	renderSelectField({ input, label, type, meta: { touched, error }, children }) {
 		return (
-		<div>
-		  <label>{label}</label>
+		<div className="mb-4">
 		  <div>
 			<select {...input}>
 			  {children}
@@ -124,7 +122,24 @@ class CreateStudent extends Component {
 		  </div>
 		</div>
 		)
+  }
+
+  renderTextArea( {input, label, type, meta: { touched, error, warning}}) {
+		
+		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+	
+		return (
+		  <div className="mb-4" style={{width:500}}>
+        <div>
+			<textarea rows='5' cols='20' {...input} type={type} className='form-control' />
+      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+			</div>
+      </div>
+		  
+		);
 	}
+  
+
 
 	
 
@@ -150,158 +165,166 @@ class CreateStudent extends Component {
 		}
 		
 		return (
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				
-					<fieldset>
-						<label>First Name: </label>
-						<Field 
-							name="firstName"
-							type="text"
+			<div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+       	 		<div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+              <h3 className="mb-4" style={{color: '#3C5A6B'}}>Create Student</h3>
+					<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+					
+						<fieldset>
+							<label>First Name: </label>
+							<Field 
+								name="firstName"
+								type="text"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Last Name: </label>
+							<Field 
+								name="lastName"
+								type="text"
+								component= {this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Address: </label>
+							<Field 
+								name="address"
+								type="text"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Cohort Number: </label>
+							<Field 
+								name="cohort"
+								type="number"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Phone Number: </label>
+							<Field 
+								name="phone"
+								type="tel"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Email: </label>
+							<Field
+							name="email"
+							type="email"
 							component={this.renderField}
 							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Last Name: </label>
-						<Field 
-							name="lastName"
-							type="text"
-							component= {this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Address: </label>
-						<Field 
-							name="address"
-							type="text"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Cohort Number: </label>
-						<Field 
-							name="cohort"
-							type="number"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Phone Number: </label>
-						<Field 
-							name="phone"
-							type="tel"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Email: </label>
-						<Field
-						name="email"
-						type="email"
-						component={this.renderField}
-						autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>LinkedIn Profile: </label>
-						<Field 
-							name="linkedIn"
-							type="url"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Job Seeking Status: </label>
-						<Field name="jobSeekingStatus" component={this.renderSelectField}>
-							<option />
-							<option value = "employed">Employed</option>
-							<option value = "seeking-employment">Seeking Employment</option>
-							<option value = "open">Open</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Graduation Date: </label>
-						<Field 
-							name="graduationDate"
-							type="date"
-							component={this.renderField}
-							autoComplete="none"
-						/>
-					</fieldset>
-					<fieldset>
-						<label>Work Desired: </label>
-						<Field name="typeOfWorkDesired" component={this.renderSelectField}>
-							<option />
-							<option value = "front-end">Front End</option>
-							<option value = "back-end">Back End</option>
-							<option value = "full-stack">Full Stack</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Employment Location Preference: </label>
-						<Field name="employmentLocationPreference" component={this.renderSelectField}>
-							<option />
-							<option value = "local">Local Work Only</option>
-							<option value = "remote">Remote Work Only</option>
-							<option value = "relocation">Willing to Relocate</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label className='mr-3'>Profile Photo: </label>
-						{this.state.picture === '' ?
-						<button
-							className='btn btn-sm btn-secondary'
-							onClick={e => {
-								e.preventDefault();
-								this.showImageUploadWidget(imageUploadWidget);
-							}}
-						>
-							Upload Photo
-						</button> :
-						<h6>Photo uploaded!</h6>
-						}
-					</fieldset>
-					<fieldset>
-					<label className='mr-3'>Resume: </label>
-						{this.state.resume === '' ?
+							/>
+						</fieldset>
+						<fieldset>
+							<label>LinkedIn Profile: </label>
+							<Field 
+								name="linkedIn"
+								type="url"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Job Seeking Status: </label>
+							<Field name="jobSeekingStatus" component={this.renderSelectField}>
+								<option />
+								<option value = "employed">Employed</option>
+								<option value = "seeking-employment">Seeking Employment</option>
+								<option value = "open">Open</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Graduation Date: </label>
+							<Field 
+								name="graduationDate"
+								type="date"
+								component={this.renderField}
+								autoComplete="none"
+							/>
+						</fieldset>
+						<fieldset>
+							<label>Work Desired: </label>
+							<Field name="typeOfWorkDesired" component={this.renderSelectField}>
+								<option />
+								<option value = "front-end">Front End</option>
+								<option value = "back-end">Back End</option>
+								<option value = "full-stack">Full Stack</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Employment Location Preference: </label>
+							<Field name="employmentLocationPreference" component={this.renderSelectField}>
+								<option />
+								<option value = "local">Local Work Only</option>
+								<option value = "remote">Remote Work Only</option>
+								<option value = "relocation">Willing to Relocate</option>
+							</Field>
+						</fieldset>
+						<fieldset className="mb-4">
+							<label className='mr-3'>Profile Photo: </label>
+							{this.state.picture === '' ?
 							<button
-								className='btn btn-sm btn-secondary'
+                className='btn btn-sm btn-secondary'
+                style={{backgroundColor: '#679AB8'}}
 								onClick={e => {
 									e.preventDefault();
-									this.showImageUploadWidget(resumeUploadWidget);
+									this.showImageUploadWidget(imageUploadWidget);
 								}}
 							>
-								Upload Resume
+								Upload Photo
 							</button> :
-							<h6>Resume uploaded!</h6>
-						}
-					</fieldset>
-					<fieldset>
-						<label>Industry Preferred: </label>
-						<Field name="industriesPreferred" component="select">
-							<option value = "finance">Finance</option>
-							<option value = "healthcare">Healthcare</option>
-							<option value = "gaming">Gaming</option>
-							<option value = "ecommerce">E-commerce</option>
-						</Field>
-					</fieldset>
-					<fieldset>
-						<label>Bio: </label>
-						<Field
-						name="bio"
-						type="text"
-						component={this.renderField}
-						autoComplete="none"
-						/>
-					</fieldset>
-				
-				<button type='submit'>Save</button>
-				</form>
+							<h6>Photo uploaded!</h6>
+							}
+						</fieldset>
+						<fieldset className="mb-4">
+						<label className='mr-3'>Resume: </label>
+							{this.state.resume === '' ?
+								<button
+                  className='btn btn-sm btn-secondary'
+                  style={{backgroundColor: '#679AB8'}}
+									onClick={e => {
+										e.preventDefault();
+										this.showImageUploadWidget(resumeUploadWidget);
+									}}
+								>
+									Upload Resume
+								</button> :
+								<h6>Resume uploaded!</h6>
+							}
+						</fieldset>
+						<fieldset className="mb-4">
+							<label>Industry Preferred: </label>
+							<Field name="industriesPreferred" component="select">
+								<option value = "finance">Finance</option>
+								<option value = "healthcare">Healthcare</option>
+								<option value = "gaming">Gaming</option>
+								<option value = "ecommerce">E-commerce</option>
+							</Field>
+						</fieldset>
+						<fieldset>
+							<label>Bio: </label>
+							<Field
+							name="bio"
+							type="text"
+							component={this.renderTextArea}
+							autoComplete="none"
+							/>
+						</fieldset>
+					
+					<button className="mb-4" type='submit'>Save</button>
+					</form>
+					</div>
+					</div>
+					
 		)
 	}
 }
