@@ -5,9 +5,11 @@ class PackageRow extends Component {
   formatDate = (date) => {
     let newDate = new Date(date);
      return newDate.toLocaleDateString();
+     
   }
   render(){
     const { currentPackage } = this.props;
+    console.log(currentPackage)
     return(
       <tr style={{backgroundColor: this.props.backgroundColor}}>
         <td>{currentPackage.packageName}</td>
@@ -18,7 +20,8 @@ class PackageRow extends Component {
         <td>
           <Link to={`/admin/package/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>View</span></Link>
           <Link to={`/admin/editpackage/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
-          <Link to={`/employer/${currentPackage._id}`} target="_blank"><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
+          <Link to={`/employer/${currentPackage._id}?admin=true`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
+
         </td>
        
       </tr>
