@@ -7,7 +7,7 @@ import PackageRow from './PackageRow';
 import SearchBar from './Search'
 import './FormStyle.css';
 
-let lightRowBackground = true
+let lightRowBackground = true;
 
 class PackageList extends Component {
 
