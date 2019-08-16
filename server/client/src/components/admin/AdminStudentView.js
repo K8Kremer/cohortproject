@@ -44,13 +44,11 @@ import { Dropdown, Button } from 'react-bootstrap'
     
       return (
        
-        <div style={{backgroundColor:"#9EAEB8"}}>
         
-        <div className='container'>
-          <div className='row'>
+        <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
             
               
-          <div className='col-12 card shadow-sm p-3 mb-5 bg-white rounded'>
+          <div className='mx-auto card shadow-sm p-3 mb-5 bg-white rounded'>
             
               <div className='card-header text-center'>
                 {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
@@ -98,8 +96,7 @@ import { Dropdown, Button } from 'react-bootstrap'
               <p><b>Phone: </b>{this.props.current_student.phone}</p>
             </div>
         </div>
-          </div>
-        </div>
+         
         )
     }
 };
