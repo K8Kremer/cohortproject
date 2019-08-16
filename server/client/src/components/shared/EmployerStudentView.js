@@ -31,29 +31,51 @@ class EmployerStudentView extends Component {
         studentObject.student._id === this.props.studentId)
       return (
         <div className="row ml-4 mr-4 mb-5" style={{ borderStyle: 'ridge', minHeight: 400, minWidth: 270 }}>
-            <div className='col-sm-3' style={{ backgroundColor: '#3C5A6B', alignContent: "center", minWidth: 250 }}>
-              <div className=" mt-4  mx-auto" style={{ backgroundColor: '#3C5A6B', height: 150, width: 150, paddingTop: 0 }}>
+          <div className='col-sm-3' style={{ backgroundColor: '#3C5A6B', alignContent: "center", minWidth: 250 }}>
+            <div className=" mt-4  mx-auto" style={{ backgroundColor: '#3C5A6B', height: 150, width: 150, paddingTop: 0 }}>
               <CardImg className="img-responsive" src={studentObject.student.picture || "https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg"} alt=""></CardImg>
-              </div>
-              <div className="mb-4 mt-4 text-center">
-                <h4 style={{ color: 'white' }}>{studentObject.student.firstName} {studentObject.student.lastName}</h4>
-                <div style={{ color: 'white' }}>
-                  <p>Job-seeking status: {studentObject.student.jobSeekingStatus}</p>
-                  <p>Contact: {studentObject.student.email} </p>
-                  <p>{studentObject.student.phone} </p>
-                  <p>{studentObject.student.linkedIn}, {studentObject.student.projectRepoLink}</p>
-                </div>
-              </div>
             </div>
-            <div className="col-sm-6 pt-4 pl-3" style={{ Color: '#3C5A6B' }}>
-              <div className="mb-4">Student Details </div>
-              <div className="mb-4">Bio: {studentObject.student.bio} </div>
-              <div className="mb-4">Industry: {studentObject.student.industriesPreferred[0]}</div>
-              <div className="mb-4">Specialization: {studentObject.student.typeOfWorkDesired} </div>
-              <div className="mb-4">location preferences </div>
-              <div className="mb-4">link to view/download resume?  </div>
+            <div className="mb-4 mt-4 text-center">
+              <h4 style={{ color: 'white' }}>{studentObject.student.firstName} {studentObject.student.lastName}</h4>
+              <div style={{ color: 'white' }}>
+                <p>{studentObject.student.typeOfWorkDesired} Software Engineer</p>
+                <p>Contact: {studentObject.student.email} </p>
+                <p>{studentObject.student.phone} </p>
+              </div>
             </div>
           </div>
+          <div className="col-sm-6 pt-4 pl-3" style={{ Color: '#3C5A6B' }}>
+            <div className="mb-4">Bio: {studentObject.student.bio} </div>
+            <div className="mb-4">Industry: {studentObject.student.industriesPreferred[0]}</div>
+            <div className="mb-4">Job-seeking status: {studentObject.student.jobSeekingStatus}</div>
+            <div className="mb-4">Location preference: {studentObject.student.employmentLocationPreference} </div>
+            <div className="mb-4"> 
+            {studentObject.student.resume !== undefined ? (
+                <a
+                  href={studentObject.student.resume}
+                  target="_blank"
+                  rel="nofollow noreferrer"
+                >
+                  View Resume
+              </a>
+              ) : (
+                  <span>No Resume Uploaded.</span>
+                )}
+            </div>
+            <div className="mb-4"> 
+            {studentObject.student.linkedIn !== undefined ? (
+                <a
+                  href={studentObject.student.linkedIn}
+                  target="_blank"
+                >
+                  View LinkedIn
+              </a>
+              ) : (
+                  <span> </span>
+                )}
+            </div>
+          </div>
+        </div>
       )
     }
   }
