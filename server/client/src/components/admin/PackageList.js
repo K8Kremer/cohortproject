@@ -7,6 +7,8 @@ import PackageRow from './PackageRow';
 import SearchBar from './Search'
 import './FormStyle.css';
 
+let lightRowBackground = true
+
 class PackageList extends Component {
 
   constructor(props){
@@ -32,7 +34,7 @@ class PackageList extends Component {
         <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
        
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
-            <h3>Packages</h3>
+            <h3 style={{color: '#3C5A6B'}}>Packages</h3>
             <Button className='create-package' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
               onClick={e=> this.props.history.push('/admin/createpackage')}>New Package</Button>
           </div>
@@ -43,7 +45,7 @@ class PackageList extends Component {
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
             <tbody>
-              <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
+              <tr style={{backgroundColor:'#3C5A6B', color: '#ffffff'}}>
                 <th style={{width:'20%'}}>Package</th>
                 <th style={{width:'20%'}}>Recipient</th>
                 <th style={{width:'20%'}}>Status</th>
@@ -54,8 +56,16 @@ class PackageList extends Component {
             </tbody>
             <tbody style={{backgroundColor: 'white'}}>
               {packagesArray.map((currentPackage) => {
+                let backgroundColor;
+                if (lightRowBackground) {
+                  lightRowBackground= false
+                  backgroundColor = 'white'
+                } else {
+                  lightRowBackground = true
+                  backgroundColor = '#c5d0d6'
+                }
                 return (
-                  <PackageRow key={currentPackage._id} currentPackage={currentPackage}/>
+                  <PackageRow key={currentPackage._id} backgroundColor={backgroundColor} currentPackage={currentPackage}/>
                 )
               })}
             </tbody>

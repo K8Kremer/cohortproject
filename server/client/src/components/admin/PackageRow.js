@@ -9,16 +9,16 @@ class PackageRow extends Component {
   render(){
     const { currentPackage } = this.props;
     return(
-      <tr>
+      <tr style={{backgroundColor: this.props.backgroundColor}}>
         <td>{currentPackage.packageName}</td>
         <td>{currentPackage.companyName}</td>
         <td style={{ textAlign: 'left' }}>{currentPackage.seenByEmployer ? 'Viewed' : 'Unopened'}</td>
         <td>{this.formatDate(currentPackage.created_at)}</td>
       
         <td>
-          <Link to={`/admin/package/${currentPackage._id}`}> <span className='badge badge-secondary'>View</span></Link>
-          <Link to={`/admin/editpackage/${currentPackage._id}`}> <span className='badge badge-secondary'>Edit</span></Link>
-          <Link to={`/employer/${currentPackage._id}`}> <span className='badge badge-secondary'>Employer View</span></Link>
+          <Link to={`/admin/package/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>View</span></Link>
+          <Link to={`/admin/editpackage/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
+          <Link to={`/employer/${currentPackage._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
         </td>
        
       </tr>
