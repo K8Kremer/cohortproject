@@ -54,11 +54,11 @@ import { Dropdown, Button } from 'react-bootstrap'
             
               <div className='card-header text-center'>
                 {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
-                <Link to = {`/admin/editstudent/${this.props.current_student._id}`}><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 150}}>Edit</button></Link>
-                <Link to = '/employer/:packageId/student/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 20}}>View as Employer</button></Link>
+                <Link to = {`/admin/editstudent/${this.props.current_student._id}`}><button type='button' className='btn btn-sm' style={{backgroundColor: "#679AB8", color: '#fff', position:'absolute', right: 150}}>Edit</button></Link>
+                <Link to = '/employer/:packageId/student/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#679AB8", color: '#fff', position:'absolute', right: 20}}>View as Employer</button></Link>
                 <Dropdown style={{position:'absolute', top: 100,right: 270}}>
                   <span>Choose a package: </span>
-                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                  <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}>
                     {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
                   </Dropdown.Toggle>
 
@@ -75,8 +75,10 @@ import { Dropdown, Button } from 'react-bootstrap'
                     })}
                   </Dropdown.Menu>
                 </Dropdown>
-                <Button className="submit-students" style={{position:'absolute', top: 100,right: 30}}
-              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentArray)}>Submit Student To Package</Button>
+                <Button className="submit-students" style={{position:'absolute', top: 100, right: 30, backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+                  onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentArray)}>
+                    Submit Student To Package
+                </Button>
  
               <img className='img-thumbnail rounded float-left' style={{height: 100, width: 100}}src={this.props.current_student.picture}></img>
               <h2 style={{textAlign:'center', marginTop: 30, marginRight: 100}}>{this.props.current_student.firstName} {this.props.current_student.lastName}</h2>
