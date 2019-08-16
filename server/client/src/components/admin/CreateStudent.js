@@ -81,8 +81,7 @@ class CreateStudent extends Component {
 		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 	
 		return (
-		  <div >
-        <label className='control-label'>{label}</label>
+		  <div className="mb-4" style={{width: 250}}>
         <div>
 			<input {...input} type={type} className='form-control' />
       {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
@@ -114,8 +113,7 @@ class CreateStudent extends Component {
 
 	renderSelectField({ input, label, type, meta: { touched, error }, children }) {
 		return (
-		<div>
-		  <label>{label}</label>
+		<div className="mb-4">
 		  <div>
 			<select {...input}>
 			  {children}
@@ -124,7 +122,24 @@ class CreateStudent extends Component {
 		  </div>
 		</div>
 		)
+  }
+
+  renderTextArea( {input, label, type, meta: { touched, error, warning}}) {
+		
+		// const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+	
+		return (
+		  <div className="mb-4" style={{width:500}}>
+        <div>
+			<textarea rows='5' cols='20' {...input} type={type} className='form-control' />
+      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+			</div>
+      </div>
+		  
+		);
 	}
+  
+
 
 	
 
@@ -151,7 +166,8 @@ class CreateStudent extends Component {
 		
 		return (
 			<div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
-       	 		<div className='mx-3 px-3 pt-4' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+       	 		<div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+              <h3 className="mb-4" style={{color: '#3C5A6B'}}>Create Student</h3>
 					<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 					
 						<fieldset>
@@ -253,11 +269,12 @@ class CreateStudent extends Component {
 								<option value = "relocation">Willing to Relocate</option>
 							</Field>
 						</fieldset>
-						<fieldset>
+						<fieldset className="mb-4">
 							<label className='mr-3'>Profile Photo: </label>
 							{this.state.picture === '' ?
 							<button
-								className='btn btn-sm btn-secondary'
+                className='btn btn-sm btn-secondary'
+                style={{backgroundColor: '#679AB8'}}
 								onClick={e => {
 									e.preventDefault();
 									this.showImageUploadWidget(imageUploadWidget);
@@ -268,11 +285,12 @@ class CreateStudent extends Component {
 							<h6>Photo uploaded!</h6>
 							}
 						</fieldset>
-						<fieldset>
+						<fieldset className="mb-4">
 						<label className='mr-3'>Resume: </label>
 							{this.state.resume === '' ?
 								<button
-									className='btn btn-sm btn-secondary'
+                  className='btn btn-sm btn-secondary'
+                  style={{backgroundColor: '#679AB8'}}
 									onClick={e => {
 										e.preventDefault();
 										this.showImageUploadWidget(resumeUploadWidget);
@@ -283,7 +301,7 @@ class CreateStudent extends Component {
 								<h6>Resume uploaded!</h6>
 							}
 						</fieldset>
-						<fieldset>
+						<fieldset className="mb-4">
 							<label>Industry Preferred: </label>
 							<Field name="industriesPreferred" component="select">
 								<option value = "finance">Finance</option>
@@ -297,12 +315,12 @@ class CreateStudent extends Component {
 							<Field
 							name="bio"
 							type="text"
-							component={this.renderField}
+							component={this.renderTextArea}
 							autoComplete="none"
 							/>
 						</fieldset>
 					
-					<button type='submit'>Save</button>
+					<button className="mb-4" type='submit'>Save</button>
 					</form>
 					</div>
 					</div>
