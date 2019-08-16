@@ -56,11 +56,11 @@ const LoginPage = () => {
        </div>
        <div className='container text-center'>
           <img className="img-responsive" style={{ borderRadius: 100, border: '1px solid #9EAEB8', marginBottom: 5 }} src="https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg" width="150" height="150" alt=""></img> 
-          <h1 className='login-header'>Project Shift</h1>
+          <h1 className='login-header mb-4'>Project Shift</h1>
           <div className='login-box'>
-              <input className='col-md-6 login-form' placeholder= "Username" value={username} onChange={handleUsernameChange}></input>
+              <input className='col-md-6 login-form username' placeholder= "Username" value={username} onChange={handleUsernameChange}></input>
               <br />
-              <input className='col-md-6 login-form' placeholder='Password' type='password' value={password} onChange={handlePasswordChange}></input>
+              <input className='col-md-6 login-form password' placeholder='Password' type='password' value={password} onChange={handlePasswordChange}></input>
           </div>
           <br/>
           {errortext ? renderErrorText() : ''}
