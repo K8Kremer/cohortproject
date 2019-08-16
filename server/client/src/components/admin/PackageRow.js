@@ -11,8 +11,12 @@ class PackageRow extends Component {
         <td style={{ textAlign: 'left' }}>{currentPackage.seenByEmployer ? 'Viewed' : 'Unopened'}</td>
         <td>{currentPackage.created_at}</td>
       
-        <Link to={`/admin/package/${currentPackage._id}`}> <td><span className='badge badge-secondary'>View</span></td></Link>
-       <Link to={`/admin/editpackage/${currentPackage._id}`}> <td><span className='badge badge-secondary'>Edit</span></td></Link> 
+        <td>
+          <Link to={`/admin/package/${currentPackage._id}`} className='badge badge-info mb-1 d-block'>View</Link>
+          <Link to={`/admin/editpackage/${currentPackage._id}`} className='badge badge-secondary mb-1 d-block'>Edit</Link>
+          <Link to={`/employer/${currentPackage._id}`} className='badge badge-warning d-block'>Employer View</Link>
+        </td>
+       
       </tr>
     )
   }
