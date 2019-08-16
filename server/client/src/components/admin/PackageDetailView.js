@@ -41,7 +41,7 @@ class PackageDetailView extends Component {
     
     return (
       <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
-        <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
+        <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
         <div className='row mb-2 p-3'> 
           <h3 style={{color: '#3C5A6B'}}>Packages > {this.props.package.packageName}</h3>
           <Link to={`/admin/editpackage/${this.props.package._id}`}className='btn btn-md btn-info float-right mx-3 mb-3' style={{backgroundColor: '#679AB8'}}>Edit</Link>
