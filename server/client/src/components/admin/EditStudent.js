@@ -29,6 +29,10 @@ class EditStudent extends Component {
 		this.props.fetchStudent(this.props.match.params.studentId);
 		this.setState({ picture: '', resume: '', redirectToNewPage: false });
   }
+
+  componentDidUpdate(){
+    this.props.fetchStudent(this.props.match.params.studentId);
+  }
   
   /**TODO: Make the save button update the store */
 	onSubmit = formProps => {
@@ -79,6 +83,19 @@ class EditStudent extends Component {
 		  </div>
 		</div>
 		)
+  }
+  
+  renderField( {input, label, type, meta: { touched, error, warning}}) {
+		return (
+		  <div >
+        <label className='control-label'>{label}</label>
+        <div>
+			<input {...input} type={type} className='form-control' />
+      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+			</div>
+      </div>
+		  
+		);
 	}
 
 	render() {
@@ -97,13 +114,13 @@ class EditStudent extends Component {
 
 		return (
 			<div>
-				<form onSubmit={handleSubmit(this.onSubmit.bind(this))} initialValues>
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this),console.log('handled!'))} initialValues>
 					<fieldset>
 						<label>First Name: </label>
 						<Field 
 							name="firstName"
-							type="text"
-							component="input"
+              type="text"
+							component={this.renderField}
 							defaultValue="MegaStar"
               autoComplete="none"
 						/>
@@ -113,7 +130,7 @@ class EditStudent extends Component {
 						<Field 
 							name="lastName"
 							type="text"
-							component="input"
+							component={this.renderField}
               autoComplete="none"
 						/>
 					</fieldset>
@@ -122,16 +139,25 @@ class EditStudent extends Component {
 						<Field 
 							name="address"
 							type="text"
-							component="input"
+							component={this.renderField}
+							autoComplete="none"
+						/>
+					</fieldset>
+          <fieldset>
+						<label>Cohort Number: </label>
+						<Field 
+							name="cohort"
+							type="number"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
 					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="phoneNumber"
+							name="phone"
 							type="tel"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -140,16 +166,26 @@ class EditStudent extends Component {
 						<Field
 						name="email"
 						type="email"
-						component="input"
+						component={this.renderField}
 						autoComplete="none"
 						/>
 					</fieldset>
+          <fieldset>
+          <label>LinkedIn Profile: </label>
+						<Field 
+							name="linkedIn"
+							type="url"
+							component={this.renderField}
+							autoComplete="none"
+						/>
+					</fieldset>
+        
 					<fieldset>
 						<label>Link To Project Repos: </label>
 						<Field 
 							name="projectRepos"
 							type="url"
-							component="input"
+							component={this.renderField}
 							autoComplete="none"
 						/>
 					</fieldset>
@@ -163,11 +199,11 @@ class EditStudent extends Component {
 						</Field>
 					</fieldset>
 					<fieldset>
-						<label>Graduation Date: </label>
+						<label>Graduation Date: currently {this.props.initialValues.graduationDate}</label>
 						<Field 
 							name="graduationDate"
-							type="text"
-							component="input"
+							type="date"
+							component={this.renderField}
               autoComplete="none"
 						/>
 					</fieldset>
@@ -244,6 +280,91 @@ class EditStudent extends Component {
 	}
 }
 
+function validate (values) {
+  const errors = {};
+
+
+	//check if name field is empty
+	if ( !values.firstName ) {
+		errors.firstName = 'Required'
+  } 
+  
+  if (!values.lastName) {
+		errors.lastName = 'Required'
+	}
+	
+	//check if address field is entered
+	if ( !values.address ) {
+		errors.address = 'Required'
+  }
+  
+  if (!values.cohort) {
+		errors.cohort = 'Required'
+	}
+
+	//check that the phoneNumber field is not empty
+	if ( !values.phone ) {
+		errors.phone = 'Required'
+	} else {
+		let testPhone = values.phone.replace(/-/g,'');
+		
+		//check if the phoneNumber value entered is a number
+		if (!Number(testPhone)) {
+			errors.phone = "Enter a number"
+		
+		//check if the phoneNumber value contains 10 digits
+		} else if ( testPhone.length < 10 ) {
+			errors.phone = "Phone Number must be 10 digits"
+		}
+	} 
+
+	//check if the email field is empty
+	if ( !values.email ) {
+		errors.email = "Required"
+
+		//check if the email is valid
+	}  else if ( !values.email.includes("@") || !values.email.includes('.') ) {
+		errors.email = "Please enter a valid email"
+	}
+
+	//check if the graduation date is empty
+	if ( !values.graduationDate ) {
+		errors.graduationDate = "Required"
+	}
+
+	//check if work desired is empty
+	if ( !values.typeOfWorkDesired ) {
+		errors.typeOfWorkDesired = "Required"
+	}
+
+	//check if employment location preference is empty
+	if ( !values.employmentLocationPreference ) {
+		errors.employmentLocationPreference = "Required"
+	}
+
+	//check if job seeking status is empty
+	if ( !values.jobSeekingStatus ) {
+		errors.jobSeekingStatus = "Required"
+	}
+
+	//check if the upload photo is empty (CURRENTLY NOT REQUIRED)
+	// if ( !values.uplodatPhoto ) {
+	// 	errors.uploadPhoto = "Required"
+	// }
+
+	//check if the upload Resume is empty
+	if ( !values.uploadResume ) {
+		errors.uploadResume = "Required"
+	}
+
+	//check if the bio is empty
+	if ( !values.bio ) {
+		errors.bio = "Required"
+	}
+
+	return  errors;
+}
+
 function mapStateToProps(state) {
   return {initialValues: state.current_student}
 }
@@ -253,6 +374,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const editStudentForm = reduxForm({
+  validate,
   form: 'editStudent',
   keepDirtyOnReinitialize: true,
   enableReinitialize: true

@@ -329,18 +329,18 @@ function validate (values) {
 	}
 
 	//check that the phoneNumber field is not empty
-	if ( !values.phoneNumber ) {
-		errors.phoneNumber = 'Required'
+	if ( !values.phone ) {
+		errors.phone = 'Required'
 	} else {
-		let testPhoneNumber = values.phoneNumber.replace(/-/g,'');
+		let testPhone = values.phone.replace(/-/g,'');
 		
 		//check if the phoneNumber value entered is a number
-		if (!Number(testPhoneNumber)) {
-			errors.phoneNumber = "Enter a number"
+		if (!Number(testPhone)) {
+			errors.phone = "Enter a number"
 		
 		//check if the phoneNumber value contains 10 digits
-		} else if ( testPhoneNumber.length < 10 ) {
-			errors.phoneNumber = "Phone Number must be 10 digits"
+		} else if ( testPhone.length < 10 ) {
+			errors.phone = "Phone Number must be 10 digits"
 		}
 	} 
 
