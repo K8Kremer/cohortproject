@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { fetchPackages } from '../../actions';
 import { bindActionCreators } from 'redux';
 import PackageRow from './PackageRow';
@@ -27,12 +28,15 @@ class PackageList extends Component {
     
     return (
       
-      <div className='row'>
-      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}>
-
-      </div>
-      <div className='col-8' id='nopad'>
+      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+        <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
        
+        <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
+            <h3>Packages</h3>
+            <Button className='create-package' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+              onClick={e=> this.props.history.push('/admin/createpackage')}>New Package</Button>
+          </div>
+
      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
        <tbody>
         <tr style={{backgroundColor:'#9EAEB8'}}>
@@ -61,8 +65,6 @@ class PackageList extends Component {
           </tbody>
       </table>
       </div>
-      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}> </div>
-      
       </div>
     
     );
@@ -72,9 +74,9 @@ class PackageList extends Component {
   render(){
     
     return (
-      <div>
+      <>
           {this.wrapPackages(this.props.packages)}
-      </div>
+      </>
     )
   }
 };
