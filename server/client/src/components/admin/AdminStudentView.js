@@ -40,6 +40,11 @@ import { Dropdown, Button } from 'react-bootstrap'
       alert(`${this.props.student.firstName} ${this.props.student.lastName} added to ${this.props.currentPackage.packageName}`)
     }
 
+    formatDate = (date) => {
+      let newDate = new Date(date);
+       return newDate.toLocaleDateString();
+    }
+
     render(){
     
       return (
@@ -91,7 +96,7 @@ import { Dropdown, Button } from 'react-bootstrap'
               <p><b>Resume:</b> {this.props.current_student.resume}</p>
               <p><b>Location Preference:</b> {this.props.current_student.employmentLocationPreference}</p>
               <p><b>Type of Work Desired: </b>{this.props.current_student.typeOfWorkDesired}</p>
-              <p><b>Graduation Date: </b>{this.props.current_student.graduationDate}</p>
+              <p><b>Graduation Date: </b>{this.formatDate(this.props.current_student.graduationDate)}</p>
               <p><b>Email: </b>{this.props.current_student.email}</p>
               <p><b>Phone: </b>{this.props.current_student.phone}</p>
             </div>
