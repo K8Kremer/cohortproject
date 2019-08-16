@@ -63,7 +63,15 @@ class StudentList extends Component {
 			return (
 			<Redirect to={`/admin/package/${this.props.currentPackage._id}`}/>
 			)
-		}
+    }
+    
+    //Redux Form will set certain properties to True if there are errors within your Form.
+    //we have this here due to the async getPackages action, waiting for an array.
+    if(this.props.packages.length === undefined) {
+      return(
+        <div>Hold please, loading is a bit slow...</div>
+      )
+    }
     
     return (
       <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
