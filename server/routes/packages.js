@@ -37,11 +37,11 @@ router.get('/', (req, res, next) => {
   let seenByEmployerQuery = (req.query.seenByEmployer === 'true') ? true : (req.query.seenByEmployer === 'false') ? false : req.query.seenByEmployer;
 
   // originally, get search for employer by name (default to empty string if not present), updated to packageName
-  let textQuery = req.query.companyName || ''; 
+  let textQuery = req.query.employerName || ''; 
   // if status query is specified, return all matching packages ordered by date updated (recent first)
   if (typeof(seenByEmployerQuery) === 'boolean') {
     Package
-      .find({ seenByEmployer: seenByEmployerQuery, companyName : { $regex: new RegExp(textQuery, 'i') } })
+      .find({ seenByEmployer: seenByEmployerQuery, employerName : { $regex: new RegExp(textQuery, 'i') } })
       .sort({ 'updated_at': -1 })
       .exec((err, packages) => {
         if (err) {
@@ -56,7 +56,7 @@ router.get('/', (req, res, next) => {
     // if there is no seenByEmployer (status) query, return all packages ordered by date updated (recent first)
   } else {
     Package
-      .find({ companyName : { $regex: new RegExp(textQuery, 'i') } })
+      .find({ employerName : { $regex: new RegExp(textQuery, 'i') } })
       .sort({ 'updated_at': -1 })
       .exec((err, packages) => {
         if (err) {

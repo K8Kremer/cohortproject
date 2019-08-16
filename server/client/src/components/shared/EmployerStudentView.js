@@ -3,7 +3,8 @@ import EmployerHeader from '../nav/EmployerHeader';
 import EmployerTitle from '../employer/EmployerTitle';
 import { Link } from 'react-router-dom';
 
-const EmployerStudentView = () => {
+const EmployerStudentView = (ownProps) => {
+  
   return (
     <Fragment>
       <EmployerHeader />
@@ -12,7 +13,7 @@ const EmployerStudentView = () => {
         <div className="row mt-4 mb-4 ml-4">
           <div>
             <Link
-            to={`/employer/:packageId }`}> {`<< `}Back to Students
+            to={`/employer/${ownProps.match.params.packageId}`}> {`<< `}Back to Students
             </Link>
           </div>
         </div>
