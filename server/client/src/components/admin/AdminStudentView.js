@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudent, fetchPackages } from '../../actions';
+import { fetchStudent, fetchPackage, fetchPackages, editPackage} from '../../actions';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-
+import { Dropdown, Button } from 'react-bootstrap'
 
 
   class AdminStudentView extends Component {
+    state = {
+      addedStudentArray : []
+    }
+
     //loads with student Id provided from URL
     componentDidMount(){
       this.props.fetchStudent(this.props.match.params.studentId);
       this.props.fetchPackages();
     }
-  
-
-    //blank for now, should eventually add functionality to attach student to a package on this page as well.  
-    addStudentToPackage = () => {
-      console.log('added student to package');
+   
+    componentDidUpdate(prevProps) {
+      if (this.props.currentPackage !== prevProps.currentPackage){
+      
+        let currStudent = {student: this.props.student, studentNotes: ''};
+        this.setState({addedStudentArray: []}, () => {
+          console.log(this.props.addedStudentList)
+          this.setState({ addedStudentArray: [...this.props.addedStudentList, currStudent]})
+        })
+        // this.setState({addedStudentArray: this.props.addedStudentList.concat({currStudent}, {currNotes})})
+      }
+      // if ( this.props.currentPackage.packageName !== prevProps.currentPackage.packageName ) {
+      //   ;
+      // }
     }
   
+    handlePackageSubmit = (pckg, student) => {
+      if (pckg) {
+       this.props.editPackage(pckg._id, {students: student});
+      }
+      this.setState({addedStudentArray: []});
+      alert(`${this.props.student.firstName} ${this.props.student.lastName} added to ${this.props.currentPackage.packageName}`)
+    }
+
     render(){
     
       return (
@@ -35,16 +56,27 @@ import { Link } from 'react-router-dom';
                 {/* no functionality yet in buttons or dropdown and there is a prettier bootstrap dropdown version if anyone wants to play with that*/}
                 <Link to = {`/admin/editstudent/${this.props.current_student._id}`}><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 150}}>Edit</button></Link>
                 <Link to = '/employer/:packageId/student/:studentId'><button type='button' className='btn btn-sm' style={{backgroundColor: "#9EAEB8", position:'absolute', right: 20}}>View as Employer</button></Link>
-                <select style={{position:'absolute', top: 100,right: 20}}name='package' onChange={this.addStudentToPackage}>
-                  <option />
-                  {/* will need to render available packages into dropdown options here for now hard coding two options*/}
-                  {this.props.packages.map((p) => {
-                  return (
-                    <option>{p.packageName}</option>
-                  )
-                })}
-                </select>
-                
+                <Dropdown style={{position:'absolute', top: 100,right: 270}}>
+                  <span>Choose a package: </span>
+                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                    {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {this.props.packages.map((pckg) => {
+                      return <Dropdown.Item 
+                        key={pckg.id} 
+                        href='#'
+                        onClick={ e => 
+                          {this.props.fetchPackage(pckg._id)}}
+                          >
+                          {pckg.packageName}
+                      </Dropdown.Item>
+                    })}
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Button className="submit-students" style={{position:'absolute', top: 100,right: 30}}
+              onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentArray)}>Submit Student To Package</Button>
  
               <img className='img-thumbnail rounded float-left' style={{height: 100, width: 100}}src={this.props.current_student.picture}></img>
               <h2 style={{textAlign:'center', marginTop: 30, marginRight: 100}}>{this.props.current_student.firstName} {this.props.current_student.lastName}</h2>
@@ -73,11 +105,14 @@ import { Link } from 'react-router-dom';
 function mapStateToProps(state) {
   return { 
     current_student: state.current_student,
-    packages: state.packages
+    packages: state.packages,
+    currentPackage: state.current_package,
+    student: state.current_student,
+    addedStudentList: state.current_package.students
    }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchStudent, fetchPackages}, dispatch);
+  return bindActionCreators({ fetchStudent, fetchPackages, fetchPackage, editPackage}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdminStudentView);
