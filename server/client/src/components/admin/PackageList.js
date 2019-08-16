@@ -26,14 +26,6 @@ class PackageList extends Component {
     this.props.fetchPackages();
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    let prevChoice = await prevState.filterChoice
-    let currChoice = await this.state.filterChoice
-    if (prevChoice !== currChoice) {
-
-    }
-  }
-
   handleClick(){
     this.props.history.push(`/admin/createpackage`)
   }
