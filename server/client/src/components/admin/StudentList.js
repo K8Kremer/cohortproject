@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStudents, fetchPackage, fetchPackages, editPackage, updateSearch } from '../../actions';
+import { emptyPackageFilter, fetchStudents, fetchPackage, fetchPackages, editPackage, updateSearch } from '../../actions';
 import StudentRow from './StudentRow';
 import { Dropdown, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router';
@@ -103,6 +103,14 @@ class StudentList extends Component {
                       {pckg.packageName}
                   </Dropdown.Item>
                 })}
+                  <Dropdown.Item
+                    
+                    onClick={ e => 
+                    {
+                      e.preventDefault();
+                      this.props.emptyPackageFilter({});
+                    }}
+                  ><strong>Clear Package Choice</strong></Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown
@@ -195,7 +203,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateSearch, fetchStudents, fetchPackage, fetchPackages, editPackage }, dispatch);
+  return bindActionCreators({ emptyPackageFilter, updateSearch, fetchStudents, fetchPackage, fetchPackages, editPackage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentList);
