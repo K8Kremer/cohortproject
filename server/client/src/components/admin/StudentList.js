@@ -52,70 +52,60 @@ class StudentList extends Component {
 		}
     
     return (
-      <>
-      <div className='row'>
-      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}>
-
-      </div>
-
-      <div className='col-8'>
-      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
-        <h3>Students</h3>
-        <Button className='create-student'
-          onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
-      </div>
-      
-      <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
+      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+        <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
+          <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
+            <h3>Students</h3>
+            <Button className='create-student' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+              onClick={e=> this.props.history.push('/admin/createstudent')}>New Student</Button>
+          </div>
         
-        <Dropdown>
-        <span>Choose a package: </span>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-          {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
-        </Dropdown.Toggle>
+          <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
+            <Dropdown>
+              <span>Choose a package: </span>
+              <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}>
+                {this.props.currentPackage.packageName ? this.props.currentPackage.packageName : 'Packages'}
+              </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          {this.props.packages.map((pckg) => {
-            return <Dropdown.Item 
-              key={pckg.id} 
-              href='#' 
-              onClick={ e => 
-                {
-                  e.preventDefault();
-                  this.props.fetchPackage(pckg._id)}}
-                >
-                {pckg.packageName}
-            </Dropdown.Item>
-          })}
-        </Dropdown.Menu>
-      </Dropdown>
-      <Button className="submit-students"
+              <Dropdown.Menu>
+                {this.props.packages.map((pckg) => {
+                  return <Dropdown.Item 
+                    key={pckg.id} 
+                    href='#' 
+                    onClick={ e => 
+                      {
+                        e.preventDefault();
+                        this.props.fetchPackage(pckg._id)}}
+                      >
+                      {pckg.packageName}
+                  </Dropdown.Item>
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+            <Button className="submit-students" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
               onClick={e=> this.handlePackageSubmit(this.props.currentPackage, this.state.addedStudentList)}>Submit Students To Package</Button>
-      <SearchBar />
-    </div>
-      <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
-        <tr style={{backgroundColor:'#679AB8'}}>
-          <th style={{textAlign: 'center', width:'10%'}}></th>
-          <th style={{width:'20%'}}>First Name</th>
-          <th style={{width:'20%'}}>Last Name</th>
-          <th style={{width:'10%'}}>Cohort</th>
-          <th style={{width:'20%'}}>Job-Seeking Status</th>
-          <th style={{textAlign: 'center', width:'10%'}}></th>
-          <th style={{textAlign: 'center', width:'10%'}}></th>
-  
-        </tr>
-        <tbody style={{backgroundColor: 'white'}}>
-        {this.props.students.map((student) => {
-          return (
-            <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
-          )
-        })}
-        </tbody>
-      </table>
+            <SearchBar searchType='students' dropdownFilter='filter' />
+          </div>
+
+          <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
+            <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
+              <th style={{textAlign: 'center', width:'10px'}}></th>
+              <th style={{width:'calc(20%-2px)'}}>First Name</th>
+              <th style={{width:'calc(20%-2px)'}}>Last Name</th>
+              <th style={{width:'calc(10%-1px)'}}>Cohort</th>
+              <th style={{width:'calc(20%-2px)'}}>Job-Seeking Status</th>
+              <th style={{textAlign: 'center', width:'calc(10%-1px)'}}></th>
+            </tr>
+            <tbody style={{backgroundColor: 'white'}}>
+              {this.props.students.map((student) => {
+                return (
+                  <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className='col-2'style={{backgroundColor:'#9EAEB8'}}> </div>
-      
-      </div>
-      </>
     )
   }
 };

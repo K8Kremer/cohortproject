@@ -17,13 +17,12 @@ import PackageDetailView from './PackageDetailView';
 
 const AdminView = () => {
   return (
-    <>
+    <Fragment>
+    <Container fluid={true} style={{padding: 0}}>
       <PageHeader />
       <Row noGutters={true}>  
-        <Col xs={1}>
-          <SideBar />
-        </Col>
-        <Col xs={11}>
+        <SideBar />
+        <div style={{marginLeft: '250px', width: '100%'}}>
           <Switch>
             <Route exact path='/admin/login'                  component={LoginPage} />
             <Route exact path='/admin/studentlist'            component={StudentList} />
@@ -36,9 +35,10 @@ const AdminView = () => {
             <Route exact path='/admin/editpackage/:packageId' component={EditPackage} />
             <Redirect to='/admin/studentlist' />
           </Switch>
-        </Col>
+        </div>
       </Row>
-     </>
+      </Container>
+    </Fragment>
   )
 };
 

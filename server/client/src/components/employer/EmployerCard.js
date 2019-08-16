@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const Card = styled.div`
   //margin-bottom: 30px; 
@@ -17,41 +18,36 @@ const CardImg = styled.img`
   height: 150px; 
 `
 
-class EmployerCard extends Component {
+const EmployerCard = ({ student = {}, studentNotes = '', packageId = '' }) => {
 
-  render() {
-    return (
-      <div className="col-md-4 col-sm-6" key={this.props.cardId} style={{ marginBottom: 15 }}>
-        <Card className="card">
-          <div className="views-row" style={{ padding: 15, textAlign: 'center' }}>
-            <div className=" ">
-              <CardImg className="img-responsive" src="https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg" alt=""></CardImg>
-            </div>
-            <div className=" ">
-              <h4 className=" ">FirstName LastName</h4>
-            </div>
-            <div className=" ">
-              <div className=" ">Software Engineer</div>
-            </div>
-            <div className=" ">
-              <span className=" "><hr></hr></span>
-            </div>
-            <div className=" ">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-            </div>
-            <div className=" " style={{ color: '#3C5A6B', backgroundColor: 'transparent' }}>
-              <a className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: 'transparent' }} href="/employer/0">See Full Profile</a>
-            </div>
+  return (
+    <div className="col-md-4 col-sm-6" style={{ marginBottom: 15 }}>
+      <Card className="card">
+        <div className="views-row" style={{ padding: 15, textAlign: 'center' }}>
+          <div className=" ">
+            <CardImg className="img-responsive" src={student.picture || "https://pbs.twimg.com/profile_images/918498674216456193/wlBuJivK.jpg"} alt=""></CardImg>
           </div>
-        </Card>
-      </div>
-    )
-  }
+          <div className=" ">
+            <h4 className=" ">{student.firstName} {student.lastName}</h4>
+          </div>
+          <div className=" ">
+            <div className=" ">{student.typeOfWorkDesired} Software Engineer</div>
+          </div>
+          <div className=" ">
+            <span className=" "><hr></hr></span>
+          </div>
+          <div className=" ">
+            <p>
+              {studentNotes || student.bio || ''}
+            </p>
+          </div>
+          <div className=" " style={{ color: '#3C5A6B', backgroundColor: 'transparent' }}>
+            <Link className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: 'transparent' }} to={`/employer/${packageId}/student/${student._id}`}>See Full Profile</Link>
+          </div>
+        </div>
+      </Card>
+    </div>
+  )
 }
 
 export default EmployerCard 

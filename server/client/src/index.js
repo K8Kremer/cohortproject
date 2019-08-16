@@ -11,7 +11,11 @@ import { BrowserRouter, Switch, Route, Redirect  } from 'react-router-dom';
 import EmployerStudentView from './components/shared/EmployerStudentView';
 import PackageList from './components/admin/PackageList';
 import PackageDetailView from './components/admin/PackageDetailView';
+import LogIn from './components/admin/LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+
+
 
 import { Container } from 'react-bootstrap'
 
@@ -24,21 +28,18 @@ const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Container fluid={true} style={{padding: 0}}>
-        <App>
-          <Switch>
-            {/* turn these into protected routes with login */}
-            {/* EmployerStudenView rendered here so it does not use the admin navbar and sidebar */}
-            <Route exact path='/admin/employerstudentview/:studentId' component={EmployerStudentView} />
-            <Route path='/admin' component={AdminView} />
-            <Route exact path='/employer/:packageId' component={EmployerView} />
-            <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
-            <Route path='/' render={() => (
-              <Redirect to='/admin/studentlist' />
-            )} />
-          </Switch>
-        </App>
-      </Container>
+      <App>
+        <Switch>
+          {/* turn these into protected routes with login */}
+          {/* EmployerStudenView rendered here so it does not use the admin navbar and sidebar */}
+          <Route exact path='/admin/employerstudentview/:studentId' component={EmployerStudentView} />
+          <Route path='/admin' component={AdminView} />
+          <Route exact path='/employer/:packageId' component={EmployerView} />
+          <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
+          <Route exact path='/' component= {LogIn} />
+          />
+        </Switch>
+      </App>
     </BrowserRouter>
   </Provider>, 
 document.getElementById('root'));

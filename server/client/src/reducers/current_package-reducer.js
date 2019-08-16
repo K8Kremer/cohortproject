@@ -8,6 +8,7 @@ export default function (state = {}, action) {
     case FETCH_PACKAGE:
       return action.payload;
     case EDIT_PACKAGE:
+      return action.payload;
     case CREATE_PACKAGE:
       return action.payload;
     default:
