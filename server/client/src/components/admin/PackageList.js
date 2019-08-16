@@ -7,6 +7,8 @@ import PackageRow from './PackageRow';
 import SearchBar from './Search'
 import './FormStyle.css';
 
+let lightRowBackground = true;
+
 class PackageList extends Component {
 
   constructor(props){
@@ -44,8 +46,8 @@ class PackageList extends Component {
        
 
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
+            <h3 style={{color: '#3C5A6B'}}>Packages</h3>
 
-            <h3>Packages</h3>
             <Button className='create-package' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
               onClick={e=> this.props.history.push('/admin/createpackage')}>New Package</Button>
           </div>
@@ -81,7 +83,7 @@ class PackageList extends Component {
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
             <tbody>
-              <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
+              <tr style={{backgroundColor:'#3C5A6B', color: '#ffffff'}}>
                 <th style={{width:'20%'}}>Package</th>
                 <th style={{width:'20%'}}>Recipient</th>
                 <th style={{width:'20%'}}>Status</th>
@@ -92,8 +94,16 @@ class PackageList extends Component {
             </tbody>
             <tbody style={{backgroundColor: 'white'}}>
               {packagesArray.map((currentPackage) => {
+                let backgroundColor;
+                if (lightRowBackground) {
+                  lightRowBackground= false
+                  backgroundColor = 'white'
+                } else {
+                  lightRowBackground = true
+                  backgroundColor = '#c5d0d6'
+                }
                 return (
-                  <PackageRow key={currentPackage._id} currentPackage={currentPackage}/>
+                  <PackageRow key={currentPackage._id} backgroundColor={backgroundColor} currentPackage={currentPackage}/>
                 )
               })}
             </tbody>
@@ -107,7 +117,14 @@ class PackageList extends Component {
     
 
   render(){
-    
+    //Redux Form will set certain properties to True if there are errors within your Form.
+    //we have this here due to the async getPackages action, waiting for an array.
+    if(this.props.packages.length === undefined) {
+      return (
+        <div>Hold please, loading is a bit slow...</div>
+      )
+    }
+
     return (
       <>
           {this.wrapPackages(this.props.packages)}
