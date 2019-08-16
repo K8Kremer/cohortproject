@@ -81,7 +81,6 @@ class EditStudent extends Component {
   renderSelectField({ input, label, type, meta: { touched, error }, children }) {
 		return (
 		<div>
-		  <label>{label}</label>
 		  <div>
 			<select {...input}>
 			  {children}
@@ -96,7 +95,7 @@ class EditStudent extends Component {
 		return (
 		  <div className="mb-4" style={{width:500}}>
         <div>
-			<textarea rows='5' cols='20' {...input} type={type} className='form-control' />
+			<textarea rows='8' cols='20' {...input} type={type} className='form-control' />
       {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
 			</div>
       </div>
@@ -177,7 +176,7 @@ class EditStudent extends Component {
                 autoComplete="none"
               />
             </fieldset>
-            <fieldset>
+            <fieldset className="mb-4">
               <label>Job Seeking Status: currently {this.props.initialValues.jobSeekingStatus}</label>
               <Field name="jobSeekingStatus" component={this.renderSelectField}>
                 <option />
@@ -195,7 +194,7 @@ class EditStudent extends Component {
                 autoComplete="none"
               />
             </fieldset>
-            <fieldset>
+            <fieldset className="mb-4">
               <label>Work Desired: currently {this.props.initialValues.typeOfWorkDesired} </label>
               <Field name="typeOfWorkDesired" component={this.renderSelectField}>
                 <option />
