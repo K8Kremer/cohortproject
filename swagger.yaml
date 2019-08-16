@@ -229,6 +229,30 @@ paths:
             $ref: '#/definitions/Package'
         404:
           description: Package with that ID not found
+  /packages/:id/:studentId:
+    delete: 
+      summary: Delete a student within a package
+      description: |
+        By passing in the appropriate options, you can delete a student and thier notes
+        within the array of students in a package
+      parameters:
+      - name: id
+        in: path
+        description: the Package's ID
+        required: true
+        type: string
+      - name: studentID
+        in: path
+        description: the Id of the object which contains the student and student notes
+        required: true
+        type: string
+      responses:
+        200:
+          description: Succesful deletion
+        404:
+          description: Package with that ID not found
+        400:
+          description: Unable to delete student
 definitions:
   Student:
     type: object

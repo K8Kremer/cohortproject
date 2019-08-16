@@ -9,9 +9,6 @@ class CreatePackage extends Component {
   state = {
     redirect: false
   }
-  componentDidMount(){
-    console.log(this.props.current_package);
-  }
 
   renderRedirect = () => {
     if( this.state.redirect ){
@@ -126,7 +123,7 @@ render() {
           <label className='col-form-label'>Package Notes: </label>
          
           <Field
-          name="text"
+          name="packageNotes"
           type="text"
           component="textarea"
           autoComplete="none"
