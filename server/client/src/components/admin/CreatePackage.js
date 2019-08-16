@@ -33,10 +33,23 @@ onSubmit = formProps => {
 
 renderField( {input, label, type, meta: { touched, error, warning}}) {
   return (
-    <div >
-      <label className='control-label'>{label}</label>
+    <div className='mb-4' style={{width: 250}}>
       <div>
-    <input {...input} type={type} className='form-control' />
+        <input {...input} type={type} className='form-control' />
+          {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
+    </div> 
+  );
+}
+
+renderTextArea( {input, label, type, meta: { touched, error, warning}}) {
+		
+  // const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
+  return (
+    <div className="mb-4" style={{width:500}}>
+      <div>
+    <textarea rows='5' cols='20' {...input} type={type} className='form-control' />
     {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
     </div>
@@ -44,41 +57,43 @@ renderField( {input, label, type, meta: { touched, error, warning}}) {
   );
 }
 
-
 render() {
   const { handleSubmit } = this.props;
 
 
   return (
     
-<>
-      <div className="background row mx-0 pt-3 pb-3">
-       <div className='mx-3 px-3'>
+
+    <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+    <div className='mx-3 px-3 pt-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+    <h3 className="mb-4" style={{color: '#3C5A6B'}}>Create New Package</h3>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
       
-      <h1 className='styled-header'>Create New Package</h1>
-      <form className='createPackageForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-      
-          <label className='col-form-label'>Package Name: </label>
-          <Field 
-            name="packageName"
-            type="text"
-            component ={this.renderField}
-            autoComplete="none"
-            className="form-control"
-          />
+          <fieldset>
+            <label>Package Name: </label>
+            <Field 
+              name="packageName"
+              type="text"
+              component ={this.renderField}
+              autoComplete="none"
+              className="form-control"
+            />
+          </fieldset>
          
        
       
-          <label className='col-form-label'>Recipient Name: </label>
-          <Field 
-            name="employerName"
-            type="text"
-            component={this.renderField}
-            autoComplete="none"
-            className="form-control "
-          />
+          <fieldset>
+            <label>Recipient Name: </label>
+            <Field 
+              name="employerName"
+              type="text"
+              component={this.renderField}
+              autoComplete="none"
+              className="form-control "
+            />
+          </fieldset>
    
-          <label className='col-form-label'>Recipient Email: </label>
+          <label>Recipient Email: </label>
         
           <Field 
             name="employerEmail"
@@ -88,7 +103,7 @@ render() {
             className="form-control "
           />
    
-          <label className='col-form-label'>Recipient Company: </label>
+          <label>Recipient Company: </label>
       
           <Field 
             name="companyName"
@@ -98,7 +113,7 @@ render() {
             className="form-control "
           />
    
-          <label className='col-form-label'>Project Shift Employee Name: </label>
+          <label>Project Shift Employee Name: </label>
           
           <Field 
             name="replyName"
@@ -109,7 +124,7 @@ render() {
           />
     
      
-          <label className='col-form-label'>Project Shift Email: </label>
+          <label>Project Shift Email: </label>
        
           <Field 
             name="replyEmail"
@@ -120,21 +135,25 @@ render() {
           />
     
      
-          <label className='col-form-label'>Package Notes: </label>
-         
-          <Field
-          name="packageNotes"
-          type="text"
-          component="textarea"
-          autoComplete="none"
-          className="form-control form-control-lg"
-          />
-        <button type='submit'className='btn btn-primary' id='create'>Create</button>
+          <fieldset>
+            <label>Package Notes: </label>
+           
+            <Field
+            name="packageNotes"
+            type="text"
+            component={this.renderTextArea}
+            autoComplete="none"
+            className="form-control form-control-lg"
+            />
+          </fieldset>
+        <button type='submit'
+          className='btn btn-sm btn-secondary mb-4'
+          style={{backgroundColor: '#679AB8'}}>Create</button>
       </form>
       </div>
     </div>
    
-</>
+
   )
 }
 }
