@@ -37,18 +37,18 @@ class PackageList extends Component {
         <tr style={{backgroundColor:'#9EAEB8'}}>
            <th style={{width:'20%'}}><h1 className='styled-header'>Packages</h1></th>
           <th style={{width:'20%'}}></th>
-          <th style={{width:'10%'}}></th>
           <th style={{width:'20%'}}></th>
-          <th style={{width:'10%'}}><button className='btn btn-primary' id='createPackage' onClick={this.handleClick}>New Package</button></th>
-          <th style={{width:'10%'}}></th>
+          <th style={{width:'20%'}}></th>
+          <th style={{width:'20%'}}><button className='btn btn-primary' id='createPackage' onClick={this.handleClick}>New Package</button></th>
+          {/* <th style={{width:'10%'}}></th> */}
         </tr>
         <tr style={{backgroundColor:'#679AB8'}}>
           <th style={{width:'20%'}}>Package</th>
           <th style={{width:'20%'}}>Recipient</th>
-          <th style={{width:'10%'}}>Status</th>
+          <th style={{width:'20%'}}>Status</th>
           <th style={{width:'20%'}}>Date Created</th>
-          <th style={{textAlign: 'center', width:'10%'}}></th>
-          <th style={{textAlign: 'center', width:'10%'}}></th>
+          <th style={{ textAlign: 'center',width:'20%'}}>Links</th>
+          {/* <th style={{textAlign: 'center', width:'10%'}}></th> */}
          </tr>
          </tbody>
         <tbody style={{backgroundColor: 'white'}}>
