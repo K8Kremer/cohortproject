@@ -27,10 +27,6 @@ router.get('/', (req,res,next) => {
               if (err) {
                   res.status(400).send('Make sure cohort query represents a valid cohort');                    
               }
-              //checking for cohorts without students
-              if(students.length === 0){
-                return res.send('There are no students within that cohort');
-              }
               
               res.send(students);
             })
