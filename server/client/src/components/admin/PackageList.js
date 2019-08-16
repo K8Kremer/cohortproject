@@ -47,7 +47,7 @@ class PackageList extends Component {
           <th style={{width:'20%'}}>Recipient</th>
           <th style={{width:'20%'}}>Status</th>
           <th style={{width:'20%'}}>Date Created</th>
-          <th style={{ textAlign: 'center',width:'20%'}}>Links</th>
+          <th style={{ textAlign: 'center',width:'20%'}}></th>
           {/* <th style={{textAlign: 'center', width:'10%'}}></th> */}
          </tr>
          </tbody>
