@@ -24,7 +24,39 @@ class PackageList extends Component {
   }
 
   wrapPackages(packagesArray){
-    // console.log(packagesArray);
+    console.log(packagesArray)
+    if (packagesArray == "There are no packages with that status") {
+      return (
+        <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
+        <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF', width: '100%'}}>
+       
+
+          <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
+
+            <h3>No Matching Packages</h3>
+            <Button className='create-package' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+              onClick={e=> this.props.history.push('/admin/createpackage')}>New Package</Button>
+          </div>
+
+          <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
+          <SearchBar searchType='packages' dropdownFilter='true'/>
+          </div>
+        
+        <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
+            <tbody>
+              <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
+                <th style={{width:'20%'}}>Package</th>
+                <th style={{width:'20%'}}>Recipient</th>
+                <th style={{width:'20%'}}>Status</th>
+                <th style={{width:'20%'}}>Date Created</th>
+                <th style={{ textAlign: 'center',width:'20%'}}></th>
+                {/* <th style={{textAlign: 'center', width:'10%'}}></th> */}
+              </tr>
+          </tbody>
+        </table>
+        </div> 
+        </div>)
+    }
     
     return (
       
@@ -40,7 +72,7 @@ class PackageList extends Component {
           </div>
 
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
-          <SearchBar searchType='packages' dropdownFilter='filter'/>
+          <SearchBar searchType='packages' dropdownFilter='true'/>
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>

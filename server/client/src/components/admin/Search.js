@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
       if(this.props.searchType === 'students'){
         this.props.fetchStudents(1, this.state.searchTerm)
       } else if (this.props.searchType === 'packages'){
-        this.props.fetchPackages(this.state.searchTerm)
+        this.props.fetchPackages(this.state.searchTerm, this.props.dropdownFilter)
       }
     });
   }
