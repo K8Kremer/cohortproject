@@ -8,7 +8,6 @@ class PackageRow extends Component {
   }
   render(){
     const { currentPackage } = this.props;
-    console.log(currentPackage);
     return(
       <tr>
         <td>{currentPackage.packageName}</td>
