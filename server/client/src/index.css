@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
 .package-student-delete{
   display: none;
 }
@@ -5,3 +7,70 @@
 .package-student:hover .package-student-delete {
   display: inline-block;
 }
+
+
+.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  filter: blur(8px);
+  -webkit-filter: blur(12px);
+
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.img-overlay {
+  background-color:#3C5B6F;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: .85;
+}
+
+.login-form {
+  background-color: rgba(65, 77, 87, 0.568);
+  opacity: .75;
+  border-color: transparent;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  color: white;
+}
+
+.error-text {
+  color: red;
+  font-size: 15px;
+  font-style: italic;
+}
+
+
+::placeholder {
+  color: white;
+}
+.login-wrapper{
+  margin-top: 100px;
+}
+
+.login-header {
+  color: white;
+  margin: 5px;
+  font-family: 'Roboto Slab', serif;
+
+}
+
+
+
