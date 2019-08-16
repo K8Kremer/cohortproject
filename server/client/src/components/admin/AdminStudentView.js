@@ -86,7 +86,7 @@ class AdminStudentView extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/employer/:packageId/student/:studentId">
+            <Link to="/employer/:packageId/student/:studentId" target='_blank'>
               <button
                 type="button"
                 className="btn btn-sm"
