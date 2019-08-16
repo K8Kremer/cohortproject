@@ -30,10 +30,11 @@ export const createStudent = (student) => dispatch => {
 	})
 }
 
-export const fetchPackages = (companyName = '') => dispatch => {
+export const fetchPackages = (employerName = '', seenByEmployer = null) => dispatch => {
 	axios.get(`/packages/`, {
 		params: {
-			companyName
+			employerName,
+			seenByEmployer
 		}
 	})
 	.then( response => {
