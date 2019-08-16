@@ -129,7 +129,7 @@ class EditStudent extends Component {
 					<fieldset>
 						<label>Phone Number: </label>
 						<Field 
-							name="phoneNumber"
+							name="phone"
 							type="tel"
 							component="input"
 							autoComplete="none"
