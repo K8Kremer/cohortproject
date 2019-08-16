@@ -42,6 +42,20 @@ renderField( {input, label, type, meta: { touched, error, warning}}) {
   );
 }
 
+renderTextArea( {input, label, type, meta: { touched, error, warning}}) {
+		
+  // const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
+  return (
+    <div className="mb-4" style={{width:500}}>
+      <div>
+    <textarea rows='5' cols='20' {...input} type={type} className='form-control' />
+    {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+    </div>
+    
+  );
+}
 
 render() {
   const { handleSubmit } = this.props;
@@ -69,7 +83,7 @@ render() {
        
       
           <fieldset>
-            <label className='col-form-label'>Recipient Name: </label>
+            <label>Recipient Name: </label>
             <Field 
               name="employerName"
               type="text"
@@ -79,7 +93,7 @@ render() {
             />
           </fieldset>
    
-          <label className='col-form-label'>Recipient Email: </label>
+          <label>Recipient Email: </label>
         
           <Field 
             name="employerEmail"
@@ -89,7 +103,7 @@ render() {
             className="form-control "
           />
    
-          <label className='col-form-label'>Recipient Company: </label>
+          <label>Recipient Company: </label>
       
           <Field 
             name="companyName"
@@ -99,7 +113,7 @@ render() {
             className="form-control "
           />
    
-          <label className='col-form-label'>Project Shift Employee Name: </label>
+          <label>Project Shift Employee Name: </label>
           
           <Field 
             name="replyName"
@@ -110,7 +124,7 @@ render() {
           />
     
      
-          <label className='col-form-label'>Project Shift Email: </label>
+          <label>Project Shift Email: </label>
        
           <Field 
             name="replyEmail"
@@ -121,16 +135,20 @@ render() {
           />
     
      
-          <label className='col-form-label'>Package Notes: </label>
-         
-          <Field
-          name="packageNotes"
-          type="text"
-          component="textarea"
-          autoComplete="none"
-          className="form-control form-control-lg"
-          />
-        <button type='submit'className='btn btn-primary' id='create'>Create</button>
+          <fieldset>
+            <label>Package Notes: </label>
+           
+            <Field
+            name="packageNotes"
+            type="text"
+            component={this.renderTextArea}
+            autoComplete="none"
+            className="form-control form-control-lg"
+            />
+          </fieldset>
+        <button type='submit'
+          className='btn btn-sm btn-secondary mb-4'
+          style={{backgroundColor: '#679AB8'}}>Create</button>
       </form>
       </div>
     </div>

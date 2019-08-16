@@ -316,7 +316,8 @@ class CreateStudent extends Component {
 							/>
 						</fieldset>
 					
-					<button className="mb-4" type='submit'>Save</button>
+					<button className='btn btn-sm btn-secondary mb-4'
+          style={{backgroundColor: '#679AB8'}} type='submit'>Save</button>
 					</form>
 					</div>
 					</div>
