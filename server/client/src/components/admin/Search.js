@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchStudents, fetchPackages } from '../../actions';
+import { fetchStudents, fetchPackages, updateSearch } from '../../actions';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -12,6 +12,16 @@ class SearchBar extends React.Component {
     }
 
     this.sendSearch = this.sendSearch.bind(this)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.updateSearchFlag == true) {
+      if(this.props.searchType === 'students'){
+        this.props.fetchStudents(1, this.state.searchTerm)
+      } else if (this.props.searchType === 'packages'){
+        this.props.fetchPackages(this.state.searchTerm, this.props.dropdownFilter)
+      }
+    }
   }
   
   //we'll need to include our dropdownFilter prop as part of this execution
@@ -33,9 +43,13 @@ class SearchBar extends React.Component {
     )
   }
 }
-
+function mapStateToProps(state) {
+  return {
+    updateSearchFlag: state.updateSearchFlag
+  }
+}
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ fetchStudents, fetchPackages }, dispatch)
+  return bindActionCreators({ fetchStudents, fetchPackages, updateSearch }, dispatch)
 }
 
-export default connect ( null, mapDispatchToProps)( SearchBar);
+export default connect ( mapStateToProps, mapDispatchToProps)( SearchBar);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Button, Dropdown } from 'react-bootstrap';
-import { fetchPackages } from '../../actions';
+import { fetchPackages, updateSearch } from '../../actions';
 import { bindActionCreators } from 'redux';
 import PackageRow from './PackageRow';
 import SearchBar from './Search'
@@ -52,13 +52,19 @@ class PackageList extends Component {
 
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
             {/* Currently to get the search to work properly after you filter you need to start typing in the search bar*/}
-          <Dropdown>
+          <Dropdown
+            onSelect={(ekey, e)=> this.props.updateSearch(true)}>
               <span>Filter by Status: </span>
-              <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}>
+              <Dropdown.Toggle 
+                variant="primary" 
+                id="dropdown-basic" 
+                style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
+                >
                  {this.state.filterName || 'filters'}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
+                
                 <Dropdown.Item
                   onClick={e=> this.setState({filterChoice: 'true', filterName: 'Viewed'})}
                 >Viewed</Dropdown.Item>
@@ -114,11 +120,12 @@ class PackageList extends Component {
 function mapStateToProps(state) {
   return {
     packages: state.packages,
+    updateSearchFlag: state.updateSearchFlag
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPackages }, dispatch);
+  return bindActionCreators({ fetchPackages, updateSearch }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PackageList);
