@@ -24,7 +24,7 @@ const AdminView = () => {
         <SideBar />
         <div style={{marginLeft: '250px', width:2000}}>
           <div className="p-3 pt-5 pr-5" style={{backgroundColor: '#9EAEB8'}} >
-            <div className="ml-4 pt-1" style={{backgroundColor: 'white'}}>
+            <div className="ml-4 pt-1" style={{backgroundColor: 'white', border: 'solid', borderColor: '#1F2F38'}}>
               <Switch>
                 <Route exact path='/admin/login'                  component={LoginPage} />
                 <Route exact path='/admin/studentlist'            component={StudentList} />

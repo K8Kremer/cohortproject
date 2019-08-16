@@ -5,7 +5,7 @@ class StudentRow extends Component {
   render(){
     const { student } = this.props;
     return(
-      <tr>
+      <tr style={{backgroundColor: this.props.backgroundColor}}>
         <td style={{textAlign: 'center'}}><input 
           type='checkbox' 
           value='addToPackage' 
@@ -15,8 +15,8 @@ class StudentRow extends Component {
         <td style={{textAlign: 'left'}}>{student.cohort}</td>
         <td>{student.jobSeekingStatus}</td>
         <td>
-          <Link to={`/admin/student/${student._id}`}> <span className='badge badge-secondary'>View</span></Link>
-          <Link to={`/admin/editstudent/${student._id}`}> <span className='badge badge-secondary'>Edit</span></Link>
+          <Link to={`/admin/student/${student._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8', color: 'white'}}>View</span></Link>
+          <Link to={`/admin/editstudent/${student._id}`}> <span className='badge badge-secondary' style={{backgroundColor: '#679AB8', color: 'white'}}>Edit</span></Link>
         </td>
       </tr>
     )
