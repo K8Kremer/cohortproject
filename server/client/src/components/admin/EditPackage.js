@@ -147,7 +147,7 @@ class EditPackage extends Component {
               <label className='col-sm-2 col-form-label'>Package Notes: </label>
               <div className='col-md-6'>
                 <Field
-                  name="text"
+                  name="packageNotes"
                   type="text"
                   component="textarea"
                   autoComplete="none"

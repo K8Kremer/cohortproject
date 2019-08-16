@@ -126,7 +126,7 @@ render() {
           <label className='col-form-label'>Package Notes: </label>
          
           <Field
-          name="text"
+          name="packageNotes"
           type="text"
           component="textarea"
           autoComplete="none"
