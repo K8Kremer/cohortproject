@@ -36,7 +36,7 @@ ReactDOM.render(
           <Route exact path='/employer/:packageId' component={EmployerView} />
           <Route exact path='/employer/:packageId/student/:studentId' component={EmployerStudentView} />
           <Route exact path='/' component= {LogIn} />
-          />
+          <Redirect to='/' />
         </Switch>
       </App>
     </BrowserRouter>

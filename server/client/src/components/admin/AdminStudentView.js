@@ -86,7 +86,8 @@ class AdminStudentView extends Component {
                 Edit
               </button>
             </Link>
-            <Link to="/employer/:packageId/student/:studentId" target='_blank'>
+            {/* we would place a View As Employer button here */}
+            {/* <Link to="/employer/:packageId/student/:studentId" target='_blank'>
               <button
                 type="button"
                 className="btn btn-sm"
@@ -99,7 +100,7 @@ class AdminStudentView extends Component {
               >
                 View as Employer
               </button>
-            </Link>
+            </Link> */}
             <Dropdown style={{ position: "absolute", top: 100, right: 270 }}>
               <span>Choose a package: </span>
               <Dropdown.Toggle
