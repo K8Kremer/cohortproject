@@ -57,7 +57,7 @@ class StudentList extends Component {
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
             <h3>Students</h3>
             <Button className='create-student' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
-              onClick={e=> this.props.history.push('/admin/createstudent')}>Create Student</Button>
+              onClick={e=> this.props.history.push('/admin/createstudent')}>New Student</Button>
           </div>
         
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
