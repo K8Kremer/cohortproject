@@ -7,6 +7,8 @@ import { Dropdown, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router'
 import SearchBar from './Search'
 
+let lightRowBackground = true
+
 class StudentList extends Component {
 
   state = {
@@ -88,7 +90,7 @@ class StudentList extends Component {
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
-            <tr style={{backgroundColor:'#679AB8', color: '#ffffff'}}>
+            <tr style={{backgroundColor:'#3C5B6F', color: '#ffffff'}}>
               <th style={{textAlign: 'center', width:'10px'}}></th>
               <th style={{width:'calc(20%-2px)'}}>First Name</th>
               <th style={{width:'calc(20%-2px)'}}>Last Name</th>
@@ -97,11 +99,20 @@ class StudentList extends Component {
               <th style={{textAlign: 'center', width:'calc(10%-1px)'}}></th>
             </tr>
             <tbody style={{backgroundColor: 'white'}}>
-              {this.props.students.map((student) => {
-                return (
-                  <StudentRow key={student._id} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
-                )
-              })}
+            {this.props.students.map((student) => {
+                let backgroundColor;
+                if (lightRowBackground) {
+                  lightRowBackground= false
+                  backgroundColor = 'white'
+                } else {
+                  lightRowBackground = true
+                  backgroundColor = '#c5d0d6'
+                }
+                  return (
+                    <StudentRow key={student._id} backgroundColor={backgroundColor} student={student} handleStudentClick={this.handleStudentClick} addedStudentList={this.state.addedStudentList}/>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>

@@ -5,6 +5,7 @@ import './navstyles.css';
 
 //adjust these links as necessary for routing
 const SideBar = () => (
+  <div>
   <nav id='sidebar'>
     <ul className='list-unstyled components mt-5'>
       <li className='menu-item'>
@@ -15,6 +16,9 @@ const SideBar = () => (
       </li>
     </ul>
   </nav>
+  <div id='gradient'>
+  </div>
+  </div>
 );
   
 export default SideBar;
