@@ -52,9 +52,6 @@ router.get('/', (req, res, next) => {
           res.status(400).send('Make sure status query is valid');
         }
         // check if no packages fit the criteria, and send a custom message 
-        if (packages.length === 0) {
-          return res.send('There are no packages with that status');
-        }
         res.send(packages);
       })
     // if there is no seenByEmployer (status) query, return all packages ordered by date updated (recent first)

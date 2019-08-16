@@ -21,6 +21,7 @@ class PackageRow extends Component {
           <Link to={`/admin/package/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>View</span></Link>
           <Link to={`/admin/editpackage/${currentPackage._id}`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Edit</span></Link>
           <Link to={`/employer/${currentPackage._id}?admin=true`}><span className='badge badge-secondary mr-1' style={{backgroundColor: '#679AB8'}}>Employer View</span></Link>
+
         </td>
        
       </tr>

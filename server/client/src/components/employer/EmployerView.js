@@ -27,9 +27,9 @@ class EmployerView extends Component {
   }
 
   renderList() {
-    if (this.props.package.students === 0) {
+    if (this.props.package.students.length === 0) {
       return (
-        <EmployerCard key={0} />
+        <div></div>
       )
     } else {
       return this.props.package.students.map(studentObject => {

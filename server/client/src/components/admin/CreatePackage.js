@@ -9,9 +9,6 @@ class CreatePackage extends Component {
   state = {
     redirect: false
   }
-  componentDidMount(){
-    console.log(this.props.current_package);
-  }
 
   renderRedirect = () => {
     if( this.state.redirect ){
