@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const Card = styled.div`
   //margin-bottom: 30px; 
@@ -41,7 +42,7 @@ const EmployerCard = ({ student = {}, studentNotes = '', packageId = '' }) => {
             </p>
           </div>
           <div className=" " style={{ color: '#3C5A6B', backgroundColor: 'transparent' }}>
-            <a className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: 'transparent' }} href={'/employer/' + packageId + '/student/' + student._id}>See Full Profile</a>
+            <Link className="btn btn-primary btn-ghost hidden-xs" style={{ color: '#3C5A6B', borderColor: '#3C5A6B', backgroundColor: 'transparent' }} to={`/employer/${packageId}/student/${student._id}`}>See Full Profile</Link>
           </div>
         </div>
       </Card>

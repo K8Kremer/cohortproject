@@ -33,14 +33,16 @@ class PackageList extends Component {
       <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
         <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
        
+
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
             <h3 style={{color: '#3C5A6B'}}>Packages</h3>
+
             <Button className='create-package' style={{backgroundColor: '#679AB8', borderColor: '#679AB8'}}
               onClick={e=> this.props.history.push('/admin/createpackage')}>New Package</Button>
           </div>
 
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>    
-            <SearchBar searchType='packages'/>
+          <SearchBar searchType='packages' dropdownFilter='filter'/>
           </div>
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
@@ -71,6 +73,7 @@ class PackageList extends Component {
             </tbody>
           </table>
         </div>
+
       </div>
     
     );

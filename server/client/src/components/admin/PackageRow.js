@@ -11,7 +11,7 @@ class PackageRow extends Component {
     return(
       <tr style={{backgroundColor: this.props.backgroundColor}}>
         <td>{currentPackage.packageName}</td>
-        <td>{currentPackage.companyName}</td>
+        <td>{currentPackage.employerName}</td>
         <td style={{ textAlign: 'left' }}>{currentPackage.seenByEmployer ? 'Viewed' : 'Unopened'}</td>
         <td>{this.formatDate(currentPackage.created_at)}</td>
       
