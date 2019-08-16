@@ -74,8 +74,10 @@ router.get('/:id', (req, res, next) => {
 });
 //DELETE route to remove a student object from the students array referencing by the mongo _id
 router.delete('/:id/:studentId', (req, res) => {
+
   req.package.students.pull(req.params.studentId)
   req.package.save()
+  res.send(req.package);
 
   
 });
