@@ -49,10 +49,12 @@ class StudentList extends Component {
   }
 
   handlePackageSubmit = (pckg, studentArray) => {
-    if (pckg && studentArray) {
+    if (pckg.students && studentArray) {
       //concatenate our state student list with the currentPackage
       let students = this.props.currentPackage.students.concat(studentArray);
       this.props.editPackage(pckg._id, {students});
+    } else {
+      alert ('Please select a package and students to add')
     }
     this.setState({addedStudentList: []});
   }
