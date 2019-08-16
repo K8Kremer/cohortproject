@@ -52,7 +52,7 @@ class StudentList extends Component {
 		}
     
     return (
-      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100vh'}}>
+      <div className='row mx-0 pt-3 pb-3' style={{backgroundColor:'#9EAEB8', height: '100%', minHeight: '100vh'}}>
         <div className='mx-3 px-3' style={{backgroundColor:'#FFFFFF'}}>
           <div className ='d-flex justify-content-between flex-row bd-highlight mb-3 mt-3'>
             <h3>Students</h3>
@@ -89,13 +89,12 @@ class StudentList extends Component {
 
           <table className='shadow p-3 mb-5 bg-white rounded'style={{tableLayout: 'fixed'}}className='table table-hover'>
             <tr style={{backgroundColor:'#679AB8'}}>
-              <th style={{textAlign: 'center', width:'10%'}}></th>
-              <th style={{width:'20%'}}>First Name</th>
-              <th style={{width:'20%'}}>Last Name</th>
-              <th style={{width:'10%'}}>Cohort</th>
-              <th style={{width:'20%'}}>Job-Seeking Status</th>
-              <th style={{textAlign: 'center', width:'10%'}}></th>
-              <th style={{textAlign: 'center', width:'10%'}}></th>
+              <th style={{textAlign: 'center', width:'10px'}}></th>
+              <th style={{width:'calc(20%-2px)'}}>First Name</th>
+              <th style={{width:'calc(20%-2px)'}}>Last Name</th>
+              <th style={{width:'calc(10%-1px)'}}>Cohort</th>
+              <th style={{width:'calc(20%-2px)'}}>Job-Seeking Status</th>
+              <th style={{textAlign: 'center', width:'calc(10%-1px)'}}></th>
             </tr>
             <tbody style={{backgroundColor: 'white'}}>
               {this.props.students.map((student) => {
