@@ -6,6 +6,7 @@ const uuidv1 = require('uuid/v1');
 
 //placing a helper function here for routes with the ID parameter
 router.param('id', function (req, res, next) {
+  let {admin} = req.query;
   let { id } = req.params;
   //check here for incorrect id format
   if (id.length !== 24) {
@@ -23,6 +24,9 @@ router.param('id', function (req, res, next) {
         res.status(404).send('Package not found, please check Package ID.');
       } else {
         req.package = result;
+        if (!admin) {
+          req.package.seenByEmployer = true;
+        }
         next();
       }
     })
@@ -35,7 +39,7 @@ router.param('id', function (req, res, next) {
 router.get('/', (req, res, next) => {
   // check if seenByEmployer is specified (true/false: convert string to boolean if so)
   let seenByEmployerQuery = (req.query.seenByEmployer === 'true') ? true : (req.query.seenByEmployer === 'false') ? false : req.query.seenByEmployer;
-
+  let admin = req.query.admin;
   // originally, get search for employer by name (default to empty string if not present), updated to packageName
   let textQuery = req.query.employerName || ''; 
   // if status query is specified, return all matching packages ordered by date updated (recent first)

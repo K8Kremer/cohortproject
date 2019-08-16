@@ -69,8 +69,15 @@ export const editStudent = (id, studentUpdates) => dispatch => {
 	})
 }
 
-export const fetchPackage = (id) => dispatch => {
-	axios.get(`/packages/${id}`)
+export const fetchPackage = (id, isAdmin = null) => dispatch => {
+	console.log(isAdmin);
+	axios.get(`/packages/${id}/${isAdmin}`
+	// , {
+	// 	params: {
+	// 		isAdmin
+	// 		}
+	// 	}
+		)
 		.then(response => {
 			dispatch({ type: FETCH_PACKAGE, payload: response.data });
 		})
