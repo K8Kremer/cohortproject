@@ -56,7 +56,7 @@ router.get('/', (req, res, next) => {
     // if there is no seenByEmployer (status) query, return all packages ordered by date updated (recent first)
   } else {
     Package
-      .find({ employerName : { $regex: new RegExp(textQuery, 'i') } })
+      .find({ companyName : { $regex: new RegExp(textQuery, 'i') } })
       .sort({ 'updated_at': -1 })
       .exec((err, packages) => {
         if (err) {
