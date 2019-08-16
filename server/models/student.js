@@ -31,7 +31,7 @@ const StudentSchema = new Schema({
 //updates our individual schema every time
 StudentSchema.pre('save', function (next) {
   // get the current date
-  const currentDate = new Date();
+  const currentDate = new Date("<mm-dd-YYYY>");
   // change the updated_at field to current date
   this.updated_at = currentDate;
   // if created_at doesn't exist, add to that field
