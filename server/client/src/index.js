@@ -17,8 +17,11 @@ import 'font-awesome/css/font-awesome.min.css';
 
 
 
+import { Container } from 'react-bootstrap'
+
 
 import 'bootstrap/dist/css/bootstrap.css'
+import './index.css'
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 

@@ -1,13 +1,17 @@
 import axios from "axios";
 /** using redux thunk method of requesting data instead of a promise */
-import { FETCH_STUDENTS, FETCH_PACKAGES, ADD_STUDENT_TO_PACKAGE,
-				 FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT,
+import { FETCH_STUDENTS, FETCH_PACKAGES, FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT,
 				 FETCH_PACKAGE, CREATE_PACKAGE, EDIT_PACKAGE } from './types';
 
 const ROOT_URL = 'http://localhost:8000';
 
-export const fetchStudents = (page = 1) => dispatch => {
-	axios.get(`/students/`)
+export const fetchStudents = (page = 1, fullName = '', cohort = null) => dispatch => {
+	axios.get(`/students/`, {
+		params: {
+			fullName,
+			cohort
+		}
+	})
 	.then( response => {
 		dispatch({ type: FETCH_STUDENTS, payload: response.data });
 	})
@@ -38,15 +42,6 @@ export const fetchPackages = () => dispatch => {
 
 //fetch individual package
 
-export const addStudentToPackage = (student) => dispatch => {
-	axios.post(`/students`, { student })
-	.then( response => {
-		dispatch({ type: ADD_STUDENT_TO_PACKAGE, payload: response.data});
-	})
-	.catch( error => {
-		console.log(error);
-  });
-}
   
 export const fetchStudent = (id) => dispatch => {
   axios.get(`/students/${id}`)
@@ -62,7 +57,7 @@ export const editStudent = (id, studentUpdates) => dispatch => {
   console.log(`${id}`, studentUpdates);
   axios.post(`/students/${id}`, {...studentUpdates})
 	.then( response => {
-		dispatch({ type: EDIT_STUDENT, payload: response.data});
+		dispatch({ type: EDIT_STUDENT, payload: response.data})
 	})
 	.catch( error => {
 		console.log(error);
@@ -80,7 +75,7 @@ export const fetchPackage = (id) => dispatch => {
 }
 
 export const createPackage = (newPackage) => dispatch => {
-	axios.post(`/packages/`, { ...newPackage })
+  axios.post(`/packages/`, { ...newPackage })
 		.then(response => {
 			dispatch({ type: CREATE_PACKAGE, payload: response.data });
 		})
@@ -90,7 +85,7 @@ export const createPackage = (newPackage) => dispatch => {
 }
 
 export const editPackage = (id, updates) => dispatch => {
-	axios.post(`/packages/${id}`, {students : updates})
+	axios.post(`/packages/${id}`, updates)
 		.then(response => {
 			dispatch({ type: EDIT_PACKAGE, payload: response.data });
 		})
@@ -98,4 +93,3 @@ export const editPackage = (id, updates) => dispatch => {
 			console.log(error);
 		})
 }
-

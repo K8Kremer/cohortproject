@@ -1,0 +1,37 @@
+.background{
+  background-color: #9EAEB8
+}
+
+.createPackageForm {
+  margin-top: 20px;
+  background-color: white;
+  border: 2px solid #3C5A6B;
+}
+
+
+.styled-header{
+    text-align: left;
+    color:#3C5A6B;
+}
+
+#create{
+  background-color: #3C5A6B;
+  border: solid 2px #3C5A6B;
+  position: relative;
+  left: 230px;
+}
+
+#createPackage{
+
+  background-color: #3C5A6B;
+  border: solid 2px #3C5A6B;
+  margin-top: 10px;
+}
+
+#nopad{
+  padding: 0px;
+}
+
+#form-style{
+  height: 100vh;
+}
