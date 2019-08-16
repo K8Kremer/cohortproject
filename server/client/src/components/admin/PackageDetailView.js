@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPackage } from '../../actions';
+import { fetchPackage, editPackage } from '../../actions';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 class PackageDetailView extends Component {
   constructor(props){
     super(props);
+    this.removeStudent = this.removeStudent.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchPackage(this.props.packageId);
+  }
+
+  removeStudent(studentId){
+    let newStudentArray = this.props.package.students.filter(studentObject => studentObject.student._id !== studentId);
+    this.props.editPackage(this.props.packageId, { students: newStudentArray });
+  }
+  
+  formatDate = (date) => {
+    let newDate = new Date(date);
+     return newDate.toLocaleDateString();
   }
 
   render(){
@@ -42,8 +53,8 @@ class PackageDetailView extends Component {
               <h4 className='d-inline-block'>Package Notes</h4>
               <p>{this.props.package.packageNotes}</p>
               <h5>Employer Has Viewed: {this.props.package.seenByEmployer ? 'Yes' : 'Not Yet'}</h5>
-              <h6>Created On: {this.props.package.created_at}</h6>
-              <h6>Last Updated: {this.props.package.updated_at}</h6>
+              <h6>Created On: {this.formatDate(this.props.package.created_at)}</h6>
+              <h6>Last Updated: {this.formatDate(this.props.package.updated_at)}</h6>
             </div>
             <div className='employer-info border rounded px-2'>
               <h4 className='d-block'>Employer Info</h4>
@@ -67,7 +78,14 @@ class PackageDetailView extends Component {
                       
                       <li className='list-group-item package-student shadow-sm mb-2'>
                         <h5 className='text-center'>{studentObject.student.firstName} {studentObject.student.lastName}</h5>
-                        <button type="button" className="close" aria-label="Remove Student"><span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
+                        <button
+                          type="button" onClick={e => {
+                            e.preventDefault();
+                            this.removeStudent(studentObject.student._id);
+                          }}
+                          className="close" 
+                          aria-label="Remove Student">
+                            <span className="close package-student-delete align-middle" aria-hidden="true">&times;</span></button>
                         <label><em>Student Notes:</em></label>
                         <p className='offset-xs-1'>{studentObject.studentNotes.length === 0 || studentObject.studentNotes === ' '? <em>Add some notes here...</em> : studentObject.studentNotes}</p>
                         
@@ -94,7 +112,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPackage }, dispatch);
+  return bindActionCreators({ fetchPackage, editPackage }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PackageDetailView);
